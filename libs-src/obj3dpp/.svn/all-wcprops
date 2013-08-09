@@ -1,0 +1,245 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/srvirtual/!svn/ver/1850/srvirtual/libs-src/obj3dpp
+END
+CFigure.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CFigure.hpp
+END
+CEventKey.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CEventKey.hpp
+END
+CScene.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CScene.hpp
+END
+CCollectionEventsSystem.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/srvirtual/!svn/ver/1850/srvirtual/libs-src/obj3dpp/CCollectionEventsSystem.hpp
+END
+IWorld.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/IWorld.hpp
+END
+IDataSymbol.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/IDataSymbol.hpp
+END
+CAgentWithRepresentation.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CAgentWithRepresentation.cpp
+END
+CGestorDisplays.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/CGestorDisplays.cpp
+END
+CAgentWithRepresentation.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CAgentWithRepresentation.hpp
+END
+CGestorDisplays.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/CGestorDisplays.hpp
+END
+CProcessEventSystem.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1585/srvirtual/libs-src/obj3dpp/CProcessEventSystem.cpp
+END
+CDisplayMultiSprite.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/CDisplayMultiSprite.cpp
+END
+CProcessEventSystem.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CProcessEventSystem.hpp
+END
+CTypeDescription.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CTypeDescription.hpp
+END
+CDisplayMultiSprite.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/CDisplayMultiSprite.hpp
+END
+CMultiObject3d.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1847/srvirtual/libs-src/obj3dpp/CMultiObject3d.cpp
+END
+CEventSystem.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1498/srvirtual/libs-src/obj3dpp/CEventSystem.cpp
+END
+CTransform.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CTransform.cpp
+END
+CAgentGeneratorEvent.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CAgentGeneratorEvent.cpp
+END
+CEventSystem.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CEventSystem.hpp
+END
+CMultiObject3d.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CMultiObject3d.hpp
+END
+CTransform.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CTransform.hpp
+END
+CAgentGeneratorEvent.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CAgentGeneratorEvent.hpp
+END
+CObject3d.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1842/srvirtual/libs-src/obj3dpp/CObject3d.cpp
+END
+CObject3d.inl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1842/srvirtual/libs-src/obj3dpp/CObject3d.inl
+END
+CProcessAnimation.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/srvirtual/!svn/ver/1842/srvirtual/libs-src/obj3dpp/CProcessAnimation.cpp
+END
+IDescription.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1505/srvirtual/libs-src/obj3dpp/IDescription.hpp
+END
+CProcessAnimation.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/obj3dpp/CProcessAnimation.hpp
+END
+IDisplay.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/IDisplay.hpp
+END
+CAgent.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CAgent.cpp
+END
+CDictionaryDescription.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/CDictionaryDescription.cpp
+END
+CEventTime.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/obj3dpp/CEventTime.cpp
+END
+CFigure.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CFigure.cpp
+END
+CAgent.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1849/srvirtual/libs-src/obj3dpp/CAgent.hpp
+END
+CTypeDescrPhysics.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CTypeDescrPhysics.hpp
+END
+CDictionaryDescription.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/srvirtual/!svn/ver/1834/srvirtual/libs-src/obj3dpp/CDictionaryDescription.hpp
+END
+CEventKey.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/obj3dpp/CEventKey.cpp
+END
+CEventTime.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/obj3dpp/CEventTime.hpp
+END
+CScene.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1848/srvirtual/libs-src/obj3dpp/CScene.cpp
+END
+CCollectionEventsSystem.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/srvirtual/!svn/ver/1850/srvirtual/libs-src/obj3dpp/CCollectionEventsSystem.cpp
+END

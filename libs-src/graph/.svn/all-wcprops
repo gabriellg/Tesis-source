@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/graph
+END
+CVertex.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/srvirtual/!svn/ver/1385/srvirtual/libs-src/graph/CVertex.hpp
+END
+PrvBaseGraph.inl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/graph/PrvBaseGraph.inl
+END
+CGraph.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/graph/CGraph.hpp
+END
+CGraphIO.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/graph/CGraphIO.cpp
+END
+IVertex.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/srvirtual/!svn/ver/1385/srvirtual/libs-src/graph/IVertex.hpp
+END
+CGraphIO.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1391/srvirtual/libs-src/graph/CGraphIO.hpp
+END
+CVertex.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/srvirtual/!svn/ver/1385/srvirtual/libs-src/graph/CVertex.cpp
+END
+PrvBaseGraph.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/graph/PrvBaseGraph.cpp
+END

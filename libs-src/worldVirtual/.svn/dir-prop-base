@@ -1,0 +1,12 @@
+K 10
+svn:ignore
+V 245
+CWorkspaceWorldVirtual__play.iio
+CWorkspaceWorldVirtual__pausa.iio
+CWorkspaceWorldVirtual__planoiso.iio
+CWorkspaceWorldVirtual__stop.iio
+CWorkspaceWorldVirtual__planoxy.iio
+CWorkspaceWorldVirtual__planoxz.iio
+CWorkspaceWorldVirtual__planozy.iio
+
+END

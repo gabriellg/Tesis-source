@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/srvirtual/!svn/ver/1417/srvirtual/libs-src/basicos
+END
+ILog.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/srvirtual/!svn/ver/1386/srvirtual/libs-src/basicos/ILog.cpp
+END
+variable.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/basicos/variable.c
+END
+identif.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/basicos/identif.c
+END
+variable.inl
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/basicos/variable.inl
+END
+ILog.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/srvirtual/!svn/ver/1386/srvirtual/libs-src/basicos/ILog.hpp
+END
+identif.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/basicos/identif.h
+END
+config.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/srvirtual/!svn/ver/1417/srvirtual/libs-src/basicos/config.c
+END
+config.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/srvirtual/!svn/ver/1069/srvirtual/libs-src/basicos/config.h
+END
+variable.tli
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1069/srvirtual/libs-src/basicos/variable.tli
+END

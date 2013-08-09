@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites
+END
+CDescriptionSpriteRotated.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteRotated.cpp
+END
+CDescriptionSpriteRotated.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteRotated.hpp
+END
+CDescriptionSpriteWithDataFigure.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteWithDataFigure.cpp
+END
+CDescriptionSpriteOneImage.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteOneImage.cpp
+END
+CTypeDescDrawSprite.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CTypeDescDrawSprite.cpp
+END
+CDescriptionSpriteWithDataFigure.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteWithDataFigure.hpp
+END
+CDescriptionSpriteOneImage.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteOneImage.hpp
+END
+CTransform2D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CTransform2D.cpp
+END
+CTypeDescDrawSprite.inl
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CTypeDescDrawSprite.inl
+END
+IDescriptionSprite.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/IDescriptionSprite.hpp
+END
+CTransform2D.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CTransform2D.hpp
+END
+CDescriptionSpriteAnimated.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteAnimated.cpp
+END
+CDisplaySprite.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDisplaySprite.cpp
+END
+CDescriptionSpriteAnimated.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sprites/CDescriptionSpriteAnimated.hpp
+END
+CDisplaySprite.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1836/srvirtual/libs-src/sprites/CDisplaySprite.hpp
+END

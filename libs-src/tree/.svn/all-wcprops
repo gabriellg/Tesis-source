@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/tree
+END
+INode.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/srvirtual/!svn/ver/1232/srvirtual/libs-src/tree/INode.hpp
+END
+PrvBaseTree.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/tree/PrvBaseTree.cpp
+END
+CNode.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/srvirtual/!svn/ver/1243/srvirtual/libs-src/tree/CNode.cpp
+END
+CTree.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/tree/CTree.hpp
+END
+PrvBaseTree.inl
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/tree/PrvBaseTree.inl
+END
+CNode.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/srvirtual/!svn/ver/1232/srvirtual/libs-src/tree/CNode.hpp
+END

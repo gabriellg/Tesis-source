@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/srvirtual/!svn/ver/1844/srvirtual/libs-src/graphics
+END
+CMaterial.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1793/srvirtual/libs-src/graphics/CMaterial.hpp
+END
+CColor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1394/srvirtual/libs-src/graphics/CColor.cpp
+END
+CGraphicsPoints.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/srvirtual/!svn/ver/1790/srvirtual/libs-src/graphics/CGraphicsPoints.cpp
+END
+CPositionCamera.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/srvirtual/!svn/ver/1689/srvirtual/libs-src/graphics/CPositionCamera.cpp
+END
+CGraphicsRect.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1790/srvirtual/libs-src/graphics/CGraphicsRect.cpp
+END
+CLight.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1844/srvirtual/libs-src/graphics/CLight.cpp
+END
+CColor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1394/srvirtual/libs-src/graphics/CColor.hpp
+END
+CGraphicsPoints.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/srvirtual/!svn/ver/1790/srvirtual/libs-src/graphics/CGraphicsPoints.hpp
+END
+CPositionCamera.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/srvirtual/!svn/ver/1689/srvirtual/libs-src/graphics/CPositionCamera.hpp
+END
+CGraphicsRect.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1790/srvirtual/libs-src/graphics/CGraphicsRect.hpp
+END
+CLight.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1790/srvirtual/libs-src/graphics/CLight.hpp
+END
+IGraphics.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1790/srvirtual/libs-src/graphics/IGraphics.hpp
+END
+CMaterial.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1793/srvirtual/libs-src/graphics/CMaterial.cpp
+END

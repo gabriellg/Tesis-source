@@ -1,0 +1,317 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/srvirtual/!svn/ver/1762/srvirtual/libs-src/paneles.sys
+END
+rcpaccion.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpaccion.h
+END
+rcpaccion.hxx
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpaccion.hxx
+END
+componente.inl
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1061/srvirtual/libs-src/paneles.sys/componente.inl
+END
+evtaccion.inl
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/evtaccion.inl
+END
+evtaccion.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/evtaccion.h
+END
+pnlfecha.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/pnlfecha.c
+END
+edit.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/edit.h
+END
+etiqueta.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/etiqueta.c
+END
+menubar.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/paneles.sys/menubar.c
+END
+pnlfecha.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/pnlfecha.h
+END
+separador.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/paneles.sys/separador.c
+END
+menubar.inl
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/menubar.inl
+END
+etiqueta.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/etiqueta.h
+END
+menubar.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/menubar.h
+END
+separador.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/separador.h
+END
+menu.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/menu.c
+END
+rcpkey.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1335/srvirtual/libs-src/paneles.sys/rcpkey.c
+END
+menu.inl
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/menu.inl
+END
+timeproc.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/paneles.sys/timeproc.c
+END
+rcpkey.inl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpkey.inl
+END
+menu.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/menu.h
+END
+rcpkey.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpkey.h
+END
+boton.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/boton.c
+END
+rcpmouse.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1463/srvirtual/libs-src/paneles.sys/rcpmouse.c
+END
+timeproc.inl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/timeproc.inl
+END
+dialogo.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/dialogo.c
+END
+rcpmouse.inl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpmouse.inl
+END
+areadibujo.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1762/srvirtual/libs-src/paneles.sys/areadibujo.cpp
+END
+rcpmouse.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpmouse.h
+END
+boton.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/boton.h
+END
+dialogo.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/dialogo.h
+END
+areadibujo.hxx
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1463/srvirtual/libs-src/paneles.sys/areadibujo.hxx
+END
+areadibujo.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/srvirtual/!svn/ver/1463/srvirtual/libs-src/paneles.sys/areadibujo.hpp
+END
+rcpdibujo.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1463/srvirtual/libs-src/paneles.sys/rcpdibujo.cpp
+END
+combobox.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/combobox.c
+END
+rcpdibujo.inl
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1463/srvirtual/libs-src/paneles.sys/rcpdibujo.inl
+END
+opcmenu.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1435/srvirtual/libs-src/paneles.sys/opcmenu.cpp
+END
+rcpdibujo.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1463/srvirtual/libs-src/paneles.sys/rcpdibujo.hpp
+END
+combobox.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/combobox.h
+END
+lista.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/lista.c
+END
+panel.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/paneles.sys/panel.c
+END
+opcmenu.inl
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/opcmenu.inl
+END
+rcpaccion.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/paneles.sys/rcpaccion.c
+END
+opcmenu.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1435/srvirtual/libs-src/paneles.sys/opcmenu.hpp
+END
+panel.inl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1061/srvirtual/libs-src/paneles.sys/panel.inl
+END
+lista.hxx
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/lista.hxx
+END
+componente.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/componente.c
+END
+lista.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/lista.h
+END
+panel.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/panel.h
+END
+rcpaccion.inl
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/paneles.sys/rcpaccion.inl
+END
+evtaccion.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/paneles.sys/evtaccion.c
+END
+edit.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/paneles.sys/edit.c
+END

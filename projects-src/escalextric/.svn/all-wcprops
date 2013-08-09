@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/srvirtual/!svn/ver/1849/srvirtual/projects-src/escalextric
+END
+escalextric.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1773/srvirtual/projects-src/escalextric/escalextric.cpp
+END
+CEscalextric.inl
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1772/srvirtual/projects-src/escalextric/CEscalextric.inl
+END
+CDataCircuit__curve270_360.png
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/srvirtual/!svn/ver/1627/srvirtual/projects-src/escalextric/CDataCircuit__curve270_360.png
+END
+CDisplayEscalextric.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/srvirtual/!svn/ver/1837/srvirtual/projects-src/escalextric/CDisplayEscalextric.cpp
+END
+CDisplayEscalextric__car.png
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/srvirtual/!svn/ver/1515/srvirtual/projects-src/escalextric/CDisplayEscalextric__car.png
+END
+CDisplayEscalextric.inl
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/srvirtual/!svn/ver/1837/srvirtual/projects-src/escalextric/CDisplayEscalextric.inl
+END
+CCar.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1846/srvirtual/projects-src/escalextric/CCar.cpp
+END
+CDataCircuit__straight_horizontal.png
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/srvirtual/!svn/ver/1492/srvirtual/projects-src/escalextric/CDataCircuit__straight_horizontal.png
+END
+CEventApplyVelocity.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/srvirtual/!svn/ver/1525/srvirtual/projects-src/escalextric/CEventApplyVelocity.cpp
+END
+CCar.inl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/srvirtual/!svn/ver/1846/srvirtual/projects-src/escalextric/CCar.inl
+END
+CEventAcceleration.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/srvirtual/!svn/ver/1602/srvirtual/projects-src/escalextric/CEventAcceleration.cpp
+END
+CGeneratorPhysics.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/srvirtual/!svn/ver/1849/srvirtual/projects-src/escalextric/CGeneratorPhysics.cpp
+END
+CEventApplyVelocity.inl
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/srvirtual/!svn/ver/1525/srvirtual/projects-src/escalextric/CEventApplyVelocity.inl
+END
+CDataCircuit__curve90_180.png
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/srvirtual/!svn/ver/1627/srvirtual/projects-src/escalextric/CDataCircuit__curve90_180.png
+END
+CEventAcceleration.inl
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/srvirtual/!svn/ver/1602/srvirtual/projects-src/escalextric/CEventAcceleration.inl
+END
+CGeneratorPhysics.inl
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/srvirtual/!svn/ver/1849/srvirtual/projects-src/escalextric/CGeneratorPhysics.inl
+END
+CDataCircuit.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1841/srvirtual/projects-src/escalextric/CDataCircuit.cpp
+END
+CWorldEscalextric.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/srvirtual/!svn/ver/1846/srvirtual/projects-src/escalextric/CWorldEscalextric.cpp
+END
+CDataCircuit__curve0_90.png
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/srvirtual/!svn/ver/1627/srvirtual/projects-src/escalextric/CDataCircuit__curve0_90.png
+END
+CDataCircuit.inl
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1791/srvirtual/projects-src/escalextric/CDataCircuit.inl
+END
+CWorldEscalextric.inl
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/srvirtual/!svn/ver/1846/srvirtual/projects-src/escalextric/CWorldEscalextric.inl
+END
+CDataCircuit__straight_vertical.png
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/srvirtual/!svn/ver/1492/srvirtual/projects-src/escalextric/CDataCircuit__straight_vertical.png
+END
+CEscalextric.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1846/srvirtual/projects-src/escalextric/CEscalextric.cpp
+END
+CDataCircuit__curve180_270.png
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/srvirtual/!svn/ver/1627/srvirtual/projects-src/escalextric/CDataCircuit__curve180_270.png
+END

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/clienteServidor.sys
+END
+servicio.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/clienteServidor.sys/servicio.h
+END
+sckstream.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/clienteServidor.sys/sckstream.c
+END
+cliente.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/clienteServidor.sys/cliente.h
+END
+filesocket.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/clienteServidor.sys/filesocket.c
+END
+sckstream.inl
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/clienteServidor.sys/sckstream.inl
+END
+filesocket.inl
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/srvirtual/!svn/ver/1070/srvirtual/libs-src/clienteServidor.sys/filesocket.inl
+END
+filesocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/clienteServidor.sys/filesocket.h
+END
+servidor.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/clienteServidor.sys/servidor.c
+END
+servicio.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/clienteServidor.sys/servicio.c
+END
+servidor.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/clienteServidor.sys/servidor.h
+END
+cliente.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/clienteServidor.sys/cliente.c
+END
+servicio.inl
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/clienteServidor.sys/servicio.inl
+END

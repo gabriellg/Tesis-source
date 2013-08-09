@@ -1,0 +1,31 @@
+// Marco de aplicaci�n
+
+#include "marco.tlh"
+
+typedef void (*marco_FPtr_lanza_mensaje)(struct marco_item_t *datos, enum marco_tipo_mensaje_t tipo_mensaje, const char *mensaje);
+typedef void (*marco_FPtr_lanza_explicacion)(struct marco_item_t *datos, enum marco_tipo_mensaje_t tipo_mensaje, const ArrString *explicacion);
+typedef bool (*marco_FPtr_lanza_pregunta)(struct marco_item_t *datos, const char *pregunta);
+
+#define COMPROBAR_FPTR_LANZA_MENSAJE(funcion, tipo_dato) (void)((void (*)(struct tipo_dato *, enum marco_tipo_mensaje_t , const char *)) funcion == funcion)
+#define COMPROBAR_FPTR_LANZA_EXPLICACION(funcion, tipo_dato) (void)((void (*)(struct tipo_dato *, enum marco_tipo_mensaje_t, const ArrString *)) funcion == funcion)
+#define COMPROBAR_FPTR_LANZA_PREGUNTA(funcion, tipo_dato) (void)((bool (*)(struct tipo_dato *, const char *))funcion == funcion)
+	
+struct marco_t *macro_nousar_crea(
+						struct marco_item_t **datos,
+						marco_FPtr_lanza_mensaje func_lanza_mensaje,
+						marco_FPtr_lanza_explicacion func_lanza_explicacion,
+						marco_FPtr_lanza_pregunta func_lanza_pregunta);
+#define marco_crea(tipo_dato, dato, func_lanza_mensaje, func_lanza_explicacion, func_lanza_pregunta)\
+	(\
+		(void)((struct tipo_datos **)dato == dato),\
+		COMPROBAR_FPTR_LANZA_MENSAJE(func_lanza_mensaje, tipo_dato),\
+		COMPROBAR_FPTR_LANZA_EXPLICACION(func_lanza_explicacion, tipo_dato),\
+		COMPROBAR_FPTR_LANZA_PREGUNTA(func_lanza_pregunta, tipo_dato),\
+		macro_nousar_crea(\
+						(struct marco_item_t **)dato,\
+						(marco_FPtr_lanza_mensaje)func_lanza_mensaje,\
+						(marco_FPtr_lanza_explicacion)func_lanza_explicacion,\
+						(marco_FPtr_lanza_pregunta)func_lanza_pregunta)\
+	)
+
+void marco_destruye(struct marco_t **marco);

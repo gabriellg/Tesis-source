@@ -1,0 +1,8 @@
+// Definici�n de una variable
+
+struct variable_t
+{
+	char *nombre;
+	ArrString *valores;
+};
+

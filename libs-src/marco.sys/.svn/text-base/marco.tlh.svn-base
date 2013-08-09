@@ -1,0 +1,12 @@
+// Marco de aplicaci�n
+
+#ifndef _MARCO_TLH_
+#define _MARCO_TLH_
+
+enum marco_tipo_mensaje_t
+{
+	MARCO_MENSAJE_INFORMACION,
+	MARCO_MENSAJE_ERROR
+};
+
+#endif //_MARCO_TLH_

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d
+END
+CTransform3D.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CTransform3D.hpp
+END
+CDisplay3D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CDisplay3D.cpp
+END
+CDescriptionModel3d.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CDescriptionModel3d.cpp
+END
+CDescriptionTransformation3D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CDescriptionTransformation3D.cpp
+END
+CTypeDescriptionGL.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CTypeDescriptionGL.cpp
+END
+IDescriptionGraphics3D.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/IDescriptionGraphics3D.hpp
+END
+CDisplay3D.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1832/srvirtual/libs-src/engine3d/CDisplay3D.hpp
+END
+CDescriptionModel3d.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CDescriptionModel3d.hpp
+END
+CDescriptionTransformation3D.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CDescriptionTransformation3D.hpp
+END
+CTypeDescriptionGL.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CTypeDescriptionGL.hpp
+END
+CTransform3D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/engine3d/CTransform3D.cpp
+END

@@ -1,0 +1,27 @@
+// Define un evento del raton
+
+#include "evtmouse.hxx"
+
+struct EvtMouse_t *evtmouse_createMove(bool isShiftPulsed, bool isControlPulsed, double xPixel, double yPixel, class IGraphics *grafics);
+
+struct EvtMouse_t *evtmouse_createPulse(
+                        enum evtmouse_button_t button,
+                        bool hasPreviuos,
+                        bool isShiftPulsed, bool isControlPulsed,
+                        double xPixelPrevious, double yPixelPrevius,
+                        double xPixel, double yPixel, 
+                        class IGraphics *graphics);
+
+struct EvtMouse_t *evtmouse_createRelease(
+                        enum evtmouse_button_t button,
+                        bool isShiftPulsed, bool isControlPulsed,
+                        double xPixel, double yPixel, 
+                        class IGraphics *graphics);
+
+struct EvtMouse_t *evtmouse_createIn(class IGraphics *grafics);
+
+struct EvtMouse_t *evtmouse_createOut(class IGraphics *grafics);
+
+struct EvtMouse_t *evtmouse_createWheel(enum evtmouse_type_t type, bool isShiftPulsed, bool isControlPulsed, class IGraphics *graphics);
+
+void evtmouse_destroy(struct EvtMouse_t **event);

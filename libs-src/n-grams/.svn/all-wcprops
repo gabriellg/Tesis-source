@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/n-grams
+END
+CGraphNGram.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1247/srvirtual/libs-src/n-grams/CGraphNGram.hpp
+END
+CGraphNGramTransition.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/n-grams/CGraphNGramTransition.cpp
+END
+CSubGraph.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/n-grams/CSubGraph.cpp
+END
+CGraphNGramTransition.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/n-grams/CGraphNGramTransition.hpp
+END
+CSubGraphVertex.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/srvirtual/!svn/ver/1251/srvirtual/libs-src/n-grams/CSubGraphVertex.cpp
+END
+CSubGraph.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1247/srvirtual/libs-src/n-grams/CSubGraph.hpp
+END
+CSubGraphVertex.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/srvirtual/!svn/ver/1247/srvirtual/libs-src/n-grams/CSubGraphVertex.hpp
+END
+CGraphNGram.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1841/srvirtual/libs-src/n-grams/CGraphNGram.cpp
+END

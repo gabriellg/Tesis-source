@@ -1,0 +1,9 @@
+//libcv.inl:
+
+#ifndef LIBCV_INL_
+#define LIBCV_INL_
+
+#include <cv.h>
+#include <highgui.h>
+
+#endif /* LIBCV_INL_ */

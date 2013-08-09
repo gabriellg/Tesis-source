@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sistema.sys
+END
+proceso.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/sistema.sys/proceso.c
+END
+CMath.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1722/srvirtual/libs-src/sistema.sys/CMath.cpp
+END
+proceso.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/sistema.sys/proceso.h
+END
+CMath.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1600/srvirtual/libs-src/sistema.sys/CMath.hpp
+END
+CString.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1476/srvirtual/libs-src/sistema.sys/CString.cpp
+END
+CString.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/srvirtual/!svn/ver/1476/srvirtual/libs-src/sistema.sys/CString.hpp
+END
+fecha.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1156/srvirtual/libs-src/sistema.sys/fecha.c
+END
+typebas.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1664/srvirtual/libs-src/sistema.sys/typebas.h
+END
+asrtbas.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1390/srvirtual/libs-src/sistema.sys/asrtbas.c
+END
+timesys.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/sistema.sys/timesys.c
+END
+memory.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sistema.sys/memory.c
+END
+fecha.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/sistema.sys/fecha.h
+END
+strbas.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1844/srvirtual/libs-src/sistema.sys/strbas.c
+END
+hilo.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1153/srvirtual/libs-src/sistema.sys/hilo.c
+END
+timesys.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/sistema.sys/timesys.h
+END
+asrtbas.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/srvirtual/!svn/ver/1390/srvirtual/libs-src/sistema.sys/asrtbas.h
+END
+memory.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1846/srvirtual/libs-src/sistema.sys/memory.h
+END
+strbas.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/srvirtual/!svn/ver/1164/srvirtual/libs-src/sistema.sys/strbas.h
+END
+hilo.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/srvirtual/!svn/ver/1042/srvirtual/libs-src/sistema.sys/hilo.h
+END
