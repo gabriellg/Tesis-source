@@ -1,4 +1,0 @@
-In file included from /home/gabi/Tesis-Source/libs-src/gtkmarco.sys/gtkmensaje.inl:3:0,
-                 from /home/gabi/Tesis-Source/libs-src/gtkmarco.sys/gtkmensaje.c:3:
-/home/gabi/Tesis-Source/libs-src/gtkmarco.sys/gtkinc.inl:3:21: error fatal: gtk/gtk.h: No existe el archivo o el directorio
-compilación terminada.

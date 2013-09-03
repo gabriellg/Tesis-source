@@ -1,3 +1,0 @@
-In file included from /home/gabi/Tesis-Source/libs-src/images/CImg.cpp:9:0:
-/home/gabi/Tesis-Source/libs-src/images/libcv.inl:6:33: error fatal: opencv2/core/core_c.h: No existe el archivo o el directorio
-compilación terminada.

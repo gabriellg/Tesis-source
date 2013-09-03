@@ -1,127 +1,0 @@
-9
-
-dir
-1851
-https://redmine.i3a.ua.es/svn/srvirtual/srvirtual/libs-src
-https://redmine.i3a.ua.es/svn/srvirtual
-
-
-
-2011-12-08T17:16:42.826891Z
-1850
-gabriellg
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-73c6af39-9124-0410-8d27-f8309f105f32
-
-GMVTools
-dir
-
-aplication
-dir
-
-aplictxt
-dir
-
-array
-dir
-
-basicos
-dir
-
-clienteServidor.sys
-dir
-
-contenedores
-dir
-
-engine3d
-dir
-
-engineSprite
-dir
-
-fich.sys
-dir
-
-generators
-dir
-
-geometry
-dir
-
-graph
-dir
-
-graphics
-dir
-
-gtkmarco.sys
-dir
-
-helpers
-dir
-
-images
-dir
-
-include
-dir
-
-marco.sys
-dir
-
-model3d
-dir
-
-n-grams
-dir
-
-obj3dpp
-dir
-
-opengl.sys
-dir
-
-paneles.sys
-dir
-
-processingImages
-dir
-
-receptors
-dir
-
-scheduler
-dir
-
-sistema.sys
-dir
-
-sprites
-dir
-
-tree
-dir
-
-vision
-dir
-
-visionStereo
-dir
-
-worldVirtual
-dir
-
