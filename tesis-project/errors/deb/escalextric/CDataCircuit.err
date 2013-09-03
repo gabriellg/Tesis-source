@@ -1,0 +1,2 @@
+/home/gabi/Tesis-source/tesis-project/projects-src/escalextric/CDataCircuit.cpp: En la función ‘CArray<SPrvTrack>* prv_readTracks(CNodeXML*)’:
+/home/gabi/Tesis-source/tesis-project/projects-src/escalextric/CDataCircuit.cpp:411:12: aviso: si borra un objeto de tipo de clase polimórfica ‘CPrvProcessTracks’ que tiene un destructor que no es virtual, puede causar conducta indefinida [-Wdelete-non-virtual-dtor]
