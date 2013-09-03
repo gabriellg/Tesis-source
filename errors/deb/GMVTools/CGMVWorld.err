@@ -1,6 +1,0 @@
-/home/gabi/Tesis-Source/libs-src/GMVTools/CGMVWorld.cpp: En la función miembro ‘virtual void CPrvProcessElements::processNode(const CNodeXML*)’:
-/home/gabi/Tesis-Source/libs-src/GMVTools/CGMVWorld.cpp:470:13: aviso: si borra un objeto de tipo de clase polimórfica ‘CPrvProcessElements’ que tiene un destructor que no es virtual, puede causar conducta indefinida [-Wdelete-non-virtual-dtor]
-/home/gabi/Tesis-Source/libs-src/GMVTools/CGMVWorld.cpp: En la función ‘void prv_readContext(const CNodeXML*, const char*, const char*, ILog*, CArrayString*)’:
-/home/gabi/Tesis-Source/libs-src/GMVTools/CGMVWorld.cpp:517:10: aviso: si borra un objeto de tipo de clase polimórfica ‘CPrvProcessNodeElementsContext’ que tiene un destructor que no es virtual, puede causar conducta indefinida [-Wdelete-non-virtual-dtor]
-/home/gabi/Tesis-Source/libs-src/GMVTools/CGMVWorld.cpp: En la función ‘void prv_readElements(const CNodeXML*, ILog*, const CArrayString*, const CArrayString*, const CArrayString*, CArray<CPrivateElementWorld>*)’:
-/home/gabi/Tesis-Source/libs-src/GMVTools/CGMVWorld.cpp:548:9: aviso: si borra un objeto de tipo de clase polimórfica ‘CPrvProcessElements’ que tiene un destructor que no es virtual, puede causar conducta indefinida [-Wdelete-non-virtual-dtor]
