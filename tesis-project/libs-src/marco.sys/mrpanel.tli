@@ -1,0 +1,12 @@
+//mrpanel.tli
+
+#include "mrpanel.hxx"
+
+struct mrpanel_t
+{
+    mrpanel_FPtr_crea_panel func_crea_panel;
+    mrpanel_FPtr_append_panel func_append_panel;
+    mrpanel_FPtr_append_componente func_append_componente;    
+    mrpanel_FPtr_remove_panel func_remove_panel;
+    mrpanel_FPtr_remove_componente func_remove_componente;
+};

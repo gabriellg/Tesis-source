@@ -1,0 +1,32 @@
+// Evento que gestiona teclas.
+
+#define EVT_F1 			0xffbe
+#define EVT_F2 			0xffbf
+#define EVT_F3 			0xffc0
+#define EVT_F4 			0xffc1
+#define EVT_F5 			0xffc2
+#define EVT_F6 			0xffc3
+#define EVT_F7 			0xffc4
+#define EVT_F8 			0xffc5
+#define EVT_F9 			0xffc6
+
+#define EVT_KP_Left 	0xff96
+#define EVT_KP_Up 		0xff97
+#define EVT_KP_Right 	0xff98
+#define EVT_KP_Down 	0xff99
+
+#define EVT_Left 		0xff51
+#define EVT_Up 			0xff52
+#define EVT_Right 		0xff53
+#define EVT_Down 		0xff54
+
+#define EVT_KP_0 		0xffb0
+#define EVT_KP_1 		0xffb1
+#define EVT_KP_2 		0xffb2
+#define EVT_KP_3 		0xffb3
+#define EVT_KP_4 		0xffb4
+#define EVT_KP_5 		0xffb5
+#define EVT_KP_6 		0xffb6
+#define EVT_KP_7 		0xffb7
+#define EVT_KP_8 		0xffb8
+#define EVT_KP_9 		0xffb9
