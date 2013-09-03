@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="merlin.toolchain.debug.1944276929">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="merlin.toolchain.debug.1944276929" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildProperties="" description="" id="merlin.toolchain.debug.1944276929" name="Debug" parent="merlin.toolchain.debug">
+					<folderInfo id="merlin.toolchain.debug.1944276929." name="/" resourcePath="">
+						<toolChain id="merlin.toolchain.builder.debug.152941468" name="Merlin debug" superClass="merlin.toolchain.builder.debug">
+							<targetPlatform id="merlin.toolchain.targetPlatformDebug.927079204" isAbstract="false" name="Linux" superClass="merlin.toolchain.targetPlatformDebug" unusedChildren="linux"/>
+							<builder buildPath="${workspace_loc:/tesis-project}/Debug" id="merlin.toolchain.builder.debug.1739584550" managedBuildOn="true" name="Debug Builder.Debug" superClass="merlin.toolchain.builder.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.so.debug.1898895714" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.so.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.1638756777" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.so.debug.1814342617" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.so.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.debug.1560302564" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.so.debug.2091794103" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.so.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.debug.1446955422" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.debug"/>
+							<tool id="merlin.toolchain.makeAllProjectDebug.31883481" name="Tool Merlin" superClass="merlin.toolchain.makeAllProjectDebug"/>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="tesis-project.merlin.toolchain.project.1846949726" name="Merlin Project" projectType="merlin.toolchain.project"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+</cproject>
