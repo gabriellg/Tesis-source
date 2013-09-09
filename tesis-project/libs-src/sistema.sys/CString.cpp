@@ -1,6 +1,5 @@
 /* -----------------------------------------------------------------------------
 *  CString
-*  Author: Antonio Javier Gallego Sánchez (ajgallego AT gmail DOT com)
 *  License: GNU Public License
 * ----------------------------------------------------------------------------*/
 
@@ -52,6 +51,23 @@ void CString::free(char **str)
     assert_no_null(str);
     assert_no_null(*str);
     FREE_T(str, char);
+}
+
+//------------------------------------------------------------------------------
+//
+void CString::deleteArrayStrings(char ***strings, unsigned long numStrings)
+{
+    char **string_loc;
+
+    assert_no_null(strings);
+    assert_no_null(*strings);
+
+    string_loc = *strings;
+
+    for (unsigned long i = 0; i < numStrings; i++)
+        CString::free(&string_loc[i]);
+
+    FREE_T(strings, char *);
 }
 
 //------------------------------------------------------------------------------
