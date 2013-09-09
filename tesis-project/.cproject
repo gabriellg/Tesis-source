@@ -3,46 +3,29 @@
 
 <cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
-		<cconfiguration id="merlin.toolchain.debug.1944276929">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="merlin.toolchain.debug.1944276929" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+		<cconfiguration id="merlin.toolchain.debug.1878029522">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="merlin.toolchain.debug.1878029522" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildProperties="" description="" id="merlin.toolchain.debug.1944276929" name="Debug" parent="merlin.toolchain.debug">
-					<folderInfo id="merlin.toolchain.debug.1944276929." name="/" resourcePath="">
-						<toolChain id="merlin.toolchain.builder.debug.152941468" name="Merlin debug" superClass="merlin.toolchain.builder.debug">
-							<targetPlatform id="merlin.toolchain.targetPlatformDebug.927079204" isAbstract="false" name="Linux" superClass="merlin.toolchain.targetPlatformDebug" unusedChildren="linux"/>
-							<builder buildPath="${workspace_loc:/tesis-project}/Debug" id="merlin.toolchain.builder.debug.1739584550" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Debug Builder" superClass="merlin.toolchain.builder.debug"/>
-							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.so.debug.1898895714" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.so.debug">
-								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.929732415" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.1638756777" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
-							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.so.debug.1814342617" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.so.debug">
-								<option id="gnu.cpp.compiler.option.include.files.1043879190" name="Include files (-include)" superClass="gnu.cpp.compiler.option.include.files" valueType="includeFiles">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/libs-src/include/bool.h}&quot;"/>
-								</option>
-								<option id="gnu.cpp.compiler.option.include.paths.132055480" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/usr/include/gtk-2.0"/>
-								</option>
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1040866368" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.debug.1560302564" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.debug">
-								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1870710666" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.so.debug.2091794103" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.so.debug"/>
-							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.debug.1446955422" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.debug">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1052351738" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
-									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
-									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
-								</inputType>
-							</tool>
-							<tool id="merlin.toolchain.makeAllProjectDebug.31883481" name="Tool Merlin" superClass="merlin.toolchain.makeAllProjectDebug"/>
+				<configuration artifactName="${ProjName}" buildProperties="" description="" id="merlin.toolchain.debug.1878029522" name="Debug" parent="merlin.toolchain.debug">
+					<folderInfo id="merlin.toolchain.debug.1878029522." name="/" resourcePath="">
+						<toolChain id="merlin.toolchain.builder.debug.719370768" name="Merlin debug" superClass="merlin.toolchain.builder.debug">
+							<targetPlatform id="merlin.toolchain.targetPlatformDebug.2031018610" isAbstract="false" name="linux" superClass="merlin.toolchain.targetPlatformDebug"/>
+							<builder buildPath="${workspace_loc:/tesis-project}/Debug" id="merlin.toolchain.builder.debug.535592382" managedBuildOn="true" name="Debug Builder.Debug" superClass="merlin.toolchain.builder.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1212741508" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.386441510" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1620088777" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.347300465" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.226976360" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.1056021892" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug"/>
+							<tool id="merlin.toolchain.makeAllProjectDebug.1660836822" name="Tool Merlin Debug" superClass="merlin.toolchain.makeAllProjectDebug"/>
 						</toolChain>
 					</folderInfo>
 				</configuration>
@@ -51,11 +34,10 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="tesis-project.merlin.toolchain.project.1846949726" name="Merlin Project" projectType="merlin.toolchain.project"/>
+		<project id="tesis-project.merlin.toolchain.project.1366474708" name="Merlin Project" projectType="merlin.toolchain.project"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
 </cproject>
