@@ -64,7 +64,7 @@ class CPrvProcessTracks: public IProcessNodeXML
 	public:
 
 		CPrvProcessTracks();
-		~CPrvProcessTracks();
+		virtual ~CPrvProcessTracks();
 		virtual void processNode(const class CNodeXML *node);
 
 		class CArray<SPrvTrack> *getTracks(void);
