@@ -8,6 +8,8 @@ class IProcessNodeXML
 {
 	public:
 
+		virtual ~IProcessNodeXML() {;}
+
 		virtual void processNode(const class CNodeXML *node) = 0;
 };
 
