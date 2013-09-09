@@ -61,7 +61,7 @@ class CPrvProcessNodeElementsContext : public IProcessNodeXML
 	public:
 
 		CPrvProcessNodeElementsContext(const char *tag, class CArrayString *ids, class ILog *log);
-		~CPrvProcessNodeElementsContext();
+		virtual ~CPrvProcessNodeElementsContext();
 
 		virtual void processNode(const class CNodeXML *node);
 
@@ -84,7 +84,7 @@ class CPrvProcessElements : public IProcessNodeXML
 	public:
 
 		CPrvProcessElements(unsigned long recursiveLevel, struct prv_dataProcessElements_t **dataProcess);
-		~CPrvProcessElements();
+		virtual ~CPrvProcessElements();
 
 		virtual void processNode(const class CNodeXML *node);
 
