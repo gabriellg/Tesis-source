@@ -1,0 +1,114 @@
+\begin{thebibliography}{10}
+
+\bibitem{Axelrod1997}
+R.~Axelrod.
+\newblock Advancing the art of simulation in the social sciences, 1997.
+
+\bibitem{Chiu2011}
+C.-C. Chiu and S.~Marsella.
+\newblock A style controller for generating virtual human behaviors.
+\newblock In {\em Proceedings of 10th. Int. Conf. on Autonomous Agents and
+  Multi-Agent Systems}, pages 1023--1030, 2011.
+
+\bibitem{Genesereth1995}
+M.~R. Genesereth and S.~P. Ketchpel.
+\newblock Software agents.
+\newblock {\em Communications of the ACM}, 37:48--53, 1994.
+
+\bibitem{Gilbert2008}
+N.~Gilbert.
+\newblock {\em Agent-Based Models}.
+\newblock SAGE Publications, 2008.
+
+\bibitem{Hahn2009}
+C.~Hahn, C.~Madrigal-Mora, and K.~Fischer.
+\newblock A platform-independent metamodel for multiagent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}, 18:239--266, April
+  2009.
+
+\bibitem{Khoo2002}
+A.~Khoo and R.~Zubek.
+\newblock Applying inexpensive ai techniques to computer games.
+\newblock {\em IEEE Intelligent Systems}, pages 48--53, 2002.
+
+\bibitem{Luke2004}
+S.~Luke, C.~Cioffi-revilla, L.~Panait, and K.~Sullivan.
+\newblock Mason: A new multi-agent simulation toolkit.
+\newblock In {\em University of Michigan}, 2004.
+
+\bibitem{Luo2010}
+R.~Luo, Y.-C. Lin, and C.-C. Kao.
+\newblock Autonomous mobile robot navigation and localization based on floor
+  plan map information and sensory fusion approach.
+\newblock In {\em Multisensor Fusion and Integration for Intelligent Systems
+  (MFI), 2010 IEEE Conference on}, pages 121 --126, sept. 2010.
+
+\bibitem{Maes1997}
+P.~Maes, T.~Darrell, B.~Blumberg, and A.~Pentland.
+\newblock The alive system: wireless, full-body interaction with autonomous
+  agents.
+\newblock {\em Multimedia Syst.}, 5:105--112, March 1997.
+
+\bibitem{North2005}
+M.~J. North, T.~R. Howe, N.~T. Collier, and J.~R. Vos.
+\newblock The repast simphony runtime system.
+\newblock {\em Proceedings of the Agent 2005 Conference on Generative Social
+  Processes Models and Mechanisms}, (1):151--158, 2005.
+
+\bibitem{Novak2007}
+J.~Novak.
+\newblock {\em Game Development Essentials: An Introduction. Second edition.}
+\newblock Delmar Cengage Learning, 2007.
+
+\bibitem{Querrec2011}
+R.~Querrec, C.~Buche, F.~Lecorre, and F.~Harrouet.
+\newblock Agent metamodel for virtual reality applications.
+\newblock In D.~Ryzko, H.~Rybinski, P.~Gawrysiak, and M.~Kryszkiewicz, editors,
+  {\em Emerging Intelligent Technologies in Industry}, volume 369 of {\em
+  Studies in Computational Intelligence}, pages 81--90. Springer Berlin /
+  Heidelberg, 2011.
+
+\bibitem{Reynolds2000}
+C.~Reynolds.
+\newblock Interaction with groups of autonomous characters.
+\newblock {\em Group}, 21(4):449--460, 2000.
+
+\bibitem{Rhyne2000}
+T.-M. Rhyne.
+\newblock Entertainment computing: Computer games' influence on scientific and
+  information visualization.
+\newblock {\em Computer}, 33:154--156, 2000.
+
+\bibitem{Sherman2003}
+W.~R. Sherman and A.~Craig.
+\newblock {\em Understanding virtual reality: interface, application, and
+  design.}
+\newblock Morgan Kaufmann., 2003.
+
+\bibitem{Thiebaux2009}
+M.~Thiebaux, B.~Lance, and S.~Marsella.
+\newblock {Real-Time Expressive Gaze Animation for Virtual Humans}.
+\newblock In {\em 8th International Conference on Autonomous Agents and
+  Multi-Agent Systems (AAMAS)}, Budapest, Hungary, May 2009.
+
+\bibitem{Ulicny2001}
+B.~Ulicny and D.~Thalmann.
+\newblock Crowd simulation for interactive virtual environments and vr training
+  systems.
+\newblock In {\em Proceedings of the Eurographic workshop on Computer animation
+  and simulation}, pages 163--170, New York, NY, USA, 2001. Springer-Verlag New
+  York, Inc.
+
+\bibitem{Wachsmuth1995}
+I.~Wachsmuth and Y.~Tao.
+\newblock Interactive graphics design with situated agents.
+\newblock In {\em Graphics and Robotics}, pages 73--86, London, UK, 1995.
+  Springer-Verlag.
+
+\bibitem{Wilensky1999}
+U.~Wilensky.
+\newblock Netlogo. center for connected learning and computer-based modeling,
+  northwestern university, evanston, il.
+\newblock http://ccl.northwestern.edu/netlogo, 1999.
+
+\end{thebibliography}

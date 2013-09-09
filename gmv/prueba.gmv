@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<World>
+  <Primitives>
+    <Primitive id="sphere"/>
+    <Primitive id="cube"/>
+    <Primitive id="car"/>
+    <Primitive id="scenario"/>
+  </Primitives>
+  <Transforms>
+    <Transform id="scale3D"/>
+    <Transform id="rotation3D"/>
+    <Transform id="traslation3D"/>
+  </Transforms>
+  <Actors>
+    <Actor id="Robot"/>
+ </Actors>
+  <Displays>
+    <Display id="opengl3D"/>
+    <Display id="sprite2D"/>
+  </Displays>
+  <Generators>
+    <Generator id="Joystick"/>
+    <Generator id="keyboard"/>
+  </Generators>
+  <Scene>
+    <ElementWorld class="Actor" id="Robot"/>
+    <ElementWorld class="Primitive" id="scenario"/>
+    <ElementWorld class = "Transform" id="traslation3D" params="2,3,5">
+        <ElementWorld class="Primitive" id="cube"/>
+    </ElementWorld>
+    <ElementWorld class = "Transform" id="traslation3D" params="2,3,5"/>
+  </Scene>
+</World>

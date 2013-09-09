@@ -1,0 +1,747 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+%\usepackage[spanish]{babel}
+\usepackage{url}
+
+
+\begin{document}
+
+\mainmatter
+
+
+\title{Formal model to integrate Multiagent Systems and Interactive Graphic Systems}
+\titlerunning{Formal model to integrate Multiagent Systems and Interactive Graphic Systems}
+%\toctitle{Formal model to integrate Multiagent Systems and Interactive Graphic Systems}
+
+
+\author{Gabriel L\'opez Garc\'ia, Rafael Molina-Carmona and Javier Gallego-S\'anchez}
+\authorrunning{Gabriel L\'opez \and Rafael Molina-Carmona \and Javier Gallego-S\'anchez}
+%\tocauthor{G. L\'opez \and R. Molina \and J. Gallego}
+
+\institute{Grupo de Inform\'atica Industrial e Inteligencia Artificial\\
+Universidad de Alicante, Ap.99, E-03080, Alicante, Spain\\
+\{glopez, rmolina, ajgallego\}@dccia.ua.es}
+
+
+
+\maketitle
+
+
+\begin{abstract}
+
+A formal grammar-based model to integrate the essential characteristics of a Multiagent System
+using the visualization given by an Interactive Graphic Systems is presented. This model adds
+several advantages, such as the separation between the implementation of the system activity and
+the hardware devices, or the easy reusability of components. To
+illustrate the model, a practical case is presented. It implements a simulation of the fires in
+forests caused by lightning.
+
+\end{abstract}
+
+
+
+%___________________________________________________________________________
+\section{Introduction
+\label{sec:introduction}}
+%___________________________________________________________________________
+
+The growing influence of Multi-Agent Systems (MAS) in several fields of research (sociology,
+economics, artificial intelligence, ecology, and so on) has led to a significant evolution in its
+development. On the other hand, the spectacular progress of the Interactive Graphic Systems (IGS)
+has contributed to present the information in a more friendly way using new forms of analysis.
+Videogames and the entertainment industry in general, have had a decisive influence on this
+spectacular progress, that has arrived to the field of research \cite{Rhyne2000}. However, with few
+exceptions, solutions to integrate MASs and IGSs are not proposed.
+
+Agents are usually considered to have some generic characteristics that make them difficult to
+model \cite{Gilbert2008}. Although there are some common strategies for implementing them, there is
+a lack of a unified design pattern. As a consequence, some problems arise, such as the difficult
+reproduction of the results provided by the MASs \cite{Axelrod1997}, the lack of a suitable visual
+representation or the limited capabilities of interaction with the user and with the environment.
+MASs could take advantage of the wide research carried out in this fields to develop IGSs.
+
+There are many generic and specific work environments to develop MASs, but they seldom include
+advanced visual features. For instance, in Sociology
+\cite{Axelrod1997,Gilbert2008}, very specific solutions are used, generally
+oriented to sociological studies, such as the movement of crowds
+\cite{Ulicny2001,Reynolds2000}. In some cases, they use graphics to display statistics,
+the density of agents within the environment or even the animation of the movements of agents
+\cite{Reynolds2000}. Netlog \cite{Wilensky1999} is a useful tool to study highly complex systems.
+It has developed some graphical features, but the agents are represented by Logo style triangles
+just to allow the user to observe the movement agents and the population density.
+
+Some applications of the MASs to Virtual Reality systems can also be found. One of these systems
+proposes an implementation of a virtual world where objects react to several gestures of the user
+\cite{Maes1995}. The work of \cite{Wachsmuth1995} uses the concepts of perception of the MASs
+applied to virtual reality, where the agents react interactively with the user.
+
+In the area of the entertainment industry, some MASs applied to games can also be found. In this
+case, the agents are usually called bots \cite{Khoo2002} and they are programmed as characters of
+the game, with objectives, strategies and actions. Programming is done with a specific script
+language for each game, so that characters cannot easily be transferred between games. These
+systems are so successful that they are being used in research for some specific cases
+\cite{Rhyne2000}.
+
+An increasing variety of generic development environments with a similar philosophy are also
+emerging: they implement the most important features of agents, i.e., perception of the world,
+communication, reaction, and so on \cite{Gilbert2008}. Some examples are Repast \cite{North2005}
+and MASON \cite{Luke2005}.
+
+As a conclusion, there are a variety of environments that implement the essential characteristics
+of the MASs and, in some cases, they have some basic display functions. However, a model that
+unifies the definition of MASs and the whole potential of IGS has not been proposed.
+
+This paper describes an integral model based on grammars to develop complex environments that take
+advantage of the MASs and the IGSs features. This system uses a descriptive language and discrete
+events to specify all the features necessary to define an agent. It allows an easy interaction with
+the user so that the initial conditions could be changed, the experiments can be reproduced and the
+components of the scene are displayed in real time. It is also independent from the display and
+interaction devices and it incorporates a physics engine. Finally, the agents can be easily reused.
+
+The following section provides a description of the proposed model. In section 3, a case of study
+is proposed with the aim of showing the use of the whole system. Finally, some conclusions and
+possible lines of future work are presented.
+
+
+
+%___________________________________________________________________________
+\section{Model for Virtual Worlds Generation
+\label{sec:model}}
+%___________________________________________________________________________
+
+In the proposed model, a scene is a set of dynamic and static elements. They are all represented by
+a sequence of primitives an transformations defined in a geometric system $G$. A primitive is not
+just understood as a draw primitive (e.g. a sphere) but an action on the geometric system that can
+be a visual action or not. A transformation is a modification on the primitive behavior. They will
+affect the set of primitives inside their scope of application.
+
+The agents are the dynamic elements and they are made of activities and an optional set of internal
+states. Each activity is a process that is executed as a reaction to a given event. The agents can
+have a geometrical representation, defined using primitives and transformations, depending on their
+internal state.
+
+An event executes an activity. Its generation is independent from the physical device. They provide
+the different ways of communication in a MAS.
+
+Those are the main elements of the proposed system. Next, a formal mathematical model is presented,
+to precisely define its features.
+
+
+\begin{table}[h]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|}
+
+    \hline
+
+    Rule 1.- \textbf{WORLD} $\rightarrow$ OBJECTS \\
+
+    Rule 2.- \textbf{OBJECTS} $\rightarrow$ OBJECT $|$ OBJECT · OBJECTS \\
+
+    Rule 3.- \textbf{OBJECT} $\rightarrow$ FIGURE $|$ TRANSFORMATION $|$ AGENT \\
+
+    Rule 4.- \textbf{AGENT} $\rightarrow$ $a^d_{st}$ (OBJECTS), $a^d_{st} \in A^D_{ST}, d \in D, st \in ST$ \\
+
+    Rule 5.- \textbf{TRANSFORMATION} $\rightarrow t$ (OBJECTS), $t \in T$ \\
+
+    Rule 6.- \textbf{FIGURE} $\rightarrow$ $p^+$, $p \in P$ \\
+
+    \hline
+
+\end{tabular}
+\end{center}
+\end{small}
+\label{tab:rules}
+\caption{Rules of the grammar}
+\end{table}
+
+
+A string $w \in \Sigma^*$ is generated by the grammar $M$ (Table 1), if it can be
+obtained starting with the initial symbol WORLD and using the given rules. The
+language $L(M)$ is the set of all the strings
+which can be generated by this method, so:
+$L(M) = \lbrace w \in \Sigma^* \ | \ \text{WORLD} \stackrel{*}{\rightarrow} w \rbrace$.
+This grammar is a context-independent grammar (or a type-2 grammar, according to the Chomsky
+hierarchy). Therefore, there is a procedure which verifies if a scene is correctly described.
+
+Apart from the language syntax, it is necessary to define the functionality of the strings, that is,
+the semantics of the language. In our case, it is denoted using a denotational method, which defines
+the meaning of the string through mathematical logic terms.
+
+
+
+%___________________________________________________________________________
+\subsubsection{Semantic Function for Primitives (Rule 6)
+\label{sec:rule6}}
+
+Rule 6 defines the syntax of a figure as a sequence of primitives. Primitive's semantics is defined
+as a function $\alpha: P \rightarrow G$. Each symbol in the set $P$ carries out a primitive on a given geometric
+system $G$. So, depending on the definition of the function $\alpha$ and on the geometric system $G$, the result
+may be different. $G$ represents the actions which are run on a specific geometric system. An example
+of geometric system are graphical libraries such as OpenGL or Direct3D. But, the function $\alpha$ has no
+restrictions on the geometric system that can be applied.
+
+
+
+%___________________________________________________________________________
+\subsubsection{Semantic Function for Transformations (Rule 5)
+\label{sec:rule5}}
+
+The scope of a transformation is
+limited by the symbols ``()''. Two functions are used to describe the semantics
+of a transformation: $\beta: T \rightarrow G$ (it is carried out when the symbol ``('' is
+processed), and $\delta: T \rightarrow G$ (it is carried out when the symbol ``)'' is found).
+These two functions have the same features that the function $\alpha$, but they
+are applied to the set of transformations $T$, using the same geometric system
+$G$.
+
+Given a string $w \in L(M)$, a new function $\varphi$ is defined to run a sequence of primitives $P$
+and transformations $T$ in a geometric system $G$:
+
+
+\begin{equation}
+\begin{small}
+    \varphi (w) = \left\{
+    \begin{array}{ll}
+        \alpha(w) & \mathit{if} \ \ w \in P  \\
+
+        \beta(t); \varphi(v); \delta(t) & \mathit{if} \ \ w = t(v) \wedge v \in L(M) \wedge t \in T \\
+
+        \varphi(s); \varphi(v)  & \mathit{if} \ \ w = s \cdotp v \wedge s, v \in L(M)
+    \end{array}\right\}
+\end{small}
+\end{equation}
+
+
+
+One of the most important features of this system is the independence from a specific graphics
+system. The definition of the functions $\alpha$, $\beta$ and $\delta$ provides the differences in
+behaviour, encapsulating the implementation details. Therefore, the strings developed to define
+virtual worlds may be reused in other systems.
+
+
+
+%___________________________________________________________________________
+\subsubsection{Semantic Function for Agents (Rule 4)
+\label{sec:rule4}}
+
+The semantics of agents is a function which defines its evolution in time. It is called
+\textit{evolution function} $\lambda$ and is defined as:
+$\lambda: L(M) \times E^D \rightarrow L(M)$, where $E^D$ is the set of events
+for the device $D$ (considering these devices as
+any software or hardware process that sends events). By applying the function
+$\lambda(w, e^{f})$, $w \in L(M)$ is transformed into another string $u$,
+which allows the system to evolve. It has a different expression depending on
+its evolution, but the general expression is defined as:
+
+\begin{small}
+\begin{equation}
+    \lambda (a_{st}^{d}(v),e^{f})=
+    \left\{
+    \begin{array}{ll}
+        u \in L(M) & \mathit{if}  \ \ f = d \\
+        a_{st}^{d}(v)  & \mathit{if}  \ \ f \neq d
+    \end{array}\right\}
+\end{equation}
+\end{small}
+
+The result $u$ of the function may contain or not the own agent, it can generate other
+event for the next frame or change the state `$st$' of the agent.
+
+The function $\lambda$ can define a recursive algorithm, called
+\textit{function of the system evolution} $\eta$. Given a set of
+events $e^i, e^j, e^k, \dots, e^n$ (denoted as $e^v$, where $v \in D^+$)
+and a string $w$, it describes the evolution of the system at a given point
+in time. This algorithm also uses the operator $\prod_{\forall f \in v}$ which concatenates
+strings.
+
+\begin{small}
+\begin{equation}
+    \eta (w, e^v) = \left\{
+    \begin{array}{ll}
+        w   & \mathit{if}  \ \ w \in P  \\
+
+        t(\eta (v, e^v))    & \mathit{if}  \ \  w = t(v)  \\
+
+        \underset{\forall f \in v}{ \prod }(\lambda (a_{st}^d (\eta
+            (y, e^v)), e^f))    & \mathit{if}  \ \ w = a_{st}^d(y) \\
+
+        \eta (s, e^v) \cdot \eta (t, e^v)   & \mathit{if}  \
+\  w = s \cdot t
+    \end{array}\right\}
+\end{equation}
+\end{small}
+
+For the visualization of an agent, it must be first converted into strings made up only
+of primitives and transformations. This conversion is carried out by a type of function $\lambda$
+called \textit{visualization function} $\theta: L(M) \times E^V \rightarrow L(E)$, where
+$V \subseteq D$ are events used to create different views of the system, $E^V$ are events
+created in the visualization process, and $L(E)$
+is the language $L(M)$ without agents. This function is defined as:
+
+\begin{small}
+\begin{equation}
+    \theta (a_{st}^d(v), e^f) =
+    \left\{
+    \begin{array}{ll}
+        w \in L(E) & \ \ \mathit{if}  \ \ f = d \wedge d \in V \\
+        \epsilon  & \ \ \mathit{if}  \ \ f \neq d
+    \end{array}\right\}
+\end{equation}
+\end{small}
+
+As with the function $\lambda$, an algorithm is defined for $\theta$. It returns a string $z \in
+L(E)$, given a string $w \in L(M)$ and a set of events $e^v$, where $v \in V^+$ and $V \subseteq
+D$. This function is called \textit{function of system visualization} $\pi$ and it is defined as:
+$\pi: L(M) \times E^V \rightarrow L(E)$
+
+\begin{small}
+\begin{equation}
+    \pi (w, e^v) = \left\{
+    \begin{array}{ll}
+        w   & \mathit{if}  \ \ w \in P^+  \\
+
+        t(\pi (y, e^v))     & \mathit{if}  \ \  w = t(y)  \\
+
+        \underset{\forall f \in v}{ \prod }(\theta (a_{st}^v (\pi
+            (y, e^v)), e^f))    & \mathit{if}  \ \ w = a_{st}^v(y) \\
+
+        \pi (s, e^v) \cdot \pi (t, e^v)    & \mathit{if}  \
+            \  w = s \cdot t
+    \end{array}\right\}
+\end{equation}
+\end{small}
+
+
+%___________________________________________________________________________
+\subsubsection{Semantic Functions for OBJECT, OBJECTS and WORLD (Rules 1,
+2 and 3)
+\label{sec:rules123}}
+
+The semantic function of WORLD is a recursive function
+which breaks down the string of the WORLD and converts it into substrings of OBJECTS. Then, these
+substrings are in turn broken down into substrings of OBJECT. And for each substring of OBJECT,
+depending on the type of the object, the semantic function of agent, transformation or primitive is
+run. Primitives generated by agents without the visualization function represent the static
+part of the system.
+
+%___________________________________________________________________________
+\subsection{Activity and Events
+\label{sec:activity_events}}
+
+In MAS some mechanisms must be established to model its activities.
+These activities are run by agents and are activated by events.
+Not all activities are run when an event is received, they can also be run when certain
+conditions are satisfied.
+The following event definition is established: {\itshape
+$e_c^d$ is defined as an event of type $d \in D$ with data $e$, which is carried out only when the
+condition $c$ is fulfilled. When there is no condition, the event is
+represented by $e^d$.} Events may include information identifying who sent the message. So, it provides a generic
+communication system that can implement FIPA or KMQL \cite{Genesereth1995}.
+
+
+%___________________________________________________________________________
+\subsection{Input Devices and Event Generators
+\label{sec:input_devices}}
+
+It is necessary to establish the independence between the system and the input devices
+that generate events (hardware or software). So, the events needed to make
+the system respond to a set of input devices must be defined.
+A new function called \textit{event generator} is defined as: {\itshape
+Let $C^d(t)$ be a function which creates events of type $d$ at the time instant $t$,
+where $d \in D$ and $D$ is the set of event types which can be generated by the system. }
+
+It is important to note that event generators encapsulate the device-dependent code.
+They also can model the communication processes that exist in a MAS (agent-agent and
+agent-environment communication).
+
+The process which obtains the events produced by input devices and their associated
+generators is defined as follows: {\itshape
+Let $C^*$ be the set of all the event generators which are associated with input
+devices and $E(C^*, t)$ the function that collects all the events from all the generators, then:}
+
+\begin{small}
+\begin{center}
+\begin{tabular}{lll}
+    $E(C^*, t) = \left\{
+    \begin{array}{ll}
+        e(z, C_i(t))   &  \mathit{if}  \ z = E(C^* - C_i, t) \\
+        \epsilon   &  \mathit{if} \ C^* = \emptyset
+    \end{array}
+    \right\}$
+    &, where \ &
+    $e(z, e^i) = \left\{
+    \begin{array}{ll}
+        z \cdot e^i   &   \mathit{if} \ e^i \notin z \\
+        z    &   \mathit{if} \ e^i \in z
+    \end{array}
+    \right\}$
+\end{tabular}
+\end{center}
+\end{small}
+
+
+
+%___________________________________________________________________________
+\subsection{System Algorithm
+\label{sec:system_algorithm}}
+
+Once all the elements involved in the model to manage a MAS have been defined, the algorithm which carries out the
+entire system can be established:
+
+\begin{center}
+\begin{tabular}{lll}
+\begin{small}
+\begin{tabular}{|ll|}
+    \hline
+    1. & $w = w_o$; $t = 0$ \\
+    2. & $e^* = E(G^*, t)$ \\
+    3. & $e^v =$ events of $e^*$ where $v \in V^+$ \\
+    4. & $e^u = e^* - e^v$ \\
+    5. & $w_{next} = \eta(w, e^u)$ \\
+    6. & $v =  \pi(w, e^v)$ \\
+    7. & $g = \varphi(v)$ \\
+    8. & $w = w_{next}; \ \ t = t + 1$ \\
+    9. & If $w = \epsilon$ then go to 11 \\
+    10. & Go to 2 \\
+    11. & End \\
+\hline
+\end{tabular}
+\end{small}
+     & &
+\begin{small}
+\begin{tabular}{p{0.5\linewidth}}
+    $w_o$ is the intial string of the system.\\
+
+    $e^*$ are all the events generated by the system in a frame $t$.\\
+
+    $G^*$ = \{All the event generators which generate events of type $D$\}\\
+
+    $D$ = \{All the possible events in the system\}\\
+
+    $V$ = \{All the visual events\} where $V \subseteq D$\\
+
+    $e^v$ are all the events from visual devices.\\
+
+    $e^u$ are all the events from non-visual devices.\\
+
+    $g$ is the output device.\\
+\end{tabular}
+\end{small}
+\end{tabular}
+\end{center}
+
+
+
+Steps 2, 3 and 4 manage the system events. In step 5, the evolution algorithm is called to obtain the
+string for the next frame. In steps 6 and 7, the visualization of the system is performed.
+In step 8, the next iteration
+is prepared. Step 9 checks if the current string satisfies the condition of completion: if the
+following string is empty the algorithm ends (Step 11), otherwise the algorithm continues.
+
+Step 5 and 6-7 can be parallelized because they do not share any data, it leads
+to a faster system performance.
+
+
+
+%___________________________________________________________________________
+\section{Case of Study
+\label{sec:case_study}}
+%___________________________________________________________________________
+
+This example is an application that simulates fires in forests caused by lightning \cite{John2007}.
+The system basically consists of an agent who defines the forest. This agent
+can create other agents that implement trees (with a given probability $g$)
+and lightning (with a probability $f$). If a lightning is created in the same
+position as a tree, it will burn as well as the trees around it.
+To model this example, four elements are defined:
+events, event generators, agents and graphic primitives.
+
+Events are used to produce the necessary activity of system. Their aim is to run certain
+activities of the agents that compose the scene. The events defined for this example are:
+
+\begin{itemize}
+    \item $t$: Event generated to increase the time since the previous event.
+
+    \item $c$: Creates a tree at the position $(i, j)$ of the forest.
+
+    \item $f$: Creates a bolt of lightning at position $(i, j)$.
+
+    \item $e$: Eliminates the tree of the position $(i, j)$.
+
+    \item $b$: Burns the tree at position $(i, j)$.
+
+    \item $v$: Draws using a graphics library (e.g. OpenGL).
+\end{itemize}
+
+
+The next step is to define the event generators:
+
+\begin{itemize}
+    \item \textit{Time event generator} ($C_{time}$): It makes the animation of the system. Every time
+    instant $t$, it generates an event $e^t$ to change the appearance of an agent.
+
+    \item \textit{Forest event generator} ($C_{forest}$): It produces events to create trees ($e^{c}$)
+    and lightning ($e^{f}$).
+
+    \item \textit{Visualization event generator} ($C_{visualization}$): It captures the drawing orders and produces an
+    event to send the elements to draw on the graphics system.
+\end{itemize}
+
+
+Table \ref{table2} shows the primitives and transformations that make up the scene.
+The functions ${\alpha}$, ${\beta}$ and ${\delta}$ define them.
+
+Table \ref{table4} shows the evolution function $\lambda$ and the graphical representation $\pi$
+of the agents defined for this example. The agent defined for trees ($TR$) has three internal
+states $st = \{s1, s2, s3 \}$: $s1$ is the state of growth, $s2$ corresponds to a grown tree and $s3$ to a burning tree.
+This is an example of how an agent can have different representation depending on its internal state.
+The function $Nbo$ sends burn events $e^b$ to all the neighbours trees of an agent, creating
+a chain reaction (agent-agent communication). An example of agent-environment communication is made
+between the forest and the generator $C_{forest}$.
+
+\vspace{-0.4cm}
+
+\begin{table}[h]
+\begin{center}
+\begin{small}
+\begin{tabular}{lll}
+
+    \begin{tabular}{|l|l|}
+        \hline \itshape Primitive & \itshape Description\\
+        \hline $TR$   & Draw a tree\\
+        \hline $TR_b$ & Draw a burning tree\\
+        \hline $FA$   & Draw a bolt of lightning\\
+        \hline $BO$   & Draw a grid of NxN \\
+        \hline
+    \end{tabular}
+     & &
+    \begin{tabular}{|l|l|}
+        \hline \itshape Transformations & \itshape Description\\
+        \hline $D_{(i,j)}$ & Translate (i,j)\\
+        \hline $S_{(s)}$ & Scale (n) units\\
+        \hline
+    \end{tabular}
+
+\end{tabular}
+\end{small}
+\caption{\label{table2} (left) Definition of primitives, (right) Definition of transformations}
+\end{center}
+\end{table}
+
+
+\vspace{-1.5cm}
+\begin{table}[h]
+\begin{center}
+\begin{small}
+\begin{tabular}{|p{0.08\linewidth}|p{0.15\linewidth}|p{0.73\linewidth}|}
+
+    \hline
+    \itshape Agent &
+    \itshape Description &
+    \itshape Function ${\lambda}$ and ${\pi}$\\
+    \hline
+
+    \ \ $BO$ &
+    \ Forest &
+    \begin{tabular}{lll}
+        $\lambda(BO^{cfe}, e^{i})$ & $=$ & $\left\{
+        \begin{array}{ll}
+            TR_{s1}^{t=1} \cdot BO^{cfv}    & \ \ \ i = c \\
+            FA^{t=1}   \cdot BO^{cfv}   & \ \ \ i = f \\
+            BO^{cfe}            & \ \ \ i = e \\
+            BO^{cfe}            & \ \ \ i \neq c,f,e
+        \end{array}
+        \right\}$ \\
+
+        $\pi (BO^{v}, e^{i})$ & $=$ & $\left\{
+        \begin{array}{ll}
+            BO          & \ \ \   i = v \\
+            \epsilon    & \ \ \   i \neq v
+        \end{array}
+        \right\}$
+    \end{tabular}   \\
+
+    \hline
+
+    \ \ $TR$ &
+    \ Tree &
+    \begin{tabular}{lll}
+        $\lambda(TR_{st}^x, e^{i})$ & $=$ & $\left\{
+        \begin{array}{ll}
+            TR_{s1}^{t+1}       & i = t \wedge t+1 \leqslant N \wedge s = s1 \\
+            TR_{s2}^{b}         & i = t \wedge t+1 > N \wedge s = s1 \\
+            TR_{s3}^{t=1} \wedge \Delta Nbo^{b}         & i = b > N \wedge s = s2 \\
+            TR_{s3}^{t+1}       & i = t \wedge s = s3 \\
+            \Delta e^{e}        & i = t \wedge  t+1 > N  \wedge s = s3 \\
+            TR_{st}^{t}         & i \neq t \wedge   i \neq b \\
+        \end{array}
+        \right\}$ \\
+
+        $\pi (TR_{st}^{v}, e^{i})$ & $=$ & $\left\{
+        \begin{array}{ll}
+            D_{(i, j)}( S_{(n)} (TR) )    & \ \ \   i = v \wedge st = s1 \\
+            D_{(i, j)}( TR )        & \ \ \   i = v \wedge st = s2 \\
+            D_{(i, j)}( S_{(-n)} (TR) )   & \ \ \   i = v \wedge st = s3 \\
+            \epsilon            & \ \ \   i \neq v
+        \end{array}\right\}$
+    \end{tabular}   \\
+
+
+    \hline
+
+    \ \ $FA$ &
+    \ Lightning &
+    \begin{tabular}{lll}
+        $\lambda (FA^{t}, e^{i})$ & $=$ & $\left\{
+        \begin{array}{ll}
+            FA^{t+1}        & \ \ \  i = t \wedge t+1 \leqslant N \\
+            \Delta e^{b}        & \ \ \  i = t \wedge t+1 > N \\
+            FA^{t}          & \ \ \  i \neq t
+        \end{array}
+        \right\}$ \\
+
+        $\pi (FA^{v}, e^{i})$ & $=$ & $\left\{
+        \begin{array}{ll}
+            D_{(i, j)}(FA)          & \ \ \   i = v \\
+            \epsilon            & \ \ \   i \neq v
+        \end{array}
+        \right\}$
+    \end{tabular}   \\
+
+    \hline
+\end{tabular}
+\end{small}
+\caption{\label{table4} Agents defined for this example}
+\end{center}
+\end{table}
+
+
+
+
+
+
+\vspace{-1cm}
+%___________________________________________________________________________
+\section{Conclusions and Future Work
+\label{sec:conclusions}}
+%___________________________________________________________________________
+
+In this paper a proposal to unify the most relevant features of MASs and IGSs has been presented.
+The proposed model uses a context-free language to define the elements of the system. Although
+further work needs to be done, the use of a descriptive language like this seems to have several
+advantages.
+
+Firstly, the definition of the scene is reusable and independent from the platform thanks to the
+use of the semantic functions. The only task to reuse the scene in a new graphical system is to
+adapt the semantic functions. This functions can be adapted to the graphical requirements of the
+application, so the display can be as complex as desired, from schematic representations to
+realistic scenes for virtual reality.
+
+The use of event generators also makes the interaction with the user independent from the hardware.
+This feature allows an easy introduction of new interaction devices, just changing the device that
+activates the event generator, but keeping the event itself invariable.
+
+The event generators are also used to implement an important feature of a MAS: the communication,
+both agent-agent and agent-environment. The communication between agents is achieved through events
+generated by the agents. The incorporation of a event generator acting as a physics engine (it
+would generate events to inform about collisions, gravity and so on) allows the communication
+between the environment and the agents.
+
+In this model, the semantic functions and the event generators describe the general behaviour of
+the system, acting as a sort of compiler. An instance of the system, that is, a particular scene,
+is defined by a string that is compiled by the system. The use of a string allows the reproduction
+of the experiments just recompiling the scene.
+
+Some of this features are illustrated through the simple example that has been presented.
+Nevertheless, this case is very simple and has some limitations, so it will be extended and
+improved in the future. Furthermore, the model will be applied to other problems to validate its
+features. It also opens new prospects in the future such as the development of agents that are made
+up of other agents or the execution of actions associated to events with a given probability. In
+this field, new possibilities such as probabilistic learning strategies or genetic algorithms will
+be considered.
+
+
+
+
+
+\begin{thebibliography}{0}
+
+\bibitem{Axelrod1997}
+\textsc{Robert Axelrod}
+\newblock Advancing the Art of Simulation in the Social Sciences
+\newblock \emph{Simulating Social Phenomena}, Springer, 1997
+
+\bibitem{Genesereth1995}
+\textsc{Michael R. Genesereth, Steven P. Ketchpel}
+\newblock Software Agents
+\newblock \emph{Communications of the ACM} 1995
+
+\bibitem{Gilbert2008}
+\textsc{Nigel Gilbert}
+\newblock Agent-Based Models
+\newblock \emph{SAGE Publications} 2008
+
+\bibitem{John2007}
+\textsc{John H.Miller}
+\newblock Complex Adaptative Systems
+\newblock \emph{Princeton University Press} 2007
+
+\bibitem{Khoo2002}
+\textsc{Aaron Khoo, Robert Zubek}
+\newblock Applying Inexpensive AI Techniques to Computer Games
+\newblock \emph{IEEE Intelligent Systems} July-August 2002
+
+\bibitem{Luke2005}
+\textsc{Sean Luke, Claudio Cioffi-Revilla, Liviu Panait, and Keith Sullivan}
+\newblock MASON: A New Multi-Agent Simulation Toolkit
+\newblock \emph{Vol. 81, SAGE Journals} 2005
+
+\bibitem{Maes1995}
+\textsc{Pattie Maes, Trevor Darrell, Bruce Blumberg, Alex Pentland}
+\newblock The ALIVE System:Wireless, Full-body Interaction with Autonomous Agents,
+\newblock \emph{ACM Multimedia Systems, Vol.5, No.2, pp.105-112} 1997
+
+\bibitem{North2005}
+\textsc{M.J. North, T.R. Howe, N.T. Collier, J.R. Vos}
+\newblock The Repast Simphony Runtime System
+\newblock \emph{Conference on Generative Social Processes, Models, and Mechanisms, Proceedings of the Agent} 2005
+
+\bibitem{Reynolds2000}
+\textsc{Craig Reynolds}
+\newblock Interaction with Groups of Autonomous Characters
+\newblock \emph{Game Developers Conference} 2000
+
+\bibitem{Rhyne2000}
+\textsc{Theresa-Marie Rhyne}
+\newblock Computer Games’Influence on Scientific and Information Visualization
+\newblock \emph{Entertainment Computing} 2000
+
+\bibitem{Ulicny2001}
+\textsc{B. Ulicny, D. Thalmann}
+\newblock Crowd simulation for interactive virtual environments and VR training systems
+\newblock \emph{Computer Animation and Simulation, Springer} 2001
+
+\bibitem{Wilensky1999}
+\textsc{Wilensky, U., NetLogo}
+\newblock User Manual, 1999
+
+\bibitem{Wachsmuth1995}
+\textsc{Ipke Wachsmuth, Yong Cao}
+\newblock Interactive Graphics Design with Situated Agents
+\newblock \emph{Graphics and Robotics} 1995
+
+\bibitem{Davis1994}
+\textsc{D.Martin, R.Sigal, E.J.Weyuker}:
+\emph{Computability, Complexity, and Languages, Fundamentals of Theoretical Computer Science},
+2nd~ed, Elsevier Science 1994
+
+\end{thebibliography}
+
+
+
+\end{document}

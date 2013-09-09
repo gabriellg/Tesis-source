@@ -1,0 +1,21 @@
+#include "windows.hxx"
+
+#define GL_LEQUAL                         0x0203
+
+WINGDIAPI void APIENTRY glColorMask (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+
+WINGDIAPI void APIENTRY glGetIntegerv (GLenum pname, GLint *params);
+
+WINGDIAPI void APIENTRY glGetDoublev (GLenum pname, GLdouble *params);
+
+WINGDIAPI void APIENTRY glPushMatrix (void);
+WINGDIAPI void APIENTRY glPopMatrix (void);
+WINGDIAPI void APIENTRY glTranslated (GLdouble x, GLdouble y, GLdouble z);
+WINGDIAPI void APIENTRY glScaled (GLdouble x, GLdouble y, GLdouble z);
+WINGDIAPI void APIENTRY glMultMatrixd (const GLdouble *m);
+
+WINGDIAPI void APIENTRY glGetFloatv (GLenum pname, GLfloat *params);
+
+WINGDIAPI void APIENTRY glTranslatef (GLfloat x, GLfloat y, GLfloat z);
+WINGDIAPI void APIENTRY glScalef (GLfloat x, GLfloat y, GLfloat z);
+WINGDIAPI void APIENTRY glMultMatrixf (const GLfloat *m);

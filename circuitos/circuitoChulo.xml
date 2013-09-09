@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Circuit name="CircuitoChulo">
+<Track class="straight"/>
+<Track class="RotateLeft"/>
+<Track class="straight"/>
+<Track class="RotateRight"/>
+<Track class="RotateLeft"/>
+<Track class="RotateLeft"/>
+<Track class="straight"/>
+<Track class="straight"/>
+<Track class="RotateLeft"/>
+<Track class="straight"/>
+<Track class="straight"/>
+<Track class="RotateLeft"/>
+</Circuit>

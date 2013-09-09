@@ -1,0 +1,221 @@
+// Renderización OpenGL
+
+#include "windows.hxx"
+
+#define GL_POLYGON_OFFSET_FILL            0x8037
+#define GL_POLYGON_OFFSET_LINE            0x2A02
+
+#define GL_CLIP_PLANE0                    0x3000
+
+#define GL_UNSIGNED_BYTE                  0x1401
+#define GL_UNSIGNED_SHORT                 0x1403
+#define GL_UNSIGNED_INT                   0x1405
+#define GL_FLOAT                          0x1406
+#define GL_DOUBLE                         0x140A
+
+#define GL_VERTEX_ARRAY                   0x8074
+#define GL_NORMAL_ARRAY                   0x8075
+#define GL_EDGE_FLAG_ARRAY                0x8079
+#define GL_TEXTURE_COORD_ARRAY            0x8078
+
+/* HintMode */
+#define GL_DONT_CARE                      0x1100
+#define GL_FASTEST                        0x1101
+#define GL_NICEST                         0x1102
+
+#define GL_TRUE                           1
+#define GL_FALSE                          0
+
+#define GL_NEVER                          0x0200
+#define GL_EQUAL                          0x0202
+#define GL_LEQUAL                         0x0203
+#define GL_GREATER                        0x0204
+#define GL_NOTEQUAL                       0x0205
+#define GL_GEQUAL                         0x0206
+
+/* FrontFaceDirection */
+#define GL_CW                             0x0900
+#define GL_CCW                            0x0901
+
+WINGDIAPI void APIENTRY glPolygonOffset (GLfloat factor, GLfloat units);
+
+typedef struct _POINTFLOAT {
+    FLOAT   x;
+    FLOAT   y;
+} POINTFLOAT, *PPOINTFLOAT;
+
+typedef struct _GLYPHMETRICSFLOAT {
+    FLOAT       gmfBlackBoxX;
+    FLOAT       gmfBlackBoxY;
+    POINTFLOAT  gmfptGlyphOrigin;
+    FLOAT       gmfCellIncX;
+    FLOAT       gmfCellIncY;
+} GLYPHMETRICSFLOAT, *PGLYPHMETRICSFLOAT, FAR *LPGLYPHMETRICSFLOAT;
+
+#define WGL_FONT_LINES      0
+#define WGL_FONT_POLYGONS   1
+WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(struct HDC__ *, DWORD, DWORD, DWORD, FLOAT,
+                                           FLOAT, int, LPGLYPHMETRICSFLOAT);
+#define wglUseFontOutlines  wglUseFontOutlinesA
+
+WINGDIAPI PROC WINAPI wglGetProcAddress(LPCSTR);
+
+WINGDIAPI void APIENTRY glPushMatrix (void);
+WINGDIAPI void APIENTRY glPopMatrix (void);
+WINGDIAPI void APIENTRY glTranslated (GLdouble x, GLdouble y, GLdouble z);
+WINGDIAPI void APIENTRY glScaled (GLdouble x, GLdouble y, GLdouble z);
+WINGDIAPI void APIENTRY glMultMatrixd (const GLdouble *m);
+
+WINGDIAPI void APIENTRY glListBase (GLuint base);
+
+WINGDIAPI GLuint APIENTRY glGenLists (GLsizei range);
+WINGDIAPI void APIENTRY glNewList (GLuint list, GLenum mode);
+WINGDIAPI void APIENTRY glEndList (void);
+WINGDIAPI void APIENTRY glCallList (GLuint list);
+WINGDIAPI void APIENTRY glCallLists (GLsizei n, GLenum type, const GLvoid *lists);
+
+void APIENTRY gluLookAt(
+    GLdouble eyex, 
+    GLdouble eyey, 
+    GLdouble eyez, 
+    GLdouble centerx, 
+    GLdouble centery, 
+    GLdouble centerz, 
+    GLdouble upx, 
+    GLdouble upy, 
+    GLdouble upz);
+
+
+void APIENTRY gluPerspective(
+    GLdouble fovy, 
+    GLdouble aspect, 
+    GLdouble zNear, 
+    GLdouble zFar);
+
+#define GLU_SMOOTH              100000
+#define GLU_FLAT                100001
+
+#define GLU_FILL                100012
+#define GLU_OUTSIDE             100020
+#define GLU_SILHOUETTE          100013
+
+#define GLU_TRUE                GL_TRUE
+#define GLU_FALSE               GL_FALSE
+
+typedef struct GLUquadric GLUquadric;
+typedef struct GLUquadric GLUquadricObj;
+
+GLUquadric* APIENTRY gluNewQuadric (void);
+
+void APIENTRY gluDeleteQuadric (
+    GLUquadric          *state);
+
+void APIENTRY gluQuadricNormals (
+    GLUquadric          *quadObject, 
+    GLenum              normals);
+
+void APIENTRY gluQuadricTexture (
+    GLUquadric          *quadObject, 
+    GLboolean           textureCoords);
+
+void APIENTRY gluQuadricOrientation (
+    GLUquadric          *quadObject, 
+    GLenum              orientation);
+
+void APIENTRY gluQuadricDrawStyle (
+    GLUquadric          *quadObject, 
+    GLenum              drawStyle);
+
+void APIENTRY gluCylinder (
+    GLUquadric          *qobj, 
+    GLdouble            baseRadius, 
+    GLdouble            topRadius, 
+    GLdouble            height, 
+    GLint               slices, 
+    GLint               stacks);
+
+void APIENTRY gluDisk (
+    GLUquadric          *qobj, 
+    GLdouble            innerRadius, 
+    GLdouble            outerRadius, 
+    GLint               slices, 
+    GLint               loops);
+
+void APIENTRY gluPartialDisk (
+    GLUquadric          *qobj, 
+    GLdouble            innerRadius, 
+    GLdouble            outerRadius, 
+    GLint               slices, 
+    GLint               loops, 
+    GLdouble            startAngle, 
+    GLdouble            sweepAngle);
+
+void APIENTRY gluSphere (
+    GLUquadric          *qobj, 
+    GLdouble            radius, 
+    GLint               slices, 
+    GLint               stacks);
+
+WINGDIAPI void APIENTRY glEnableClientState (GLenum array);
+
+WINGDIAPI void APIENTRY glDrawElements (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
+
+WINGDIAPI void APIENTRY glVertexPointer (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+WINGDIAPI void APIENTRY glNormalPointer (GLenum type, GLsizei stride, const GLvoid *pointer);
+WINGDIAPI void APIENTRY glEdgeFlagPointer (GLsizei stride, const GLvoid *pointer);
+
+WINGDIAPI void APIENTRY glDisableClientState (GLenum array);
+
+WINGDIAPI GLboolean APIENTRY glIsList (GLuint list);
+
+WINGDIAPI void APIENTRY glDeleteLists (GLuint list, GLsizei range);
+
+WINGDIAPI void APIENTRY glColor4ub (GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha);
+
+WINGDIAPI void APIENTRY glClipPlane (GLenum plane, const GLdouble *equation);
+
+WINGDIAPI void APIENTRY glLineWidth (GLfloat width);
+
+WINGDIAPI void APIENTRY glHint (GLenum target, GLenum mode);
+
+WINGDIAPI void APIENTRY glDepthMask (GLboolean flag);
+
+WINGDIAPI void APIENTRY glColorMask (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+
+WINGDIAPI void APIENTRY glStencilFunc (GLenum func, GLint ref, GLuint mask);
+
+WINGDIAPI void APIENTRY glStencilOp (GLenum fail, GLenum zfail, GLenum zpass);
+
+WINGDIAPI void APIENTRY glClearStencil (GLint s);
+
+WINGDIAPI void APIENTRY glAlphaFunc (GLenum func, GLclampf ref);
+
+WINGDIAPI void APIENTRY glTexCoord2d (GLdouble s, GLdouble t);
+
+WINGDIAPI void APIENTRY glTexCoordPointer (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+
+WINGDIAPI void APIENTRY glMaterialfv(GLenum face, GLenum pname, const GLfloat *params);
+WINGDIAPI void APIENTRY glMaterialf(GLenum face, GLenum pname, GLfloat param);
+WINGDIAPI void APIENTRY glMateriali(GLenum face, GLenum pname, GLint param);
+
+WINGDIAPI void APIENTRY glLightf (GLenum light, GLenum pname, GLfloat param);
+WINGDIAPI void APIENTRY glLightModeli (GLenum pname, GLint param);
+
+WINGDIAPI void APIENTRY glFrontFace (GLenum mode);
+
+WINGDIAPI void APIENTRY glCullFace (GLenum mode);
+
+WINGDIAPI void APIENTRY glGetIntegerv (GLenum pname, GLint *params);
+
+WINGDIAPI void APIENTRY glLoadMatrixd (const GLdouble *m);
+
+WINGDIAPI void APIENTRY glPointSize (GLfloat size);
+
+WINGDIAPI void APIENTRY glGetDoublev (GLenum pname, GLdouble *params);
+
+WINGDIAPI void APIENTRY glMap2f (GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+WINGDIAPI void APIENTRY glMapGrid2f (GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2);
+WINGDIAPI void APIENTRY glEvalMesh2 (GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2);
+
+WINGDIAPI void APIENTRY glEdgeFlag (GLboolean flag);
+WINGDIAPI const GLubyte * APIENTRY glGetString (GLenum name);

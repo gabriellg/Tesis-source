@@ -1,0 +1,49 @@
+
+enum cplangl_tipo_vista_t
+{
+    CPLANGL_VISTA_ORTOGONAL,
+    CPLANGL_VISTA_PERSPECTIVA
+};
+
+enum cplangl_tipo_modelado_t
+{
+    CPLANGL_MODELADO_SOLIDO,
+    CPLANGL_MODELADO_ALAMBRICO
+};
+
+enum cplangl_tipo_lista_dibujo_t
+{
+    CPLANGL_LISTA_CON_MUCHO_DETALLE,
+    CPLANGL_LISTA_CON_POCO_DETALLE,
+    CPLANGL_LISTA_PLACAS_CON_MUCHO_DETALLE,
+    CPLANGL_LISTA_PLACAS_CON_POCO_DETALLE
+};
+
+enum cplangl_tipo_dibujo_t
+{
+    CPLANGL_DIBUJO_CON_MUCHO_DETALLE,
+    CPLANGL_DIBUJO_CON_POCO_DETALLE,
+    CPLANGL_DIBUJO_LINEAS,
+    CPLANGL_GENERA_SOMBRAS_SHADER,
+    CPLANGL_DIBUJO_SOMBRAS_SHADER
+};
+
+enum cplangl_offset_zbuffer_t
+{
+    CPLANGL_NIVEL_0,
+    CPLANGL_NIVEL_1,
+    CPLANGL_NIVEL_2,
+    CPLANGL_NIVEL_3
+};
+
+enum cplan_tipo_suelo_t
+{
+    CPLANGL_SUELO_INFINITO,
+    CPLANGL_SUELO_FINITO
+};
+
+enum cplan_tipo_textura_t
+{
+    CPLANGL_TEXTURA_REPETIDA,
+    CPLANGL_TEXTURA_CALCAMONIA
+};

@@ -1,0 +1,38 @@
+// Definición de FBO.
+
+#include "windows.hxx"
+
+#define GL_TRUE                           1
+#define GL_FALSE                          0
+
+
+#define APIENTRYP APIENTRY *
+
+#define GL_FRAMEBUFFER_EXT                0x8D40
+#define GL_DEPTH_ATTACHMENT_EXT           0x8D00
+#define GL_COLOR_ATTACHMENT0_EXT          0x8CE0
+#define GL_FRAMEBUFFER_COMPLETE_EXT       0x8CD5
+
+#define GL_RENDERBUFFER_EXT               0x8D41
+
+typedef void (APIENTRYP PFNGLGENFRAMEBUFFERSEXTPROC) (GLsizei n, GLuint *framebuffers);
+typedef void (APIENTRYP PFNGLDELETEFRAMEBUFFERSEXTPROC) (GLsizei n, const GLuint *framebuffers);
+typedef void (APIENTRYP PFNGLBINDFRAMEBUFFEREXTPROC) (GLenum target, GLuint framebuffer);
+typedef void (APIENTRYP PFNGLFRAMEBUFFERTEXTURE2DEXTPROC) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+typedef GLenum (APIENTRYP PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC) (GLenum target);
+
+typedef void (APIENTRYP PFNGLBINDRENDERBUFFEREXTPROC) (GLenum target, GLuint renderbuffer);
+typedef void (APIENTRYP PFNGLDELETERENDERBUFFERSEXTPROC) (GLsizei n, const GLuint *renderbuffers);
+typedef void (APIENTRYP PFNGLGENRENDERBUFFERSEXTPROC) (GLsizei n, GLuint *renderbuffers);
+typedef void (APIENTRYP PFNGLRENDERBUFFERSTORAGEEXTPROC) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (APIENTRYP PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC) (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+
+WINGDIAPI PROC WINAPI wglGetProcAddress(LPCSTR);
+WINGDIAPI void APIENTRY glDrawBuffer (GLenum mode);
+WINGDIAPI void APIENTRY glReadBuffer (GLenum mode);
+WINGDIAPI void APIENTRY glColorMask (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+
+WINGDIAPI void APIENTRY glPushMatrix (void);
+WINGDIAPI void APIENTRY glPopMatrix (void);
+
+WINGDIAPI void APIENTRY glTexCoord2d (GLdouble s, GLdouble t);

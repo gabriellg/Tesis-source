@@ -1,0 +1,117 @@
+// Definicion de texturas.
+
+#include "windows.hxx"
+
+#define GL_TRUE                           1
+#define GL_FALSE                          0
+
+#define GL_BGR 0x80E0
+#define GL_BGRA 0x80E1
+
+#define GL_UNSIGNED_BYTE                  0x1401
+#define GL_FLOAT                          0x1406
+
+#define GL_LEQUAL                         0x0203
+
+#define GL_CLAMP                          0x2900
+#define GL_REPEAT                         0x2901
+#define GL_CLAMP_TO_EDGE                  0x812F
+
+#define GL_TEXTURE0                       0x84C0
+
+#define GL_TEXTURE_MAG_FILTER             0x2800
+#define GL_TEXTURE_MIN_FILTER             0x2801
+#define GL_TEXTURE_WRAP_S                 0x2802
+#define GL_TEXTURE_WRAP_T                 0x2803
+#define GL_TEXTURE_BORDER_COLOR           0x1004
+
+#define GL_NEAREST_MIPMAP_NEAREST         0x2700
+#define GL_LINEAR_MIPMAP_NEAREST          0x2701
+#define GL_NEAREST_MIPMAP_LINEAR          0x2702
+#define GL_LINEAR_MIPMAP_LINEAR           0x2703
+
+#define GL_GENERATE_MIPMAP                0x8191
+
+#define GL_INTENSITY                      0x8049
+#define GL_DEPTH_TEXTURE_MODE             0x884B
+#define GL_TEXTURE_COMPARE_MODE           0x884C
+#define GL_TEXTURE_COMPARE_FUNC           0x884D
+#define GL_COMPARE_R_TO_TEXTURE           0x884E
+#define GL_MAX_TEXTURE_UNITS              0x84E2
+
+#define GL_RGB16F_ARB                     0x881B
+
+#define GL_CONSTANT                       0x8576
+#define GL_PREVIOUS                       0x8578
+
+#define GL_COMBINE                        0x8570
+#define GL_COMBINE_RGB                    0x8571
+#define GL_COMBINE_ALPHA                  0x8572
+#define GL_SOURCE0_RGB                    0x8580
+#define GL_SOURCE1_RGB                    0x8581
+#define GL_SOURCE2_RGB                    0x8582
+#define GL_SOURCE0_ALPHA                  0x8588
+#define GL_SOURCE1_ALPHA                  0x8589
+#define GL_SOURCE2_ALPHA                  0x858A
+#define GL_OPERAND0_RGB                   0x8590
+#define GL_OPERAND1_RGB                   0x8591
+#define GL_OPERAND2_RGB                   0x8592
+#define GL_OPERAND0_ALPHA                 0x8598
+#define GL_OPERAND1_ALPHA                 0x8599
+#define GL_OPERAND2_ALPHA                 0x859A
+
+#define GL_SRC_COLOR                      0x0300
+
+typedef void (APIENTRY * PFNGLACTIVETEXTUREPROC) (GLenum texture);
+
+WINGDIAPI const GLubyte * APIENTRY glGetString (GLenum name);
+
+WINGDIAPI void APIENTRY glTexImage1D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+
+WINGDIAPI void APIENTRY glTexImage2D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+
+WINGDIAPI void APIENTRY glTexParameteri (GLenum target, GLenum pname, GLint param);
+
+WINGDIAPI void APIENTRY glTexEnvi (GLenum target, GLenum pname, GLint param);
+
+WINGDIAPI void APIENTRY glTexEnvf (GLenum target, GLenum pname, GLfloat param);
+
+WINGDIAPI void APIENTRY glTexEnvfv (GLenum target, GLenum pname, const GLfloat *params);
+
+WINGDIAPI void APIENTRY glTexGeni (GLenum coord, GLenum pname, GLint param);
+
+WINGDIAPI void APIENTRY glTexGenfv (GLenum coord, GLenum pname, const GLfloat *params);
+
+WINGDIAPI void APIENTRY glTexGendv (GLenum coord, GLenum pname, const GLdouble *params);
+
+WINGDIAPI void APIENTRY glGenTextures (GLsizei n, GLuint *textures);
+
+WINGDIAPI GLboolean APIENTRY glIsTexture (GLuint texture);
+
+WINGDIAPI void APIENTRY glBindTexture (GLenum target, GLuint texture);
+
+WINGDIAPI void APIENTRY glDeleteTextures (GLsizei n, const GLuint *textures);
+
+WINGDIAPI void APIENTRY glTexParameterf (GLenum target, GLenum pname, GLfloat param);
+
+WINGDIAPI void APIENTRY glTexParameterfv (GLenum target, GLenum pname, const GLfloat *params);
+
+WINGDIAPI void APIENTRY glGetIntegerv (GLenum pname, GLint *params);
+
+int APIENTRY gluBuild2DMipmaps(GLenum target, GLint components, GLint width, GLint height, GLenum format, GLenum type, const void  *data);
+
+WINGDIAPI PROC WINAPI wglGetProcAddress(LPCSTR);
+
+WINGDIAPI void APIENTRY glPushMatrix (void);
+
+WINGDIAPI void APIENTRY glPopMatrix (void);
+
+WINGDIAPI void APIENTRY glTexCoord2d (GLdouble s, GLdouble t);
+
+WINGDIAPI void APIENTRY glCopyTexImage2D (GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
+
+WINGDIAPI void APIENTRY glCopyTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+
+WINGDIAPI void APIENTRY glLoadMatrixd (const GLdouble *m);
+WINGDIAPI void APIENTRY glLoadMatrixf (const GLfloat *m);
+

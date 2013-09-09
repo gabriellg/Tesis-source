@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2010)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: aamas2012_formal_agent_framework_virtual_worlds.aux
+The style file: abbrv.bst
+Database file #1: biblioVWG.bib
+Warning--entry type for "Wilensky1999" isn't style-file defined
+--line 126 of file biblioVWG.bib
+Warning--there's a number but no volume in North2005
+You've used 19 entries,
+            2118 wiz_defined-function locations,
+            640 strings with 7261 characters,
+and the built_in function-call counts, 6641 in all, are:
+= -- 659
+> -- 280
+< -- 7
++ -- 113
+- -- 90
+* -- 423
+:= -- 1061
+add.period$ -- 59
+call.type$ -- 19
+change.case$ -- 97
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 279
+empty$ -- 552
+format.name$ -- 90
+if$ -- 1437
+int.to.chr$ -- 0
+int.to.str$ -- 19
+missing$ -- 20
+newline$ -- 97
+num.names$ -- 40
+pop$ -- 130
+preamble$ -- 1
+purify$ -- 81
+quote$ -- 0
+skip$ -- 200
+stack$ -- 0
+substring$ -- 416
+swap$ -- 76
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 70
+warning$ -- 1
+while$ -- 67
+width$ -- 21
+write$ -- 209
+(There were 2 warnings)
