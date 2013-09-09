@@ -1,7 +1,5 @@
 /* -----------------------------------------------------------------------------
 *  CArrayString
-*  Author: Antonio Javier Gallego Sánchez (ajgallego AT gmail DOT com)
-*          Gabriel López García (gabriellg AT gmail DOT com)
 *  License: GNU Public License
 * ----------------------------------------------------------------------------*/
 
@@ -86,18 +84,40 @@ void CArrayString::set( unsigned long ind, const char* str )
 //
 void CArrayString::addDestroyingString (char **str)
 {
+    assert_no_null(str);
+    assert_no_null(*str);
     PrvBaseArray::add((struct prv_item_t *)*str);
     *str = NULL;
 }
 
 //------------------------------------------------------------------------------
 //
-void CArrayString::add(const char* str)
+void CArrayString::add(const char *str)
 {
     char *str_copy;
 
     str_copy = CString::copy(str);
     PrvBaseArray::add((struct prv_item_t *)str_copy);
+}
+
+//------------------------------------------------------------------------------
+//
+void CArrayString::insert(unsigned long ind, const char *str)
+{
+    char *str_copy;
+
+    str_copy = CString::copy(str);
+    PrvBaseArray::insert(0, (struct prv_item_t *)str_copy);
+}
+
+//------------------------------------------------------------------------------
+//
+void CArrayString::insertDestroyingString(unsigned long ind, char **strDestroying)
+{
+    assert_no_null(strDestroying);
+    assert_no_null(*strDestroying);
+    PrvBaseArray::insert(0, (struct prv_item_t *)*strDestroying);
+    *strDestroying = NULL;
 }
 
 //------------------------------------------------------------------------------
@@ -198,3 +218,29 @@ char *CArrayString::toString(char separator)
     return str;
 }
 
+//------------------------------------------------------------------------------
+//
+char **CArrayString::toArrayC(unsigned long *numStrings) const
+{
+    char **strings;
+    unsigned long num;
+
+    assert_no_null(numStrings);
+
+    num = PrvBaseArray::size();
+    assert(num > 0);
+
+    strings = CALLOC(num, char *);
+
+    for (unsigned long i = 0; i < num; i++)
+    {
+        const char *str;
+
+        str = (const char *)PrvBaseArray::get(i);
+        strings[i] = CString::copy(str);
+    }
+
+    *numStrings = num;
+
+    return strings;
+}

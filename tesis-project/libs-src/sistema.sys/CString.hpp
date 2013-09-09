@@ -1,6 +1,5 @@
 /* -----------------------------------------------------------------------------
 *  CString
-*  Author: Antonio Javier Gallego Sánchez (ajgallego AT gmail DOT com)
 *  License: GNU Public License
 * ----------------------------------------------------------------------------*/
 
@@ -10,6 +9,7 @@ class CString
         static char* create(unsigned long numChars);
         static char* createWithInitialitation(char car, unsigned long numChars);
         static void free(char **str);
+        static void deleteArrayStrings(char ***strings, unsigned long numStrings);
         static char* copy(const char *str);
         static unsigned long size(const char *str);
 
@@ -47,4 +47,5 @@ class CString
 
         static char *printf(const char *format,...);
         static int scanf(const char *str, const char *format, ...);
+
 };

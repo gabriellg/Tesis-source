@@ -1,7 +1,5 @@
 /* -----------------------------------------------------------------------------
 *  CArrayString
-*  Author: Antonio Javier Gallego Sánchez (ajgallego AT gmail DOT com)
-*          Gabriel López García (gabriellg AT gmail DOT com)
 *  License: GNU Public License
 * ----------------------------------------------------------------------------*/
 
@@ -26,6 +24,9 @@ class CArrayString : public PrvBaseArray
         void add( const char* str );
         void addDestroyingString( char **str );
 
+        void insert(unsigned long ind, const char *str);
+        void insertDestroyingString(unsigned long ind, char **strDestroying);
+
         void erase( unsigned long ind );
         void eraseLast();
 
@@ -35,4 +36,6 @@ class CArrayString : public PrvBaseArray
         bool searchString( const char* str, unsigned long *ind ) const;
 
         char *toString(char separator);
+        char **toArrayC(unsigned long *numStrings) const;
+
 };
