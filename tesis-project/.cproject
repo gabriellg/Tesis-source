@@ -29,11 +29,25 @@
 									<listOptionValue builtIn="false" value="/usr/include/atk-1.0"/>
 									<listOptionValue builtIn="false" value="/usr/lib/i386-linux-gnu/gtk-2.0/include"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1868288593" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="&quot;DELETE_OBJECT(x, type) =((void)((type *) *x == *x), memory_integrity_pointer_to_destroy((void **)x), delete *x, memory_crush_pointer((void **)x))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;ASSIGN_PP_NO_NULL(ptr, x)=((void)(*ptr == (x *)*ptr), (x *)memory_assign_double_pointer_no_null((void **)ptr))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;MALLOC(x)=(x *)memory_malloc(sizeof(x))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;FREE_T(x, type)=((void)((type *) *x == *x), memory_free((void **)x, sizeof(x)))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;ASSIGN_PP(ptr, x)=((void)(*ptr == (x *)*ptr), (x *)memory_assign_double_pointer((void **)ptr))&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1814801190" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1615906461" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
 								<option id="gnu.c.compiler.option.include.files.1072181496" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" valueType="includeFiles">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/libs-src/include/bool.h}&quot;"/>
+								</option>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1558211033" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="&quot;DELETE_OBJECT(x, type) =((void)((type *) *x == *x), memory_integrity_pointer_to_destroy((void **)x), delete *x, memory_crush_pointer((void **)x))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;ASSIGN_PP_NO_NULL(ptr, x)=((void)(*ptr == (x *)*ptr), (x *)memory_assign_double_pointer_no_null((void **)ptr))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;MALLOC(x)=(x *)memory_malloc(sizeof(x))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;FREE_T(x, type)=((void)((type *) *x == *x), memory_free((void **)x, sizeof(x)))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;ASSIGN_PP(ptr, x)=((void)(*ptr == (x *)*ptr), (x *)memory_assign_double_pointer((void **)ptr))&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1260043470" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
