@@ -151,7 +151,7 @@ CTypeDescLimitsSprite::~CTypeDescLimitsSprite()
 
 //-----------------------------------------------------------------------
 
-class CAgent *CTypeDescLimitsSprite::move(const char *idElement, class CAgent **actorToTransform)
+class IObjectDraw *CTypeDescLimitsSprite::move(const char *idElement, class IObjectDraw **actorToTransform)
 {
     class IDataSymbol *dataId;
 

@@ -1,7 +1,4 @@
-/* -----------------------------------------------------------------------------
- *  CAgent.cpp
- *  License: GNU Public License
- * ----------------------------------------------------------------------------*/
+// CAgent.hpp: Definición de Agente
 
 #include "CAgent.hpp"
 
@@ -95,9 +92,8 @@ void CAgent::appendChildren(class CArrayRef<CAgent> **sons)
 
 //-----------------------------------------------------------------------
 
-static void prv_destroyAgentNotUsed(
-                class CArrayRef<CAgent> *agentsNotRepeatedNew,
-                class CArrayRef<CAgent> *agentsNotRepeatedOld)
+static void prv_destroyAgentOldNotUsed(class CArrayRef<CAgent> *agentsNotRepeatedNew,
+        class CArrayRef<CAgent> *agentsNotRepeatedOld)
 {
     class CArray<CAgent> *agentsToDelete;
     unsigned long num;
@@ -120,13 +116,36 @@ static void prv_destroyAgentNotUsed(
 
 //-----------------------------------------------------------------------
 
-class CArrayRef<CAgent> *CAgent::prv_allReferenceNotRepeated(class CArrayRef<CAgent> *agents)
+static void prv_destroyAgent(class CArrayRef<CAgent> **agentsNotRepeated)
 {
-    class CArrayRef<CAgent> *allReference;
-
-    allReference = new CArrayRef<CAgent>;
-
+    class CArrayRef<CAgent> *agentsNotRepeated_loc;
     unsigned long num;
+
+    assert_no_null(agentsNotRepeated);
+    assert_no_null(*agentsNotRepeated);
+
+    agentsNotRepeated_loc = *agentsNotRepeated;
+    num = agentsNotRepeated_loc->size();
+
+    for (unsigned long i = 0; i < num; i++)
+    {
+        class CAgent *agent;
+
+        agent = agentsNotRepeated_loc->get(i);
+        DELETE_OBJECT(&agent, class CAgent);
+    }
+
+    DELETE_OBJECT(agentsNotRepeated, class CArrayRef<CAgent>);
+}
+
+//-----------------------------------------------------------------------
+
+class CArrayRef<CAgent>* CAgent::prv_allReferenceNotRepeated(class CArrayRef<CAgent> *agents)
+{
+    class CArrayRef<CAgent>* allReferenceNotRepeated;
+    unsigned long num;
+
+    allReferenceNotRepeated = new CArrayRef<CAgent>;
 
     num = agents->size();
 
@@ -137,12 +156,41 @@ class CArrayRef<CAgent> *CAgent::prv_allReferenceNotRepeated(class CArrayRef<CAg
         agent = agents->get(i);
         assert_no_null(agent);
 
-        agent->prv_appendRefNotRepeated(0, allReference);
+        agent->prv_appendRefNotRepeated(0, allReferenceNotRepeated);
     }
 
-    return allReference;
+    return allReferenceNotRepeated;
 }
 
+//-----------------------------------------------------------------------
+
+void CAgent::destroyAllAgentsNotRepeated(class CArrayRef<CAgent> **agents)
+{
+    class CArrayRef<CAgent> *allReferenceNotRepeated;
+
+    assert_no_null(agents);
+
+    allReferenceNotRepeated = prv_allReferenceNotRepeated(*agents);
+
+    prv_destroyAgent(&allReferenceNotRepeated);
+
+    DELETE_OBJECT(agents, class CArrayRef<CAgent>);
+}
+
+//-----------------------------------------------------------------------
+
+void CAgent::destroyOldObjects(class CArrayRef<CAgent> *agents, class CArrayRef<CAgent> **oldAgents)
+{
+    class CArrayRef<CAgent> *oldSons, *newSons;
+
+    oldSons = prv_allReferenceNotRepeated(agents);
+    newSons = prv_allReferenceNotRepeated(*oldAgents);
+
+    prv_destroyAgentOldNotUsed(newSons, oldSons);
+
+    DELETE_OBJECT(&oldSons, class CArrayRef<CAgent>);
+    DELETE_OBJECT(&newSons, class CArrayRef<CAgent>);
+}
 
 //-----------------------------------------------------------------------
 
@@ -191,18 +239,18 @@ class CAgent *CAgent::prv_nextGenerationRecursive(unsigned long numRecursive, cl
                 oldSons = prv_allReferenceNotRepeated(m_dataPrivate->sons);
                 newSons = prv_allReferenceNotRepeated(nextGenerationSons);
 
-                prv_destroyAgentNotUsed(newSons, oldSons);
+                prv_destroyAgentOldNotUsed(newSons, oldSons);
 
-                delete oldSons;
-                delete newSons;
+                DELETE_OBJECT(&oldSons, class CArrayRef<CAgent>);
+                DELETE_OBJECT(&newSons, class CArrayRef<CAgent>);
 
-                delete agentEvolved->m_dataPrivate->sons;
-                agentEvolved->m_dataPrivate->sons = nextGenerationSons;
+                DELETE_OBJECT(&agentEvolved->m_dataPrivate->sons, class CArrayRef<CAgent>);
+                m_dataPrivate->sons = nextGenerationSons;
             }
             else
             {
                 agentEvolved->m_dataPrivate->sons->concatenate(nextGenerationSons);
-                delete nextGenerationSons;
+                DELETE_OBJECT(&nextGenerationSons, class CArrayRef<CAgent>);
             }
         }
     }
@@ -221,107 +269,30 @@ class CAgent *CAgent::nextGeneration(class CCollectionEventsSystem *allEvents)
 
 //-----------------------------------------------------------------------
 
-void CAgent::prv_getRepresentationRecursive(
-                        unsigned long numRecursive,
-                        class CArrayRef<CAgent> *stringRepresentation,
-                        class CTypeDescription *evtDescription)
+class CArray<IObjectDraw> *CAgent::getRepresentation(class CTypeDescription *evtDescription)
 {
-    class CAgent *representationAgent;
-    unsigned long num;
+    class CArray<IObjectDraw> *representationSons;
 
-    prv_integrityAgent(m_dataPrivate);
+    representationSons = new class CArray<IObjectDraw>;
 
-    assert(numRecursive < 1000);
-    numRecursive++;
-
-    representationAgent = representation(evtDescription);
-
-    if (representationAgent != NULL)
-        stringRepresentation->add(representationAgent);
-
-    num = m_dataPrivate->sons->size();
-
-    for (unsigned long i = 0; i < num; i++)
+    for (unsigned long i = 0, size = m_dataPrivate->sons->size(); i < size; i++)
     {
-        class CAgent *son;
+        class CArray<IObjectDraw> *representationSon;
+        class CAgent *agentSon;
 
-        son = m_dataPrivate->sons->get(i);
-        assert_no_null(son);
+        agentSon = m_dataPrivate->sons->get(i);
 
-        son->prv_getRepresentationRecursive(numRecursive, stringRepresentation, evtDescription);
-    }
-}
-
-//-----------------------------------------------------------------------
-
-class CArrayRef<CAgent> *CAgent::getRepresentation(class CTypeDescription *evtDescription)
-{
-    class CArrayRef<CAgent> *stringRepresentation;
-
-    stringRepresentation = new class CArrayRef<CAgent>;
-    prv_getRepresentationRecursive(0, stringRepresentation, evtDescription);
-
-    return stringRepresentation;
-}
-
-//-----------------------------------------------------------------------
-
-void CAgent::prv_traslateRepresentationToDescription(unsigned long numRecursive, class CTypeDescription *evtDescription)
-{
-    unsigned long num;
-
-    prv_integrityAgent(m_dataPrivate);
-
-    assert(numRecursive < 1000);
-    numRecursive++;
-
-    beginRepresentation(evtDescription);
-    drawRepresentation(evtDescription);
-
-    num = m_dataPrivate->sons->size();
-
-    for (unsigned long i = 0; i < num; i++)
-    {
-        class CAgent *son;
-
-        son = m_dataPrivate->sons->get(i);
-        assert_no_null(son);
-        son->prv_traslateRepresentationToDescription(numRecursive, evtDescription);
+        representationSon = agentSon->getRepresentation(evtDescription);
+        if (representationSon->size() > 0)
+            representationSons->concatenateDestroying(&representationSon);
     }
 
-    endRepresentation(evtDescription);
-}
-
-//-----------------------------------------------------------------------
-
-void CAgent::traslateRepresentationToDescription(class CTypeDescription *evtDescription)
-{
-    unsigned long num;
-
-    prv_integrityAgent(m_dataPrivate);
-
-    beginRepresentation(evtDescription);
-    drawRepresentation(evtDescription);
-
-    num = m_dataPrivate->sons->size();
-
-    for (unsigned long i = 0; i < num; i++)
-    {
-        class CAgent *son;
-
-        son = m_dataPrivate->sons->get(i);
-        assert_no_null(son);
-        son->prv_traslateRepresentationToDescription(0, evtDescription);
-    }
-
-    endRepresentation(evtDescription);
+    return createRepresentation(evtDescription, &representationSons);
 }
 
 //---------------------------------------------------------------
 
-void CAgent::prv_appendRefNotRepeated(
-                        unsigned long numRecursivity,
-                        class CArrayRef<CAgent> *agentsNotRepeated)
+void CAgent::prv_appendRefNotRepeated(unsigned long numRecursivity, class CArrayRef<CAgent> *agentsNotRepeated)
 {
     unsigned long num;
 
@@ -343,45 +314,4 @@ void CAgent::prv_appendRefNotRepeated(
         assert_no_null(agentSon);
         agentSon->prv_appendRefNotRepeated(numRecursivity, agentsNotRepeated);
     }
-}
-
-//---------------------------------------------------------------
-
-void CAgent::deleteAllAgentNotRepeted(class CAgent **agent)
-{
-    class CArray<CAgent> *agentsNotRepeated;
-
-    assert_no_null(agent);
-    assert_no_null(*agent);
-
-    agentsNotRepeated = new CArray<CAgent>;
-    (*agent)->prv_appendRefNotRepeated(0, (class CArrayRef<CAgent> *)agentsNotRepeated);
-
-    delete agentsNotRepeated;
-
-    *agent = NULL;
-}
-
-//---------------------------------------------------------------
-
-void CAgent::eraseOldObjects(class CAgent *newAgent, class CAgent **oldAgent)
-{
-    class CArrayRef<CAgent> *agentsNotRepeatedNew;
-    class CArrayRef<CAgent> *agentsNotRepeatedOld;
-
-    assert_no_null(newAgent);
-    assert_no_null(oldAgent);
-    assert_no_null(*oldAgent);
-
-    agentsNotRepeatedNew = new CArrayRef<CAgent>;
-    agentsNotRepeatedOld = new CArrayRef<CAgent>;
-
-    newAgent->prv_appendRefNotRepeated(0, agentsNotRepeatedNew);
-    (*oldAgent)->prv_appendRefNotRepeated(0, agentsNotRepeatedOld);
-
-    prv_destroyAgentNotUsed(agentsNotRepeatedNew, agentsNotRepeatedOld);
-
-    delete agentsNotRepeatedNew;
-    delete agentsNotRepeatedOld;
-    *oldAgent = NULL;
 }

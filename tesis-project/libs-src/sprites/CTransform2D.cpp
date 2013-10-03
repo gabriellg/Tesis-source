@@ -5,6 +5,7 @@
 #include "asrtbas.h"
 #include "IDataSymbol.hpp"
 #include "CTransform.hpp"
+#include "CArray.hpp"
 #include "CGraphicsSprite.hpp"
 
 const char *CTransform2D::ID_SYMBOL_ROTATE2D = "ROTATE2D";
@@ -112,20 +113,40 @@ void CDescriptionTransformation::endSymbol(class CGraphicsSprite *graphicsSprite
 
 //-----------------------------------------------------------------------
 
-class CTransform *CTransform2D::createRotate2D(class CAgent **actorToTransform, double angleRotation)
+static class CArray<IObjectDraw> *prv_createFigure(class IObjectDraw **figure)
+{
+    class CArray<IObjectDraw> *sons;
+
+    sons = new CArray<IObjectDraw>(1);
+    sons->set(0, *figure);
+    *figure = NULL;
+
+    return sons;
+}
+
+
+//-----------------------------------------------------------------------
+
+class CTransform *CTransform2D::createRotate2D(class IObjectDraw **figure, double angleRotation)
 {
     class IDataSymbol *dataTransform;
+    class CArray<IObjectDraw> *sons;
+
+    sons = prv_createFigure(figure);
 
     dataTransform = new CDataRotate2D(angleRotation);
-    return new CTransform(ID_SYMBOL_ROTATE2D, &dataTransform, actorToTransform);
+    return new CTransform(ID_SYMBOL_ROTATE2D, &dataTransform, &sons);
 }
 
 //-----------------------------------------------------------------------
 
-class CTransform *CTransform2D::createTraslate2D(class CAgent **actorToTransform, double dx, double dy)
+class CTransform *CTransform2D::createTraslate2D(class IObjectDraw **figure, double dx, double dy)
 {
     class IDataSymbol *dataTransform;
+    class CArray<IObjectDraw> *sons;
+
+    sons = prv_createFigure(figure);
 
     dataTransform = new CDataTraslate2D(dx, dy);
-    return new CTransform(ID_SYMBOL_TRASLATE2D, &dataTransform, actorToTransform);
+    return new CTransform(ID_SYMBOL_TRASLATE2D, &dataTransform, &sons);
 }

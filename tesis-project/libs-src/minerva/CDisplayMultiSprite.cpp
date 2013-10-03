@@ -16,7 +16,7 @@ struct prv_dataPrivateDisplayMultiSprite_t
 {
     enum CDisplayMultiSprite::ETypeDistribution typeDistribution;
 
-    class CArray<IDisplay> *displays;
+    class CArray<ITraslatorDisplay> *displays;
     class CArrPixel *positionsWindows;
 };
 
@@ -32,7 +32,7 @@ static void prv_integrity(const struct prv_dataPrivateDisplayMultiSprite_t *data
 
 static struct prv_dataPrivateDisplayMultiSprite_t *prv_createDisplayMultiSprite(
                         enum CDisplayMultiSprite::ETypeDistribution typeDistribution,
-                        class CArray<IDisplay> **displays,
+                        class CArray<ITraslatorDisplay> **displays,
                         class CArrPixel **positionsWindows)
 {
     struct prv_dataPrivateDisplayMultiSprite_t *dataPrivate;
@@ -40,7 +40,7 @@ static struct prv_dataPrivateDisplayMultiSprite_t *prv_createDisplayMultiSprite(
     dataPrivate = MALLOC(struct prv_dataPrivateDisplayMultiSprite_t);
 
     dataPrivate->typeDistribution = typeDistribution;
-    dataPrivate->displays = ASSIGN_PP_NO_NULL(displays, class CArray<IDisplay>);
+    dataPrivate->displays = ASSIGN_PP_NO_NULL(displays, class CArray<ITraslatorDisplay>);
     dataPrivate->positionsWindows = ASSIGN_PP(positionsWindows, class CArrPixel);
 
     prv_integrity(dataPrivate);
@@ -67,10 +67,10 @@ static void prv_destroyDisplayMultiSprite(struct prv_dataPrivateDisplayMultiSpri
 
 CDisplayMultiSprite::CDisplayMultiSprite(enum CDisplayMultiSprite::ETypeDistribution typeDistribution)
 {
-    class CArray<IDisplay> *displays;
+    class CArray<ITraslatorDisplay> *displays;
     class CArrPixel *positionsWindows;
 
-    displays = new class CArray<IDisplay>;
+    displays = new class CArray<ITraslatorDisplay>;
     positionsWindows = NULL;
 
     m_dataPrivate = prv_createDisplayMultiSprite(typeDistribution, &displays, &positionsWindows);
@@ -85,7 +85,7 @@ CDisplayMultiSprite::~CDisplayMultiSprite()
 
 //-----------------------------------------------------------------------
 
-void CDisplayMultiSprite::appendDisplaySprite(class IDisplay **display)
+void CDisplayMultiSprite::appendDisplaySprite(class ITraslatorDisplay **display)
 {
     prv_integrity(m_dataPrivate);
 
@@ -105,7 +105,7 @@ void CDisplayMultiSprite::setInitialPositionCamera(void)
 
     for (unsigned long i = 0; i < num; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -126,7 +126,7 @@ void CDisplayMultiSprite::positionCamera(class IGraphics *graphics) const
 
     for (unsigned long i = 0; i < num; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -147,7 +147,7 @@ void CDisplayMultiSprite::makeRotationCamera(class IGraphics *graphics) const
 
     for (unsigned long i = 0; i < num; i++)
     {
-        const class IDisplay *display;
+        const class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -170,7 +170,7 @@ void CDisplayMultiSprite::setRotationCamera(
 
     for (unsigned long i = 0; i < num; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -191,7 +191,7 @@ void CDisplayMultiSprite::incrRotateCamera(struct areaDibujo_t *areaDibujo, doub
 
     for (unsigned long i = 0; i < num; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -212,7 +212,7 @@ void CDisplayMultiSprite::frontCamera(struct areaDibujo_t *areaDibujo, double st
 
     for (unsigned long i = 0; i < num; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -233,7 +233,7 @@ void CDisplayMultiSprite::backCamera(struct areaDibujo_t *areaDibujo, double ste
 
     for (unsigned long i = 0; i < num; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -254,7 +254,7 @@ bool CDisplayMultiSprite::isArea3D(void) const
 
     for (unsigned long i = 0; i < num; i++)
     {
-        const class IDisplay *display;
+        const class ITraslatorDisplay *display;
 
         display = m_dataPrivate->displays->get(i);
         assert_no_null(display);
@@ -270,7 +270,7 @@ bool CDisplayMultiSprite::isArea3D(void) const
 
 static class CArrPixel *prv_calculatePositionWindows(
                             enum CDisplayMultiSprite::ETypeDistribution typeDistribution,
-                            const class CArray<IDisplay> *displays)
+                            const class CArray<ITraslatorDisplay> *displays)
 {
     class CArrPixel *positionsWindows;
     unsigned long numDisplay;
@@ -286,7 +286,7 @@ static class CArrPixel *prv_calculatePositionWindows(
     for (unsigned long i = 0; i < numDisplay; i++)
     {
         unsigned long width, height;
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
 
         positionsWindows->set(i, (long)x, (long)y);
 
@@ -338,7 +338,7 @@ void CDisplayMultiSprite::drawScene(class IGraphics *graphics, const class CScen
 
     for (unsigned long i = 0; i < numDisplay; i++)
     {
-        class IDisplay *display;
+        class ITraslatorDisplay *display;
         long xDisplay, yDisplay;
 
         display = m_dataPrivate->displays->get(i);

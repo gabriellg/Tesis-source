@@ -225,9 +225,9 @@ void CWorldEscalextric::applyVelocity(const char *idCar, double acceleration)
 
 //-----------------------------------------------------------------------
 
-class CAgent *CWorldEscalextric::move(const char *idCar, class CAgent **figure) const
+class IObjectDraw *CWorldEscalextric::move(const char *idCar, class IObjectDraw **figure) const
 {
-    class CAgent *carMoved;
+    class IObjectDraw *carMoved;
     class SPrvCar *car;
     double xPos, yPos, angleRotation, radius;
 
@@ -240,7 +240,7 @@ class CAgent *CWorldEscalextric::move(const char *idCar, class CAgent **figure) 
     {
         case PRV_DIMENSION_2D:
         {
-            class CAgent *agentRotated;
+            class IObjectDraw *agentRotated;
 
             agentRotated = CTransform2D::createRotate2D(figure, angleRotation);
             carMoved = CTransform2D::createTraslate2D(&agentRotated, xPos, yPos);
@@ -248,7 +248,7 @@ class CAgent *CWorldEscalextric::move(const char *idCar, class CAgent **figure) 
         }
         case PRV_DIMENSION_3D:
         {
-            class CAgent *agentRotated;
+            class IObjectDraw *agentRotated;
             double angleRotationDegree;
 
             angleRotationDegree = CMath::radianToDegree(angleRotation);

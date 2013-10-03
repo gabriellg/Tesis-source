@@ -33,7 +33,7 @@ const char *CDisplayEscalextric::SYMBOL_CAR = "Car";
 
 //-----------------------------------------------------------------------
 //
-class IDisplay *CDisplayEscalextric::createDisplaySprite(
+class ITraslatorDisplay *CDisplayEscalextric::createDisplaySprite(
                             const class CDataCircuit *dataCircuit,
                             class CWorldEscalextric *worldEscalextric)
 {
@@ -125,7 +125,7 @@ static struct CModel3d *prv_createModelCar(void)
 
 //-----------------------------------------------------------------------
 //
-class IDisplay *CDisplayEscalextric::createDisplayGL(
+class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
                             const class CDataCircuit *dataCircuit,
                             class CWorldEscalextric *worldEscalextric)
 {

@@ -7,7 +7,7 @@ class CGestorDisplays
 		CGestorDisplays();
 		virtual ~CGestorDisplays();
 		
-		void appendDisplay(class IDisplay **display);
+		void appendDisplay(class ITraslatorDisplay **display);
 		
 		void setInitialPositionCamera(void);
 		

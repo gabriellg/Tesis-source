@@ -517,7 +517,7 @@ bool CWorldGeometry2DPixels::hasCollisionWithOtherBlock(const char *id, char **i
 
 //-----------------------------------------------------------------------
 
-class CAgent *CWorldGeometry2DPixels::move(const char *idElement, class CAgent **agentMoved) const
+class IObjectDraw *CWorldGeometry2DPixels::move(const char *idElement, class IObjectDraw **agentMoved) const
 {
 	struct SPrvBlockSprite *blockSprite;
 

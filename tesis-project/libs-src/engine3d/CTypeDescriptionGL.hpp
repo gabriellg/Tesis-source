@@ -17,7 +17,7 @@ class CTypeDescriptionGL: public CTypeDescrPhysics
         virtual void drawSymbol(const char *symbol, const class IDataSymbol *dataFigure);
         virtual void endSymbol(const char *symbol, const class IDataSymbol *dataFigure);
 
-        virtual class CAgent *move(const char *idElement, class CAgent **figure);
+        class IObjectDraw *move(const char *idElement, class IObjectDraw **figure);
 
 	private:
 		

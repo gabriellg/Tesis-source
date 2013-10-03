@@ -16,6 +16,7 @@
 #include "CFigure.hpp"
 #include "CCollectionEventsSystem.hpp"
 #include "CTypeDescrPhysics.hpp"
+#include "CArray.hpp"
 
 const char *CCar::LEFT = "left";
 const char *CCar::RIGHT = "right";
@@ -111,14 +112,21 @@ class CAgent *CCar::evolution(class CCollectionEventsSystem *allEvents)
 
 //---------------------------------------------------------------
 
-class CAgent *CCar::representation(class CTypeDescription *description)
+class CArray<IObjectDraw> *CCar::createRepresentation(class CTypeDescription *evtDescription,
+        class CArray<IObjectDraw> **childsOpt)
 {
+    class CArray<IObjectDraw> *representation;
     class CTypeDescrPhysics *evtRepresentation;
-    class CAgent *figureCar;
+    class IObjectDraw *figureCar, *figureCarMoved;
 
-    evtRepresentation = dynamic_cast<class CTypeDescrPhysics *>(description);
+    evtRepresentation = dynamic_cast<class CTypeDescrPhysics *>(evtDescription);
     assert_no_null(evtRepresentation);
 
     figureCar = new CFigure(CDisplayEscalextric::SYMBOL_CAR);
-    return evtRepresentation->move(m_dataPrivate->idCar, &figureCar);
+    figureCarMoved = evtRepresentation->move(m_dataPrivate->idCar, &figureCar);
+
+    representation = new class CArray<IObjectDraw>(1);
+    representation->set(0, figureCarMoved);
+
+    return representation;
 }

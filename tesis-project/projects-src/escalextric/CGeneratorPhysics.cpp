@@ -75,17 +75,17 @@ void CGeneratorAcceleration::generateEventWithKey(const class CEventKey *evtKey,
 
             case 'z':
 
-                prv_appendEvent(CCar::LEFT, -1., events);
+                prv_appendEvent(CCar::LEFT, PRV_INCR_ACCELARATION, events);
                 break;
 
             case 'j':
 
-                prv_appendEvent(CCar::RIGHT, 1., events);
+                prv_appendEvent(CCar::RIGHT, PRV_INCR_ACCELARATION, events);
                 break;
 
             case 'm':
 
-                prv_appendEvent(CCar::RIGHT, -1., events);
+                prv_appendEvent(CCar::RIGHT, -PRV_INCR_ACCELARATION, events);
                 break;
 
             default_error();

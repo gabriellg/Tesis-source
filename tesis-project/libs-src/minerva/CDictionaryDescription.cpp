@@ -12,23 +12,23 @@
 #include "CString.hpp"
 #include "CArray.hpp"
 
-struct PrvCDescriptionSymbol
+struct SPrvDescriptionSymbol
 {
-    PrvCDescriptionSymbol(const char *symbol, class IDescription **descriptionSymbol);
-    ~PrvCDescriptionSymbol();
+    SPrvDescriptionSymbol(const char *symbol, class IDescription **descriptionSymbol);
+    ~SPrvDescriptionSymbol();
 
     char *m_symbol;
     class IDescription *m_descriptionSymbol;
 };
 
-struct prv_dataPrivateDictioryDescription_t
+struct SPrvDictioryDescription
 {
-    class CArray<PrvCDescriptionSymbol> *symbols;
+    class CArray<SPrvDescriptionSymbol> *symbols;
 };
 
 //-----------------------------------------------------------------------
 
-PrvCDescriptionSymbol::PrvCDescriptionSymbol(const char *symbol, class IDescription **descriptionSymbol)
+SPrvDescriptionSymbol::SPrvDescriptionSymbol(const char *symbol, class IDescription **descriptionSymbol)
 {
     m_symbol = CString::copy(symbol);
     m_descriptionSymbol = ASSIGN_PP_NO_NULL(descriptionSymbol, class IDescription);
@@ -36,7 +36,7 @@ PrvCDescriptionSymbol::PrvCDescriptionSymbol(const char *symbol, class IDescript
 
 //-----------------------------------------------------------------------
 
-PrvCDescriptionSymbol::~PrvCDescriptionSymbol()
+SPrvDescriptionSymbol::~SPrvDescriptionSymbol()
 {
     CString::free(&m_symbol);
     delete m_descriptionSymbol;
@@ -44,7 +44,7 @@ PrvCDescriptionSymbol::~PrvCDescriptionSymbol()
 
 //-----------------------------------------------------------------------
 
-static bool prv_isSymbol(const struct PrvCDescriptionSymbol *descriptionSymbol, const char *symbol)
+static bool prv_isSymbol(const struct SPrvDescriptionSymbol *descriptionSymbol, const char *symbol)
 {
     assert_no_null(descriptionSymbol);
     return CString::equal(descriptionSymbol->m_symbol, symbol);
@@ -52,7 +52,7 @@ static bool prv_isSymbol(const struct PrvCDescriptionSymbol *descriptionSymbol, 
 
 //-----------------------------------------------------------------------
 
-static void prv_integrity(const struct prv_dataPrivateDictioryDescription_t *dataPrivate)
+static void prv_integrity(const struct SPrvDictioryDescription *dataPrivate)
 {
     assert_no_null(dataPrivate);
     assert_no_null(dataPrivate->symbols);
@@ -60,13 +60,13 @@ static void prv_integrity(const struct prv_dataPrivateDictioryDescription_t *dat
 
 //-----------------------------------------------------------------------
 
-static struct prv_dataPrivateDictioryDescription_t *prv_create(class CArray<PrvCDescriptionSymbol> **symbols)
+static struct SPrvDictioryDescription *prv_create(class CArray<SPrvDescriptionSymbol> **symbols)
 {
-    struct prv_dataPrivateDictioryDescription_t *dataPrivate;
+    struct SPrvDictioryDescription *dataPrivate;
 
-    dataPrivate = MALLOC(struct prv_dataPrivateDictioryDescription_t);
+    dataPrivate = MALLOC(struct SPrvDictioryDescription);
 
-    dataPrivate->symbols = ASSIGN_PP_NO_NULL(symbols, class CArray<PrvCDescriptionSymbol>);
+    dataPrivate->symbols = ASSIGN_PP_NO_NULL(symbols, class CArray<SPrvDescriptionSymbol>);
 
     prv_integrity(dataPrivate);
 
@@ -75,23 +75,23 @@ static struct prv_dataPrivateDictioryDescription_t *prv_create(class CArray<PrvC
 
 //-----------------------------------------------------------------------
 
-static void prv_destroy(struct prv_dataPrivateDictioryDescription_t **dataPrivate)
+static void prv_destroy(struct SPrvDictioryDescription **dataPrivate)
 {
     assert_no_null(dataPrivate);
     prv_integrity(*dataPrivate);
 
     delete (*dataPrivate)->symbols;
 
-    FREE_T(dataPrivate, struct prv_dataPrivateDictioryDescription_t);
+    FREE_T(dataPrivate, struct SPrvDictioryDescription);
 }
 
 //-----------------------------------------------------------------------
 
 CDictionaryDescription::CDictionaryDescription()
 {
-    class CArray<PrvCDescriptionSymbol> *symbols;
+    class CArray<SPrvDescriptionSymbol> *symbols;
 
-    symbols = new CArray<PrvCDescriptionSymbol>;
+    symbols = new CArray<SPrvDescriptionSymbol>;
     m_dataPrivate = prv_create(&symbols);
 }
 
@@ -107,14 +107,14 @@ CDictionaryDescription::~CDictionaryDescription()
 void CDictionaryDescription::addDescription(const char *symbol, class IDescription **description)
 {
     bool exist;
-    struct PrvCDescriptionSymbol *descriptionSymbol;
+    struct SPrvDescriptionSymbol *descriptionSymbol;
 
     prv_integrity(m_dataPrivate);
 
     exist = m_dataPrivate->symbols->existOnlyOneElement<char>(symbol, prv_isSymbol, NULL);
     assert(exist == false);
 
-    descriptionSymbol = new PrvCDescriptionSymbol(symbol, description);
+    descriptionSymbol = new SPrvDescriptionSymbol(symbol, description);
     m_dataPrivate->symbols->add(descriptionSymbol);
 }
 
@@ -132,7 +132,7 @@ bool CDictionaryDescription::searchSymbol(const char *symbol, class IDescription
 
     if (existSymbol == true)
     {
-        const struct PrvCDescriptionSymbol *descriptionSymbol;
+        const struct SPrvDescriptionSymbol *descriptionSymbol;
 
         descriptionSymbol = m_dataPrivate->symbols->get(indPos);
         assert_no_null(descriptionSymbol);

@@ -1,8 +1,8 @@
 //CDisplaySprite.hpp
 
-#include "IDisplay.hpp"
+#include "ITraslatorDisplay.hpp"
 
-class CDisplaySprite: public IDisplay
+class CDisplaySprite: public ITraslatorDisplay
 {
 	public:
 

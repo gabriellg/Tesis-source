@@ -1,8 +1,8 @@
 // Definición abstracta de una figura.
 
-#include "CAgent.hpp"
+#include "IObjectDraw.hpp"
 
-class CFigure : public CAgent
+class CFigure : public IObjectDraw
 {
 	public:
     
@@ -12,15 +12,7 @@ class CFigure : public CAgent
 
     private:
 
-        virtual void beginEvolution(class CCollectionEventsSystem *allEvents) {;}
-        virtual void endEvolution(class CCollectionEventsSystem *allEvents) {;}
-
-        virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents);
-        virtual class CAgent *representation(class CTypeDescription *evtDescription);
-
-        virtual void beginRepresentation(class CTypeDescription *evtDescription);
         virtual void drawRepresentation(class CTypeDescription *evtDescription);
-        virtual void endRepresentation(class CTypeDescription *evtDescription);
         
         struct SPrvDataPrivateFigure *m_dataPrivate;
 };

@@ -14,7 +14,7 @@ class CTypeDescrPhysics: public CTypeDescription
 
         CTypeDescrPhysics(const char *nameEvent) : CTypeDescription(nameEvent) {;};
 
-        virtual class CAgent *move(const char *idElement, class CAgent **figure) = 0;
+        virtual class IObjectDraw *move(const char *idElement, class IObjectDraw **figure) = 0;
 };
 
 #endif /* CTYPEDESCRPHYSICS_HPP_ */

@@ -6,6 +6,7 @@
 #include "CDisplayEscalextric.inl"
 #include "CDataCircuit.inl"
 #include "CCar.inl"
+#include "CCircuit.inl"
 #include "CGeneratorPhysics.inl"
 
 #include "asrtbas.h"
@@ -83,7 +84,7 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
 
 	generatorAcceleration = new CGeneratorAcceleration();
 	generatorKinematicAnForces = new CGeneratorKinematicAndForces(m_dataPrivate->worldEscalextric);
-    circuit = new CFigure(CDisplayEscalextric::SYMBOL_CIRCUIT);
+    circuit = new CCircuit();
     carLeft = new CCar(CCar::LEFT);
     carRight = new CCar(CCar::RIGHT);
 
@@ -99,7 +100,7 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
 
 void CEscalextric::appendDisplays(class CGestorDisplays *displays)
 {
-    class IDisplay *display;
+    class ITraslatorDisplay *display;
 
     assert_no_null(m_dataPrivate);
 

@@ -3,9 +3,9 @@
  *  License: GNU Public License
  * ----------------------------------------------------------------------------*/
 
-#include "CAgentWithRepresentation.hpp"
+#include "CAgent.hpp"
 
-class CCar: public CAgentWithRepresentation
+class CCar: public CAgent
 {
     public:
 
@@ -17,8 +17,13 @@ class CCar: public CAgentWithRepresentation
         
     private:
 
+        virtual void beginEvolution(class CCollectionEventsSystem *allEvents) {;}
         virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents);
-        virtual class CAgent *representation(class CTypeDescription *evtDescription);
+        virtual void endEvolution(class CCollectionEventsSystem *allEvents) {;}
+
+        virtual class CArray<IObjectDraw> *createRepresentation(class CTypeDescription *evtDescription,
+                class CArray<IObjectDraw> **childsOpt);
+
 
         struct prv_dataPrivateCar_t *m_dataPrivate;
 };

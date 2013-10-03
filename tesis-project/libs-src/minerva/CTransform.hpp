@@ -1,25 +1,18 @@
 // Define objeto transformacion
 
-#include "CAgent.hpp"
+#include "IObjectDraw.hpp"
 
-class CTransform : public CAgent
+class CTransform : public IObjectDraw
 {
 	public:
 	
-        CTransform(const char *idSymbol, class IDataSymbol **dataTransform, class CAgent **actorToTransform);
+        CTransform(const char *idSymbol, class IDataSymbol **dataTransform, class CArray<IObjectDraw> **sons);
+        CTransform(const char *idSymbol, class IDataSymbol **dataTransform, IObjectDraw **son);
 		virtual ~CTransform();
 		
     private:
 
-        virtual void beginEvolution(class CCollectionEventsSystem *allEvents) {;}
-        virtual void endEvolution(class CCollectionEventsSystem *allEvents) {;}
-
-        virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents);
-        virtual class CAgent *representation(class CTypeDescription *evtDescription);
-
-        virtual void beginRepresentation(class CTypeDescription *evtDescription);
         virtual void drawRepresentation(class CTypeDescription *evtDescription);
-        virtual void endRepresentation(class CTypeDescription *evtDescription);
 
 
         struct SPrvDataPrivateTransform *m_dataPrivate;

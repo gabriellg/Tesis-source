@@ -11,7 +11,7 @@ class CTypeDescLimitsSprite : public CTypeDescrPhysics
 		CTypeDescLimitsSprite(class CWorldGeometry2DPixels *worldGeometry2D, const class CDictionaryDescription *dictionaryDraw);
 		virtual ~CTypeDescLimitsSprite();
 
-		virtual class CAgent *move(const char *idElement, class CAgent **actorToTransform);
+		virtual class IObjectDraw *move(const char *idElement, class IObjectDraw **actorToTransform);
 
         virtual void beginSymbol(const char *symbol, const class IDataSymbol *dataFigure);
         virtual void drawSymbol(const char *symbol, const class IDataSymbol *dataFigure);

@@ -8,62 +8,63 @@
 #include "CMatrix4x4.hpp"
 #include "asrtbas.h"
 #include "memory.h"
+#include "CArray.hpp"
 
 const char *CTransform3D::ID_SYMBOL_SCALE3D = "Scale3d";
 const char *CTransform3D::ID_SYMBOL_TRASLATE3D = "Traslate3d";
 const char *CTransform3D::ID_SYMBOL_ROTATE3D = "Rotate3d";
 const char *CTransform3D::ID_SYMBOL_EXTRUSION3D = "Extrusion3d";
 
-class CDataScale3D : public IDataTransformation3D
+class CDataScale3D: public IDataTransformation3D
 {
-    public:
+public:
 
-        CDataScale3D(double sx, double sy, double sz);
+    CDataScale3D(double sx, double sy, double sz);
 
-        virtual void applyTransformacion(class IGraphics *graphics) const;
+    virtual void applyTransformacion(class IGraphics *graphics) const;
 
-    private:
+private:
 
-        double m_sx, m_sy, m_sz;
+    double m_sx, m_sy, m_sz;
 };
 
-class CDataTraslate3D : public IDataTransformation3D
+class CDataTraslate3D: public IDataTransformation3D
 {
-    public:
+public:
 
-        CDataTraslate3D(double tx, double ty, double tz);
+    CDataTraslate3D(double tx, double ty, double tz);
 
-        virtual void applyTransformacion(class IGraphics *graphics) const;
+    virtual void applyTransformacion(class IGraphics *graphics) const;
 
-    private:
+private:
 
-        double m_tx, m_ty, m_tz;
+    double m_tx, m_ty, m_tz;
 };
 
-class CDataRotate3D : public IDataTransformation3D
+class CDataRotate3D: public IDataTransformation3D
 {
-    public:
+public:
 
-        CDataRotate3D(double angle, double Ux, double Uy, double Uz);
+    CDataRotate3D(double angle, double Ux, double Uy, double Uz);
 
-        virtual void applyTransformacion(class IGraphics *graphics) const;
+    virtual void applyTransformacion(class IGraphics *graphics) const;
 
-    private:
+private:
 
-        double m_angle, m_Ux, m_Uy, m_Uz;
+    double m_angle, m_Ux, m_Uy, m_Uz;
 };
 
-class CDataExtrusion3D : public IDataTransformation3D
+class CDataExtrusion3D: public IDataTransformation3D
 {
-    public:
+public:
 
-        CDataExtrusion3D(double Nx, double Ny, double Nz);
+    CDataExtrusion3D(double Nx, double Ny, double Nz);
 
-        virtual void applyTransformacion(class IGraphics *graphics) const;
+    virtual void applyTransformacion(class IGraphics *graphics) const;
 
-    private:
+private:
 
-        double m_Nx, m_Ny, m_Nz;
+    double m_Nx, m_Ny, m_Nz;
 };
 
 //---------------------------------------------------------------
@@ -79,8 +80,8 @@ CDataScale3D::CDataScale3D(double sx, double sy, double sz)
 
 void CDataScale3D::applyTransformacion(class IGraphics *graphics) const
 {
-	assert_no_null(graphics);
-	graphics->scale(m_sx, m_sy, m_sz);
+    assert_no_null(graphics);
+    graphics->scale(m_sx, m_sy, m_sz);
 }
 
 //---------------------------------------------------------------
@@ -114,9 +115,9 @@ CDataRotate3D::CDataRotate3D(double angle, double Ux, double Uy, double Uz)
 
 void CDataRotate3D::applyTransformacion(class IGraphics *graphics) const
 {
-	assert_no_null(graphics);
+    assert_no_null(graphics);
 
-	graphics->rotation(m_angle, m_Ux, m_Uy, m_Uz);
+    graphics->rotation(m_angle, m_Ux, m_Uy, m_Uz);
 }
 
 //-----------------------------------------------------------------------
@@ -143,40 +144,66 @@ void CDataExtrusion3D::applyTransformacion(class IGraphics *graphics) const
 
 //---------------------------------------------------------------
 
-class CTransform *CTransform3D::createScale3D(class CAgent **actorToTransform, double sx, double sy, double sz)
+static class CArray<IObjectDraw> *prv_createSons(class IObjectDraw **figure)
 {
-    class IDataSymbol *dataTransformacion;
-	
-	dataTransformacion = new CDataScale3D(sx, sy, sz);
-	return new CTransform(ID_SYMBOL_SCALE3D, &dataTransformacion, actorToTransform);
+    class CArray<IObjectDraw> *sons;
+
+    sons = new CArray<IObjectDraw>(1);
+    sons->set(0, *figure);
+    *figure = NULL;
+
+    return sons;
 }
 
 //---------------------------------------------------------------
 
-class CTransform *CTransform3D::createTraslate3D(class CAgent **actorToTransform, double tx, double ty, double tz)
+class CTransform *CTransform3D::createScale3D(class IObjectDraw **figure, double sx, double sy, double sz)
 {
     class IDataSymbol *dataTransformation;
+    class CArray<IObjectDraw> *sons;
+
+    sons = prv_createSons(figure);
+
+    dataTransformation = new CDataScale3D(sx, sy, sz);
+    return new CTransform(ID_SYMBOL_SCALE3D, &dataTransformation, &sons);
+}
+
+//---------------------------------------------------------------
+
+class CTransform *CTransform3D::createTraslate3D(class IObjectDraw **figure, double tx, double ty, double tz)
+{
+    class IDataSymbol *dataTransformation;
+    class CArray<IObjectDraw> *sons;
+
+    sons = prv_createSons(figure);
 
     dataTransformation = new CDataTraslate3D(tx, ty, tz);
-    return new CTransform(ID_SYMBOL_TRASLATE3D, &dataTransformation, actorToTransform);
+    return new CTransform(ID_SYMBOL_TRASLATE3D, &dataTransformation, &sons);
 }
 
 //---------------------------------------------------------------
 
-class CTransform *CTransform3D::createRotate3D(class CAgent **actorToTransform, double angle, double Ux, double Uy, double Uz)
+class CTransform *CTransform3D::createRotate3D(class IObjectDraw **figure, double angle, double Ux, double Uy,
+        double Uz)
 {
     class IDataSymbol *dataTransformation;
+    class CArray<IObjectDraw> *sons;
+
+    sons = prv_createSons(figure);
 
     dataTransformation = new CDataRotate3D(angle, Ux, Uy, Uz);
-    return new CTransform(ID_SYMBOL_ROTATE3D, &dataTransformation, actorToTransform);
+    return new CTransform(ID_SYMBOL_ROTATE3D, &dataTransformation, &sons);
 }
 
 //---------------------------------------------------------------
 
-class CTransform *CTransform3D::createExtrusion3D(class CAgent **actorToTransform, double Nx, double Ny, double Nz)
+class CTransform *CTransform3D::createExtrusion3D(class IObjectDraw **figure, double Nx, double Ny, double Nz)
 {
     class IDataSymbol *dataTransformation;
+    class CArray<IObjectDraw> *sons;
+
+    sons = prv_createSons(figure);
 
     dataTransformation = new CDataExtrusion3D(Nx, Ny, Nz);
-    return new CTransform(ID_SYMBOL_EXTRUSION3D, &dataTransformation, actorToTransform);
+    return new CTransform(ID_SYMBOL_EXTRUSION3D, &dataTransformation, &sons);
 }

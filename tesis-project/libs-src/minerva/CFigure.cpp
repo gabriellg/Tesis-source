@@ -84,41 +84,12 @@ CFigure::~CFigure()
 
 //---------------------------------------------------------------
 
-class CAgent *CFigure::evolution(class CCollectionEventsSystem *allEvents)
-{
-    return this;
-}
-
-//---------------------------------------------------------------
-
-class CAgent *CFigure::representation(class CTypeDescription *evtDescription)
-{
-	return this;
-}
-
-//---------------------------------------------------------------
-
-void CFigure::beginRepresentation(class CTypeDescription *evtDescription)
-{
-    prv_integrity(m_dataPrivate);
-    evtDescription->beginSymbol(m_dataPrivate->symbol, m_dataPrivate->dataFigure);
-}
-
-//---------------------------------------------------------------
-
 void CFigure::drawRepresentation(class CTypeDescription *evtDescription)
 {
     assert_no_null(m_dataPrivate);
     assert_no_null(evtDescription);
 
+    evtDescription->beginSymbol(m_dataPrivate->symbol, m_dataPrivate->dataFigure);
     evtDescription->drawSymbol(m_dataPrivate->symbol, m_dataPrivate->dataFigure);
-}
-
-//---------------------------------------------------------------
-
-void CFigure::endRepresentation(class CTypeDescription *evtDescription)
-{
-    prv_integrity(m_dataPrivate);
     evtDescription->endSymbol(m_dataPrivate->symbol, m_dataPrivate->dataFigure);
 }
-

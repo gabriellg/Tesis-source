@@ -11,7 +11,7 @@ class IWorld
     public:
 
         virtual ~IWorld(){;}
-        virtual class CAgent *move(const char *idElement, class CAgent **figure) const = 0;
+        virtual class IObjectDraw *move(const char *idElement, class IObjectDraw **figure) const = 0;
 };
 
 #endif /* IWORLD_HPP_ */

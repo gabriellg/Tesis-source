@@ -18,6 +18,6 @@ class CTransform2D
         static const char *ID_SYMBOL_ROTATE2D;
         static const char *ID_SYMBOL_TRASLATE2D;
 
-        static class CTransform *createRotate2D(class CAgent **actorToTransform, double angleRotation);
-		static class CTransform *createTraslate2D(class CAgent **actorToTransform, double dx, double dy);
+        static class CTransform *createRotate2D(class IObjectDraw **figure, double angleRotation);
+		static class CTransform *createTraslate2D(class IObjectDraw **figure, double dx, double dy);
 };

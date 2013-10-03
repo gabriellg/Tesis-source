@@ -20,7 +20,7 @@ class CWorldEscalextric: public IWorld
 
         void applyVelocity(const char *idCar, double acceleration);
 
-        virtual class CAgent *move(const char *idCar, class CAgent **figure) const;
+        virtual class IObjectDraw *move(const char *idCar, class IObjectDraw **figure) const;
 
     private:
 

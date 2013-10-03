@@ -3,9 +3,9 @@
  *  License: GNU Public License
  * ----------------------------------------------------------------------------*/
 
-#include "IDisplay.hpp"
+#include "ITraslatorDisplay.hpp"
 
-class CDisplayMultiSprite : public IDisplay
+class CDisplayMultiSprite : public ITraslatorDisplay
 {
     public:
 
@@ -17,7 +17,7 @@ class CDisplayMultiSprite : public IDisplay
         CDisplayMultiSprite(enum ETypeDistribution distribution);
         virtual ~CDisplayMultiSprite();
 
-        void appendDisplaySprite(class IDisplay **display);
+        void appendDisplaySprite(class ITraslatorDisplay **display);
 
         virtual void appendDescription(const char *symbol, class IDescription **description);
         virtual void drawScene(class IGraphics *graphics, const class CScene *scene);

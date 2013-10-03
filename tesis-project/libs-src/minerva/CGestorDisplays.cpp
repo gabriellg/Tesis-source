@@ -2,7 +2,7 @@
 
 #include "CGestorDisplays.hpp"
 
-#include "IDisplay.hpp"
+#include "ITraslatorDisplay.hpp"
 
 #include "asrtbas.h"
 #include "memory.h"
@@ -11,7 +11,7 @@
 
 struct prv_dataPrivateGestorDisplays_t
 {
-	class CArray<IDisplay> *displays;
+	class CArray<ITraslatorDisplay> *displays;
 	unsigned long indCurrentDisplay;
 };
 
@@ -26,14 +26,14 @@ static void prv_integrity(const struct prv_dataPrivateGestorDisplays_t *dataPriv
 //-----------------------------------------------------------------------
 
 static struct prv_dataPrivateGestorDisplays_t *prv_create(
-                    class CArray<IDisplay> **displays,
+                    class CArray<ITraslatorDisplay> **displays,
 					unsigned long indCurrentDisplay)
 {
 	struct prv_dataPrivateGestorDisplays_t *dataPrivate;
 	
 	dataPrivate = MALLOC(struct prv_dataPrivateGestorDisplays_t);
 	
-	dataPrivate->displays = ASSIGN_PP_NO_NULL(displays, class CArray<IDisplay>);
+	dataPrivate->displays = ASSIGN_PP_NO_NULL(displays, class CArray<ITraslatorDisplay>);
 	dataPrivate->indCurrentDisplay = indCurrentDisplay;
 	
 	prv_integrity(dataPrivate);
@@ -57,10 +57,10 @@ static void prv_destroy(struct prv_dataPrivateGestorDisplays_t **dataPrivate)
 
 CGestorDisplays::CGestorDisplays()
 {
-	class CArray<IDisplay> *displays;
+	class CArray<ITraslatorDisplay> *displays;
 	unsigned long indCurrentDisplay;
 	
-	displays = new CArray<IDisplay>;
+	displays = new CArray<ITraslatorDisplay>;
 	indCurrentDisplay = 0;
 	
 	m_dataPrivate = prv_create(&displays, indCurrentDisplay);
@@ -75,7 +75,7 @@ CGestorDisplays::~CGestorDisplays()
 
 //-----------------------------------------------------------------------
 
-void CGestorDisplays::appendDisplay(class IDisplay **display)
+void CGestorDisplays::appendDisplay(class ITraslatorDisplay **display)
 {
 	assert_no_null(display);
 	prv_integrity(m_dataPrivate);
@@ -96,7 +96,7 @@ void CGestorDisplays::setInitialPositionCamera(void)
 		
 	for (i = 0; i < num; i++)
 	{
-		class IDisplay *display;
+		class ITraslatorDisplay *display;
 			
 		display = m_dataPrivate->displays->get(i);
 		display->setInitialPositionCamera();
@@ -107,7 +107,7 @@ void CGestorDisplays::setInitialPositionCamera(void)
 
 void CGestorDisplays::makeRotationCurrentDisplay(class IGraphics *graphics)
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
 	prv_integrity(m_dataPrivate);
 	
@@ -119,7 +119,7 @@ void CGestorDisplays::makeRotationCurrentDisplay(class IGraphics *graphics)
 
 void CGestorDisplays::setRotationCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double rotXDegrees, double rotYDegrees, double rotZDegrees)
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
 	prv_integrity(m_dataPrivate);
 	
@@ -131,7 +131,7 @@ void CGestorDisplays::setRotationCameraCurrentDisplay(struct areaDibujo_t *areaD
 
 void CGestorDisplays::incrRotateCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double incrRotateX, double incrRotateY, double incrRotateZ)
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
     prv_integrity(m_dataPrivate);
 
@@ -143,7 +143,7 @@ void CGestorDisplays::incrRotateCameraCurrentDisplay(struct areaDibujo_t *areaDi
 
 void CGestorDisplays::frontCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double step)
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
     prv_integrity(m_dataPrivate);
 
@@ -155,7 +155,7 @@ void CGestorDisplays::frontCameraCurrentDisplay(struct areaDibujo_t *areaDibujo,
 
 void CGestorDisplays::backCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double step)
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
     prv_integrity(m_dataPrivate);
 
@@ -167,7 +167,7 @@ void CGestorDisplays::backCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, 
 
 void CGestorDisplays::positionCameraCurrentDisplay(class IGraphics *graphics) const
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
     prv_integrity(m_dataPrivate);
 
@@ -179,7 +179,7 @@ void CGestorDisplays::positionCameraCurrentDisplay(class IGraphics *graphics) co
 
 void CGestorDisplays::drawScene(class IGraphics *graphics, const class CScene *scene)
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
     prv_integrity(m_dataPrivate);
 
@@ -191,7 +191,7 @@ void CGestorDisplays::drawScene(class IGraphics *graphics, const class CScene *s
 
 bool CGestorDisplays::isArea3DCurrentDisplay(void) const
 {
-	class IDisplay *display;
+	class ITraslatorDisplay *display;
 	
     prv_integrity(m_dataPrivate);
 

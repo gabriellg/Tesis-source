@@ -17,11 +17,9 @@ class CAgentGeneratorEvent: public CAgent
     private:
 
         virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents);
-        virtual class CAgent *representation(class CTypeDescription *evtDescription);
 
-        virtual void beginRepresentation(class CTypeDescription *evtDescription);
-        virtual void drawRepresentation(class CTypeDescription *evtDescription);
-        virtual void endRepresentation(class CTypeDescription *evtDescription);
+        virtual class CArray<IObjectDraw> *createRepresentation(class CTypeDescription *evtDescription,
+                class CArray<IObjectDraw> **childsOpt);
 };
 
 #endif /* CAGENTGENERATOREVENT_HPP_ */

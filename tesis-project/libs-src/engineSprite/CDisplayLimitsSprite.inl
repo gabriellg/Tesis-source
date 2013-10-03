@@ -3,9 +3,9 @@
  *  License: GNU Public License
  * ----------------------------------------------------------------------------*/
 
-#include "IDisplay.hpp"
+#include "ITraslatorDisplay.hpp"
 
-class CDisplayLimitsSprite : public IDisplay
+class CDisplayLimitsSprite : public ITraslatorDisplay
 {
     public:
 

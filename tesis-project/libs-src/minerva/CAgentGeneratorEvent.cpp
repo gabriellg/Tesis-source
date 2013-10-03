@@ -16,28 +16,8 @@ class CAgent *CAgentGeneratorEvent::evolution(class CCollectionEventsSystem *all
 
 //-----------------------------------------------------------------------
 
-class CAgent *CAgentGeneratorEvent::representation(class CTypeDescription *evtDescription)
+class CArray<IObjectDraw> *CAgentGeneratorEvent::createRepresentation(class CTypeDescription *evtDescription,
+        class CArray<IObjectDraw> **childsOpt)
 {
     return NULL;
-}
-
-//-----------------------------------------------------------------------
-
-void CAgentGeneratorEvent::beginRepresentation(class CTypeDescription *evtDescription)
-{
-    assert_message("Not Representation");
-}
-
-//-----------------------------------------------------------------------
-
-void CAgentGeneratorEvent::drawRepresentation(class CTypeDescription *evtDescription)
-{
-    assert_message("Not Representation");
-}
-
-//-----------------------------------------------------------------------
-
-void CAgentGeneratorEvent::endRepresentation(class CTypeDescription *evtDescription)
-{
-    assert_message("Not Representation");
 }

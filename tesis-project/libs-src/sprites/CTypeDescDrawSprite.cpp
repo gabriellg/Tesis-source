@@ -153,7 +153,7 @@ void CTypeDescDrawSprite::endSymbol(const char *symbol, const class IDataSymbol 
 
 //-----------------------------------------------------------------------
 
-class CAgent *CTypeDescDrawSprite::move(const char *idElement, class CAgent **objMove)
+class IObjectDraw *CTypeDescDrawSprite::move(const char *idElement, class IObjectDraw **objMove)
 {
     assert_no_null(m_dataPrivate);
     assert_no_null(objMove);

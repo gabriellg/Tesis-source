@@ -30,6 +30,7 @@ template<class Type> class CArray : private PrvBaseArray
         inline void eraseRefLast();
 
         inline void concatenate( const class CArray *array );
+        inline void concatenateDestroying( class CArray **array );
 
         template<class TypeSearch> inline class CArrayRef<Type>* search(
                                 const TypeSearch *itemSearch,
@@ -165,6 +166,16 @@ template<class Type> void CArray<Type>::eraseRefLast()
 template<class Type> void CArray<Type>::concatenate( const class CArray *array )
 {
     PrvBaseArray::concatenate(array, prv_copyElement);
+}
+
+//------------------------------------------------------------------------------
+//
+template<class Type> void CArray<Type>::concatenateDestroying(class CArray **array)
+{
+    class PrvBaseArray **arrayPrivate;
+
+    arrayPrivate = (class PrvBaseArray **)array;
+    PrvBaseArray::concatenateDestroying(arrayPrivate);
 }
 
 //------------------------------------------------------------------------------

@@ -1,53 +1,39 @@
-/* -----------------------------------------------------------------------------
- *  CAgent.hpp
- *  License: GNU Public License
- * ----------------------------------------------------------------------------*/
+// CAgent.hpp: Definición de Agente
 
-#ifndef CAGENT_HPP_
-#define CAGENT_HPP_
+#pragma once
+
+#include "IObjectDraw.hpp"
 
 class CAgent
 {
-    public:
+public:
 
-        CAgent(void);
-        virtual ~CAgent();
+    CAgent(void);
+    virtual ~CAgent();
 
-        void appendChild(class CAgent **son);
-        void appendChildren(class CArrayRef<CAgent> **sons);
+    void appendChild(class CAgent **son);
+    void appendChildren(class CArrayRef<CAgent> **sons);
 
-        class CAgent *nextGeneration(class CCollectionEventsSystem *allEvents);
-        class CArrayRef<CAgent> *getRepresentation(class CTypeDescription *evtDescription);
-        void traslateRepresentationToDescription(class CTypeDescription *evtDescription);
+    class CAgent *nextGeneration(class CCollectionEventsSystem *allEvents);
+    class CArray<IObjectDraw> *getRepresentation(class CTypeDescription *evtDescription);
 
-        static void deleteAllAgentNotRepeted(class CAgent **agent);
-        static void eraseOldObjects(class CAgent *newAgent, class CAgent **oldAgent);
+    virtual void beginEvolution(class CCollectionEventsSystem *allEvents) = 0;
+    virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents) = 0;
+    virtual void endEvolution(class CCollectionEventsSystem *allEvents) = 0;
 
-    private:
+    virtual class CArray<IObjectDraw> *createRepresentation(class CTypeDescription *evtDescription,
+            class CArray<IObjectDraw> **childsOpt) = 0;
 
-        virtual void beginEvolution(class CCollectionEventsSystem *allEvents) = 0;
-        virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents) = 0;
-        virtual void endEvolution(class CCollectionEventsSystem *allEvents) = 0;
+    static void destroyAllAgentsNotRepeated(class CArrayRef<CAgent> **agents);
+    static void destroyOldObjects(class CArrayRef<CAgent> *agents, class CArrayRef<CAgent> **oldAgents);
 
-        virtual class CAgent *representation(class CTypeDescription *evtDescription) = 0;
+private:
 
-        virtual void beginRepresentation(class CTypeDescription *evtDescription) = 0;
-        virtual void drawRepresentation(class CTypeDescription *evtDescription)  = 0;
-        virtual void endRepresentation(class CTypeDescription *evtDescription) = 0;
+    static class CArrayRef<CAgent>* prv_allReferenceNotRepeated(class CArrayRef<CAgent>* agents);
 
-        class CAgent *prv_nextGenerationRecursive(unsigned long numRecursive, class CCollectionEventsSystem *allEvents);
-        void prv_getRepresentationRecursive(
-                                unsigned long numRecursive,
-                                class CArrayRef<CAgent> *stringRepresentation,
-                                class CTypeDescription *evtDescription);
+    class CAgent *prv_nextGenerationRecursive(unsigned long numRecursive, class CCollectionEventsSystem *allEvents);
 
-        void prv_traslateRepresentationToDescription(unsigned long numRecursive, class CTypeDescription *description);
+    void prv_appendRefNotRepeated(unsigned long numRecursivity, class CArrayRef<CAgent> *agentsNotRepeated);
 
-        void prv_appendRefNotRepeated(unsigned long numRecursive, class CArrayRef<CAgent> *agentsNotRepeated);
-
-        static class CArrayRef<CAgent> *prv_allReferenceNotRepeated(class CArrayRef<CAgent> *agents);
-
-        struct SPrvDataPrivateAgent *m_dataPrivate;
+    struct SPrvDataPrivateAgent *m_dataPrivate;
 };
-
-#endif /* CAGENT_HPP_ */

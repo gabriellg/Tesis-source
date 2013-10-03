@@ -39,6 +39,7 @@ class PrvBaseArray
         void eraseRefLast();
 
         void concatenate(const class PrvBaseArray *array, CArray_FPtr_copyElement funcCopy);
+        void concatenateDestroying(class PrvBaseArray **array);
 
         class PrvBaseArray* search( const struct prv_itemSearch_t *itemSearch,
                             CArray_FPtr_search funcSearch_optional ) const;

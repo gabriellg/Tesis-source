@@ -9,7 +9,7 @@ class CWorldGeometry2DPixels : public IWorld
 		CWorldGeometry2DPixels();
 		virtual ~CWorldGeometry2DPixels();
 
-		virtual class CAgent *move(const char *idElement, class CAgent **agentMoved) const;
+		virtual class IObjectDraw *move(const char *idElement, class IObjectDraw **agentMoved) const;
 
 		void createBlockSprite(const char *id, long x, long y);
 

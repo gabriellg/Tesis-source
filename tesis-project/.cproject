@@ -35,6 +35,8 @@
 									<listOptionValue builtIn="false" value="&quot;MALLOC(x)=(x *)memory_malloc(sizeof(x))&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;FREE_T(x, type)=((void)((type *) *x == *x), memory_free((void **)x, sizeof(x)))&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;ASSIGN_PP(ptr, x)=((void)(*ptr == (x *)*ptr), (x *)memory_assign_double_pointer((void **)ptr))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;REALLOC(ptr,n,x)=((void)(*ptr == (x)*ptr), memory_realloc((void **)ptr,n,sizeof(x)))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;CALLOC(n,x)=(x *)memory_calloc(n,sizeof(x))&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1814801190" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -48,6 +50,8 @@
 									<listOptionValue builtIn="false" value="&quot;MALLOC(x)=(x *)memory_malloc(sizeof(x))&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;FREE_T(x, type)=((void)((type *) *x == *x), memory_free((void **)x, sizeof(x)))&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;ASSIGN_PP(ptr, x)=((void)(*ptr == (x *)*ptr), (x *)memory_assign_double_pointer((void **)ptr))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;REALLOC(ptr,n,x)=((void)(*ptr == (x)*ptr), memory_realloc((void **)ptr,n,sizeof(x)))&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;CALLOC(n,x)=(x *)memory_calloc(n,sizeof(x))&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1260043470" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>

@@ -238,15 +238,19 @@ struct prv_item_t* PrvBaseArray::getLast(void) const
 
 //------------------------------------------------------------------------------
 //
-static struct prv_item_t **prv_realloc(struct prv_item_t ***array, unsigned long numElements )
+static struct prv_item_t **prv_realloc(struct prv_item_t ***array, unsigned long numElements)
 {
+    struct prv_item_t **array_loc;
+
     if (array != NULL)
     {
         REALLOC(array, numElements, struct prv_item_t **);
-        return *array;
+        array_loc = *array;
     }
     else
-        return CALLOC(numElements, struct prv_item_t *);
+        array_loc = CALLOC(numElements, struct prv_item_t *);
+
+    return array_loc;
 }
 
 //------------------------------------------------------------------------------
@@ -371,28 +375,57 @@ void PrvBaseArray::eraseRefLast()
 
 //------------------------------------------------------------------------------
 //
+static void prv_concatenate(
+                        struct prv_privateArray_t *dataDest,
+                        const struct prv_privateArray_t *dataSource,
+                        CArray_FPtr_copyElement funcCopy)
+{
+    prv_integrity(dataDest);
+    prv_integrity(dataSource);
+
+    if (dataSource->numElements > 0)
+    {
+        dataDest->array = prv_realloc(&dataDest->array, dataDest->numElements + dataSource->numElements);
+
+        for (unsigned long i = 0; i < dataSource->numElements; i++)
+        {
+            if (funcCopy != NULL)
+                dataDest->array[i + dataDest->numElements] = funcCopy(dataSource->array[i]);
+            else
+                dataDest->array[i + dataDest->numElements] = dataSource->array[i];
+        }
+
+        dataDest->numElements += dataSource->numElements;
+    }
+}
+
+//------------------------------------------------------------------------------
+//
 void PrvBaseArray::concatenate(
                         const class PrvBaseArray *array,
                         CArray_FPtr_copyElement funcCopy)
 {
+    assert_no_null(array);
     prv_integrity(m_data);
     prv_integrity(array->m_data);
 
-    if (array->m_data->numElements > 0)
-    {
-        m_data->array = prv_realloc(&m_data->array, m_data->numElements + array->m_data->numElements);
-
-        for (unsigned long i = 0; i < array->m_data->numElements; i++)
-        {
-            if (funcCopy != NULL)
-                m_data->array[i + m_data->numElements] = funcCopy(array->m_data->array[i]);
-            else
-                m_data->array[i + m_data->numElements] = array->m_data->array[i];
-        }
-
-        m_data->numElements += array->m_data->numElements;
-    }
+    prv_concatenate(m_data, array->m_data, funcCopy);
 }
+
+//------------------------------------------------------------------------------
+//
+void PrvBaseArray::concatenateDestroying(class PrvBaseArray **array)
+{
+    prv_integrity(m_data);
+    assert_no_null(array);
+    assert_no_null(*array);
+
+    prv_concatenate(m_data, (*array)->m_data, NULL);
+    prv_releaseMemory(&(*array)->m_data->numElements, &(*array)->m_data->array, NULL);
+
+    DELETE_OBJECT(array, class PrvBaseArray);
+}
+
 
 //------------------------------------------------------------------------------
 //

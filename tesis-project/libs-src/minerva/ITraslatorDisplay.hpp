@@ -1,13 +1,12 @@
 //IDisplay.hpp
 
-#ifndef IDISPLAY_HPP_
-#define IDISPLAY_HPP_
+#pragma once
 
-class IDisplay
+class ITraslatorDisplay
 {
 	public:
 		
-		virtual ~IDisplay() {;}
+		virtual ~ITraslatorDisplay() {;}
 		
         virtual void appendDescription(const char *symbol, class IDescription **description) = 0;
         virtual void drawScene(class IGraphics *graphics, const class CScene *scene) = 0;
@@ -23,5 +22,3 @@ class IDisplay
 		virtual bool isArea3D(void) const = 0;
         virtual bool withSize(unsigned long *width, unsigned long *height) const = 0;
 };
-
-#endif /* CDISPLAY_HPP_ */

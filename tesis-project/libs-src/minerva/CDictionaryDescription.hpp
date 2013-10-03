@@ -15,5 +15,5 @@ class CDictionaryDescription
 
     private:
 
-        struct prv_dataPrivateDictioryDescription_t *m_dataPrivate;
+        struct SPrvDictioryDescription *m_dataPrivate;
 };

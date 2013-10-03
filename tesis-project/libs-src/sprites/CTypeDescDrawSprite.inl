@@ -19,7 +19,7 @@ class CTypeDescDrawSprite: public CTypeDescrPhysics
         virtual void drawSymbol(const char *symbol, const class IDataSymbol *dataFigure);
         virtual void endSymbol(const char *symbol, const class IDataSymbol *dataFigure);
 
-		class CAgent *move(const char *idElement, class CAgent **objMove);
+		class IObjectDraw *move(const char *idElement, class IObjectDraw **objMove);
 		
 	private:
 		

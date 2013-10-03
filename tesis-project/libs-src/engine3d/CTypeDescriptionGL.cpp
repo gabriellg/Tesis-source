@@ -129,7 +129,7 @@ void CTypeDescriptionGL::endSymbol(const char *symbol, const class IDataSymbol *
 
 //-----------------------------------------------------------------------
 
-class CAgent *CTypeDescriptionGL::move(const char *idElement, class CAgent **figure)
+class IObjectDraw *CTypeDescriptionGL::move(const char *idElement, class IObjectDraw **figure)
 {
     prv_integrity(m_dataPrivate);
     assert_no_null(m_dataPrivate->world);
