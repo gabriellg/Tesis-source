@@ -271,6 +271,7 @@ class CAgent *CAgent::nextGeneration(class CCollectionEventsSystem *allEvents)
 
 class CArray<IObjectDraw> *CAgent::getRepresentation(class CTypeDescription *evtDescription)
 {
+    class CArray<IObjectDraw> *representationAgent;
     class CArray<IObjectDraw> *representationSons;
 
     representationSons = new class CArray<IObjectDraw>;
@@ -285,9 +286,19 @@ class CArray<IObjectDraw> *CAgent::getRepresentation(class CTypeDescription *evt
         representationSon = agentSon->getRepresentation(evtDescription);
         if (representationSon->size() > 0)
             representationSons->concatenateDestroying(&representationSon);
+        else
+            DELETE_OBJECT(&representationSon, class CArray<IObjectDraw>);
     }
 
-    return createRepresentation(evtDescription, &representationSons);
+    if (representationSons->size() > 0)
+        representationAgent = createRepresentation(evtDescription, &representationSons);
+    else
+    {
+        representationAgent = createRepresentation(evtDescription, NULL);
+        DELETE_OBJECT(&representationSons, class CArray<IObjectDraw>);
+    }
+
+    return representationAgent;
 }
 
 //---------------------------------------------------------------

@@ -19,5 +19,7 @@ class CAgent *CAgentGeneratorEvent::evolution(class CCollectionEventsSystem *all
 class CArray<IObjectDraw> *CAgentGeneratorEvent::createRepresentation(class CTypeDescription *evtDescription,
         class CArray<IObjectDraw> **childsOpt)
 {
-    return NULL;
+    assert_no_null(childsOpt);
+
+    return *childsOpt;
 }

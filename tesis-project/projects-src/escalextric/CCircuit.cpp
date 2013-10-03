@@ -6,6 +6,7 @@
 
 #include "CArray.hpp"
 #include "CFigure.hpp"
+#include "asrtbas.h"
 
 //---------------------------------------------------------------
 
@@ -14,6 +15,8 @@ class CArray<IObjectDraw> *CCircuit::createRepresentation(class CTypeDescription
 {
     class CArray<IObjectDraw> *objectsDraw;
     class IObjectDraw *circuit;
+
+    assert(childsOpt == NULL);
 
     circuit = new CFigure(CDisplayEscalextric::SYMBOL_CIRCUIT);
 

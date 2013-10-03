@@ -119,6 +119,8 @@ class CArray<IObjectDraw> *CCar::createRepresentation(class CTypeDescription *ev
     class CTypeDescrPhysics *evtRepresentation;
     class IObjectDraw *figureCar, *figureCarMoved;
 
+    assert(childsOpt == NULL);
+
     evtRepresentation = dynamic_cast<class CTypeDescrPhysics *>(evtDescription);
     assert_no_null(evtRepresentation);
 
