@@ -6,7 +6,6 @@
 #include "CGeneratorPhysics.inl"
 
 #include "CCar.inl"
-#include "CEventApplyVelocity.inl"
 #include "CEventAcceleration.inl"
 
 #include "asrtbas.h"
@@ -14,25 +13,6 @@
 #include "CEventKey.hpp"
 
 static const double PRV_INCR_ACCELARATION = 1.;
-
-//-----------------------------------------------------------------------
-//
-CGeneratorKinematicAndForces::CGeneratorKinematicAndForces(class CWorldEscalextric *worldEscalextric)
-{
-    m_dataPrivate = (struct SDataPrivateGeneratorKinematicAndForces *)worldEscalextric;
-}
-
-//-----------------------------------------------------------------------
-//
-void CGeneratorKinematicAndForces::beginEvolution(class CCollectionEventsSystem *allEvents)
-{
-    class CWorldEscalextric *world;
-    class CEventSystem *evtSystem;
-
-    world = (class CWorldEscalextric *)m_dataPrivate;
-    evtSystem = new CEventApplyVelocity(world);
-    allEvents->appendEventSystem(&evtSystem);
-}
 
 //-----------------------------------------------------------------------
 //
@@ -70,12 +50,12 @@ void CGeneratorAccelerationKey::generateEventWithKey(const class CEventKey *evtK
         {
             case 'a':
 
-                prv_appendEvent(CCar::LEFT, 1., events);
+                prv_appendEvent(CCar::LEFT, PRV_INCR_ACCELARATION, events);
                 break;
 
             case 'z':
 
-                prv_appendEvent(CCar::LEFT, PRV_INCR_ACCELARATION, events);
+                prv_appendEvent(CCar::LEFT, -PRV_INCR_ACCELARATION, events);
                 break;
 
             case 'j':

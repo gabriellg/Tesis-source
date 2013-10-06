@@ -1,16 +1,20 @@
 // CCircuit.hpp: Agent Circuit.
 
-#include "CAgentNoEvolution.hpp"
+#include "CAgent.hpp"
 
-class CCircuit: public CAgentNoEvolution
+class CCircuit: public CAgent
 {
 public:
 
-    CCircuit() {;}
+    CCircuit(class CWorldEscalextric *worldEscalextric);
 
 private:
+
+    virtual void beginEvolution(class CCollectionEventsSystem *allEvents);
+    virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents, class CArrayRef<CAgent> **nextGenerationSons);
 
     virtual class CArray<IObjectDraw> *createRepresentation(class CTypeDescription *evtDescription,
             class CArray<IObjectDraw> **childsOpt);
 
+    struct SPrvCircuit *m_dataPrivate;
 };

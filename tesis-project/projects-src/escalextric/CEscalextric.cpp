@@ -74,7 +74,7 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
 {
 	class CAgent *circuit;
 	class CAgent *carLeft, *carRight;
-	class CAgent *generatorAccelerationKey, *generatorKinematicAndForces;
+	class CAgent *generatorAccelerationKey;
 	
 	assert_no_null(scene);
 	assert_no_null(m_dataPrivate);
@@ -83,15 +83,13 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
     m_dataPrivate->worldEscalextric->appendCarLaneRight(CCar::RIGHT);
 
 	generatorAccelerationKey = new CGeneratorAccelerationKey();
-	generatorKinematicAndForces = new CGeneratorKinematicAndForces(m_dataPrivate->worldEscalextric);
-    circuit = new CCircuit();
+    circuit = new CCircuit(m_dataPrivate->worldEscalextric);
     carLeft = new CCar(CCar::LEFT);
     carRight = new CCar(CCar::RIGHT);
 
     generatorAccelerationKey->appendChild(&carLeft);
     generatorAccelerationKey->appendChild(&carRight);
-    generatorKinematicAndForces->appendChild(&generatorAccelerationKey);
-    circuit->appendChild(&generatorKinematicAndForces);
+    circuit->appendChild(&generatorAccelerationKey);
 
 	scene->appendAgent(&circuit);
 }
