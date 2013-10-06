@@ -26,12 +26,6 @@
 #include "CGeneratorSolid.hpp"
 
 #include "CImg.hpp"
-#include "CDataCircuit__straight_horizontal.iig"
-#include "CDataCircuit__straight_vertical.iig"
-#include "CDataCircuit__curve0_90.iig"
-#include "CDataCircuit__curve90_180.iig"
-#include "CDataCircuit__curve180_270.iig"
-#include "CDataCircuit__curve270_360.iig"
 
 enum EPrvTypeRotation
 {
@@ -548,32 +542,32 @@ static class CImg *prv_getImage(enum EPrvTypeTrack typeTrack)
     {
         case PRV_HORIZONTAL:
 
-            imageTrack = cimg_load_local_png(horizontal);
+            imageTrack = new CImg("./imagesCircuit/straight_horizontal.png");
             break;
 
         case PRV_VERTICAL:
 
-            imageTrack = cimg_load_local_png(vertical);
+            imageTrack = new CImg("./imagesCircuit/straight_vertical.png");
             break;
 
         case PRV_CURVE_0_90:
 
-            imageTrack = cimg_load_local_png(90);
+            imageTrack = new CImg("./imagesCircuit/curve0_90.png");
             break;
 
         case PRV_CURVE_90_180:
 
-            imageTrack = cimg_load_local_png(180);
+            imageTrack = new CImg("./imagesCircuit/curve90_180.png");
             break;
 
         case PRV_CURVE_180_270:
 
-            imageTrack = cimg_load_local_png(270);
+            imageTrack = new CImg("./imagesCircuit/curve180_270.png");
             break;
 
         case PRV_CURVE_270_360:
 
-            imageTrack = cimg_load_local_png(360);
+            imageTrack = new CImg("./imagesCircuit/curve270_360.png");
             break;
 
         default_error();
