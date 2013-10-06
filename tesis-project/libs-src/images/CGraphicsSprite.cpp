@@ -95,7 +95,7 @@ CGraphicsSprite::CGraphicsSprite(unsigned long width, unsigned long height, unsi
 {
     class CImg *image;
 
-    image = new CImg(width, height, r, g, b);
+    image = new CImg(width, height, 4, r, g, b);
     m_dataPrivate = prv_createDefault(&image);
 }
 

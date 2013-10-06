@@ -34,7 +34,7 @@ static void prv_testImageColor(enum CColor::Color_t typeColor)
 	class CColor *color;
 
 	color = new CColor(typeColor);
-	imageTest = new CImg(prv_SIZEX_IMAGE_TEST, prv_SIZEY_IMAGE_TEST, color);
+	imageTest = new CImg(prv_SIZEX_IMAGE_TEST, prv_SIZEY_IMAGE_TEST, 3, color);
 
 	imageTest->show("id_test");
 

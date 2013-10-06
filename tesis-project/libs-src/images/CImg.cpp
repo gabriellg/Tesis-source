@@ -14,6 +14,7 @@
 #include "AbstractGeneratorImage.hpp"
 #include "IProcessPixel.hpp"
 #include "CColor.hpp"
+#include "nomfich.h"
 
 #define PRV_PTRTOCV(data) ((IplImage *)data)
 #define PRV_PTRTOPRIVATE(data) ((struct prv_dataPrivateImage_t *)data)
@@ -131,11 +132,11 @@ CImg::CImg(unsigned long width, unsigned long height)
 
 //-----------------------------------------------------------------------
 
-CImg::CImg(unsigned long width, unsigned long height, unsigned char r, unsigned char g, unsigned char b)
+CImg::CImg(unsigned long width, unsigned long height, unsigned long nChannels, unsigned char r, unsigned char g, unsigned char b)
 {
     IplImage *cvImage;
 
-    cvImage = prv_createRGB(width, height, 3);
+    cvImage = prv_createRGB(width, height, nChannels);
     cvSet(cvImage, CV_RGB(r, g, b), 0);
 
     m_dataPrivate = PRV_PTRTOPRIVATE(cvImage);
@@ -144,7 +145,7 @@ CImg::CImg(unsigned long width, unsigned long height, unsigned char r, unsigned 
 
 //-----------------------------------------------------------------------
 //
-CImg::CImg(unsigned long width, unsigned long height, class CColor *color)
+CImg::CImg(unsigned long width, unsigned long height, unsigned long nChannels, class CColor *color)
 {
 	IplImage *cvImage;
     unsigned char r, g, b;
@@ -152,7 +153,7 @@ CImg::CImg(unsigned long width, unsigned long height, class CColor *color)
     assert_no_null(color);
 	color->getColor(&r, &g, &b);
 
-	cvImage = prv_createRGB(width, height, 3);
+	cvImage = prv_createRGB(width, height, nChannels);
     cvSet(cvImage, CV_RGB(r, g, b), 0);
 
     m_dataPrivate = PRV_PTRTOPRIVATE(cvImage);
@@ -224,8 +225,12 @@ CImg::CImg(const CImg *image)
 CImg::CImg(const char* filename)
 {
     IplImage *cvImage;
+    bool existFile;
 
     assert_no_null(filename);
+
+    existFile = nomfich_existe_fichero(filename);
+    assert(existFile == true);
 
     cvImage = cvLoadImage(filename, CV_LOAD_IMAGE_UNCHANGED);
     m_dataPrivate = PRV_PTRTOPRIVATE(cvImage);
@@ -613,6 +618,8 @@ void CImg::drawImageOnImage(long x, long y, const class CImg *image)
 
     cvDest = PRV_PTRTOCV(m_dataPrivate);
     cvSource = PRV_PTRTOCV(image->m_dataPrivate);
+
+    assert(cvSource->nChannels == cvDest->nChannels);
 
     cvSetImageROI(cvDest, cvRect(x, y, cvSource->width, cvSource->height));
 

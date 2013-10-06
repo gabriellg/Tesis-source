@@ -9,8 +9,8 @@ class CImg
     public:
 
 		CImg(unsigned long width, unsigned long height);
-		CImg(unsigned long width, unsigned long height, unsigned char r, unsigned char g, unsigned char b);
-        CImg(unsigned long width, unsigned long height, class CColor *color);
+		CImg(unsigned long width, unsigned long height, unsigned long nChannels, unsigned char r, unsigned char g, unsigned char b);
+        CImg(unsigned long width, unsigned long height, unsigned long nChannels, class CColor *color);
         CImg(unsigned long width, unsigned long height, unsigned long widthStep, unsigned long nChannels, const unsigned char *buffer);
         CImg(class CAbstractGeneratorImage *generator);
         CImg(const class CImg *image);
