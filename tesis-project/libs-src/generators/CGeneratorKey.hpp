@@ -14,7 +14,6 @@ class CGeneratorKey : public CAgentGeneratorEvent
 	private:
 
         virtual void beginEvolution(class CCollectionEventsSystem *allEvents);
-        virtual void endEvolution(class CCollectionEventsSystem *allEvents) {;}
 
         virtual void generateEventWithKey(const class CEventKey *evtKey, class CCollectionEventsSystem *events) = 0;
 };

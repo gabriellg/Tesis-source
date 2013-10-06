@@ -14,7 +14,6 @@ class CGeneratorCollisionSprite: public CAgentGeneratorEvent
 	private:
 
         virtual void beginEvolution(class CCollectionEventsSystem *events);
-        virtual void endEvolution(class CCollectionEventsSystem *allEvents) {;}
 
         struct prv_dataPrivateGeneratorCollisionSprite_t *m_dataPrivate;
 };

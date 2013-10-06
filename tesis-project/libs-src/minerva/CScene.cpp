@@ -19,8 +19,8 @@ struct SPrvDataPrivateScene
 
 //---------------------------------------------------------------
 
-static struct SPrvDataPrivateScene *prv_createScene(class CArrayRef<CAgent> **initialGeneration, class CArrayRef<CAgent> **currentGeneration,
-        class CEventKey **evtKeyCurrent)
+static struct SPrvDataPrivateScene *prv_createScene(class CArrayRef<CAgent> **initialGeneration,
+        class CArrayRef<CAgent> **currentGeneration, class CEventKey **evtKeyCurrent)
 {
     struct SPrvDataPrivateScene *dataPrivate;
     
@@ -110,14 +110,10 @@ void CScene::appendKey(const struct EvtKey_t *evtKey)
 
 //---------------------------------------------------------------
 
-static class CArrayRef<CAgent> *prv_nextGeneration(
-        class CScene *scene,
-        class CEventKey **evtKeyCurrent,
-        class CArrayRef<CAgent> *currentGeneration)
+static void prv_nextGeneration(class CScene *scene, class CEventKey **evtKeyCurrent,
+        class CArrayRef<CAgent> **currentGeneration)
 {
     class CCollectionEventsSystem *allEvents;
-    class CArrayRef<CAgent> *nextGeneration;
-    unsigned long numAgents;
 
     assert_no_null(evtKeyCurrent);
 
@@ -131,22 +127,9 @@ static class CArrayRef<CAgent> *prv_nextGeneration(
         allEvents->appendEventSystem(&evtSystemKey);
     }
 
-    numAgents = currentGeneration->size();
-    nextGeneration = new CArrayRef<CAgent>(numAgents);
-
-    for (unsigned long i = 0; i < numAgents; i++)
-    {
-        class CAgent *agent;
-        class CAgent *agentNextGeneration;
-
-        agent = currentGeneration->get(i);
-        agentNextGeneration = agent->nextGeneration(allEvents);
-        nextGeneration->set(i, agentNextGeneration);
-    }
+    CAgent::nextGeneration(allEvents, currentGeneration);
 
     DELETE_OBJECT(&allEvents, class CCollectionEventsSystem);
-
-    return nextGeneration;
 }
 
 //---------------------------------------------------------------
@@ -154,7 +137,6 @@ static class CArrayRef<CAgent> *prv_nextGeneration(
 void CScene::nextFrame()
 {
     class CArrayRef<CAgent> *currentGeneration;
-    class CArrayRef<CAgent> *nextGeneration;
     
     assert_no_null(m_dataPrivate);
 
@@ -171,10 +153,9 @@ void CScene::nextFrame()
         m_dataPrivate->initialGeneration = NULL;
     }
 
-    nextGeneration = prv_nextGeneration(this, &m_dataPrivate->evtKeyCurrent, currentGeneration);
-    m_dataPrivate->currentGeneration = nextGeneration;
+    prv_nextGeneration(this, &m_dataPrivate->evtKeyCurrent, &currentGeneration);
 
-    CAgent::destroyOldObjects(nextGeneration, &currentGeneration);
+    m_dataPrivate->currentGeneration = currentGeneration;
 }
 
 //---------------------------------------------------------------

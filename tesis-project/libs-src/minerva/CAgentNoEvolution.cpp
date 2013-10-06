@@ -4,8 +4,8 @@
 
 //---------------------------------------------------------------
 
-class CAgent *CAgentNoEvolution::evolution(class CCollectionEventsSystem *allEvents)
+class CAgent *CAgentNoEvolution::evolution(class CCollectionEventsSystem *allEvents, class CArrayRef<CAgent> **sons)
 {
+    setSons(sons);
     return this;
 }
-

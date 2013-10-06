@@ -9,8 +9,9 @@
 
 //-----------------------------------------------------------------------
 
-class CAgent *CAgentGeneratorEvent::evolution(class CCollectionEventsSystem *allEvents)
+class CAgent *CAgentGeneratorEvent::evolution(class CCollectionEventsSystem *allEvents, class CArrayRef<CAgent> **nextGenerationSons)
 {
+    setSons(nextGenerationSons);
     return this;
 }
 

@@ -16,7 +16,7 @@ class CAgentGeneratorEvent: public CAgent
 
     private:
 
-        virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents);
+        virtual class CAgent *evolution(class CCollectionEventsSystem *allEvents, class CArrayRef<CAgent> **nextGenerationSons);
 
         virtual class CArray<IObjectDraw> *createRepresentation(class CTypeDescription *evtDescription,
                 class CArray<IObjectDraw> **childsOpt);

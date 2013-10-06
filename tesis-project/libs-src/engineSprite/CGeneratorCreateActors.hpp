@@ -16,7 +16,6 @@ class CGeneratorCreateActors: public CAgentGeneratorEvent
 	private:
 
         virtual void beginEvolution(class CCollectionEventsSystem *events);
-        virtual void endEvolution(class CCollectionEventsSystem *events) {;}
 
 		struct prv_dataPrivateGeneratorCreateActors_t *m_dataPrivate;
 };

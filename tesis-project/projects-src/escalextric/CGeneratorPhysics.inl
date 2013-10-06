@@ -13,7 +13,6 @@ class CGeneratorKinematicAndForces: public CAgentGeneratorEvent
         CGeneratorKinematicAndForces(class CWorldEscalextric *worldEscalextric);
 
         virtual void beginEvolution(class CCollectionEventsSystem *allEvents);
-        virtual void endEvolution(class CCollectionEventsSystem *allEvents) {;}
 
     private:
 

@@ -90,6 +90,16 @@ void CAgent::appendChildren(class CArrayRef<CAgent> **sons)
     *sons = NULL;
 }
 
+//---------------------------------------------------------------
+
+void CAgent::setSons(class CArrayRef<CAgent> **sons)
+{
+    prv_integrityAgent(m_dataPrivate);
+    DELETE_OBJECT(&m_dataPrivate->sons, class CArrayRef<CAgent>);
+    m_dataPrivate->sons = ASSIGN_PP_NO_NULL(sons, class CArrayRef<CAgent>);
+}
+
+
 //-----------------------------------------------------------------------
 
 static void prv_destroyAgentOldNotUsed(class CArrayRef<CAgent> *agentsNotRepeatedNew,
@@ -179,7 +189,7 @@ void CAgent::destroyAllAgentsNotRepeated(class CArrayRef<CAgent> **agents)
 
 //-----------------------------------------------------------------------
 
-void CAgent::destroyOldObjects(class CArrayRef<CAgent> *agents, class CArrayRef<CAgent> **oldAgents)
+void CAgent::prv_destroyOldObjects(class CArrayRef<CAgent> *agents, class CArrayRef<CAgent> **oldAgents)
 {
     class CArrayRef<CAgent> *oldSons, *newSons;
 
@@ -196,7 +206,9 @@ void CAgent::destroyOldObjects(class CArrayRef<CAgent> *agents, class CArrayRef<
 
 class CAgent *CAgent::prv_nextGenerationRecursive(unsigned long numRecursive, class CCollectionEventsSystem *allEvents)
 {
-    class CAgent *agentEvolved;
+    unsigned long num;
+    class CArrayRef<CAgent> *nextGenerationSons;
+    class CArrayRef<CAgent> *oldSons, *newSons;
 
     prv_integrityAgent(m_dataPrivate);
     assert(numRecursive < 1000);
@@ -204,67 +216,64 @@ class CAgent *CAgent::prv_nextGenerationRecursive(unsigned long numRecursive, cl
 
     beginEvolution(allEvents);
 
-    agentEvolved = evolution(allEvents);
+    num = m_dataPrivate->sons->size();
 
-    if (agentEvolved != NULL)
+    nextGenerationSons = new CArrayRef<CAgent>;
+
+    for (unsigned long i = 0; i < num; i++)
     {
-        unsigned long num;
+        class CAgent *son;
+        class CAgent *sonEvolved;
 
-        num = m_dataPrivate->sons->size();
+        son = m_dataPrivate->sons->get(i);
+        assert_no_null(son);
 
-        if (num > 0)
-        {
-            class CArrayRef<CAgent> *nextGenerationSons;
+        sonEvolved = son->prv_nextGenerationRecursive(numRecursive, allEvents);
 
-            nextGenerationSons = new CArrayRef<CAgent>;
-
-            for (unsigned long i = 0; i < num; i++)
-            {
-                class CAgent *son;
-                class CAgent *sonEvolved;
-
-                son = m_dataPrivate->sons->get(i);
-                assert_no_null(son);
-
-                sonEvolved = son->prv_nextGenerationRecursive(numRecursive, allEvents);
-
-                if (sonEvolved != NULL)
-                    nextGenerationSons->add(sonEvolved);
-            }
-
-            if (agentEvolved == this)
-            {
-                class CArrayRef<CAgent> *oldSons, *newSons;
-
-                oldSons = prv_allReferenceNotRepeated(m_dataPrivate->sons);
-                newSons = prv_allReferenceNotRepeated(nextGenerationSons);
-
-                prv_destroyAgentOldNotUsed(newSons, oldSons);
-
-                DELETE_OBJECT(&oldSons, class CArrayRef<CAgent>);
-                DELETE_OBJECT(&newSons, class CArrayRef<CAgent>);
-
-                DELETE_OBJECT(&agentEvolved->m_dataPrivate->sons, class CArrayRef<CAgent>);
-                m_dataPrivate->sons = nextGenerationSons;
-            }
-            else
-            {
-                agentEvolved->m_dataPrivate->sons->concatenate(nextGenerationSons);
-                DELETE_OBJECT(&nextGenerationSons, class CArrayRef<CAgent>);
-            }
-        }
+        if (sonEvolved != NULL)
+            nextGenerationSons->add(sonEvolved);
     }
 
-    endEvolution(allEvents);
+    oldSons = prv_allReferenceNotRepeated(m_dataPrivate->sons);
+    newSons = prv_allReferenceNotRepeated(nextGenerationSons);
 
-    return agentEvolved;
+    prv_destroyAgentOldNotUsed(newSons, oldSons);
+
+    DELETE_OBJECT(&oldSons, class CArrayRef<CAgent>);
+    DELETE_OBJECT(&newSons, class CArrayRef<CAgent>);
+
+    return evolution(allEvents, &nextGenerationSons);
 }
 
 //-----------------------------------------------------------------------
 
-class CAgent *CAgent::nextGeneration(class CCollectionEventsSystem *allEvents)
+void CAgent::nextGeneration(class CCollectionEventsSystem *allEvents, class CArrayRef<CAgent> **currentGeneration)
 {
-    return prv_nextGenerationRecursive(0, allEvents);
+    unsigned long numAgents;
+    class CArrayRef<CAgent> *nextGeneration;
+    class CArrayRef<CAgent> *currentGeneration_loc;
+
+    assert_no_null(currentGeneration);
+    assert_no_null(*currentGeneration);
+
+    currentGeneration_loc = *currentGeneration;
+
+    numAgents = currentGeneration_loc->size();
+    nextGeneration = new CArrayRef<CAgent>(numAgents);
+
+    for (unsigned long i = 0; i < numAgents; i++)
+    {
+        class CAgent *agent;
+        class CAgent *agentNextGeneration;
+
+        agent = currentGeneration_loc->get(i);
+        agentNextGeneration = agent->prv_nextGenerationRecursive(0, allEvents);
+        if (agentNextGeneration != NULL)
+            nextGeneration->set(i, agentNextGeneration);
+    }
+
+    prv_destroyOldObjects(nextGeneration, &currentGeneration_loc);
+    *currentGeneration = nextGeneration;
 }
 
 //-----------------------------------------------------------------------

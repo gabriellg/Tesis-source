@@ -82,7 +82,7 @@ CCar::~CCar()
 
 //---------------------------------------------------------------
 
-class CAgent *CCar::evolution(class CCollectionEventsSystem *allEvents)
+class CAgent *CCar::evolution(class CCollectionEventsSystem *allEvents, class CArrayRef<CAgent> **sons)
 {
     class CEventSystem *evtSystem;
 
@@ -107,6 +107,7 @@ class CAgent *CCar::evolution(class CCollectionEventsSystem *allEvents)
         m_dataPrivate->acceleration = 0.;
     }
 
+    setSons(sons);
     return this;
 }
 
