@@ -19,7 +19,7 @@ class CGeneratorKinematicAndForces: public CAgentGeneratorEvent
         struct SDataPrivateGeneratorKinematicAndForces *m_dataPrivate;
 };
 
-class CGeneratorAcceleration : public CGeneratorKey
+class CGeneratorAccelerationKey : public CGeneratorKey
 {
     protected:
 

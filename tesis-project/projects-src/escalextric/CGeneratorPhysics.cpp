@@ -56,7 +56,7 @@ static bool prv_isKeyUsed(unsigned int keyPressed)
 
 //-----------------------------------------------------------------------
 //
-void CGeneratorAcceleration::generateEventWithKey(const class CEventKey *evtKey, class CCollectionEventsSystem *events)
+void CGeneratorAccelerationKey::generateEventWithKey(const class CEventKey *evtKey, class CCollectionEventsSystem *events)
 {
     unsigned int keyPressed;
 

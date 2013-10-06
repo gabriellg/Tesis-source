@@ -13,15 +13,14 @@
 class CArray<IObjectDraw> *CCircuit::createRepresentation(class CTypeDescription *evtDescription,
         class CArray<IObjectDraw> **childsOpt)
 {
-    class CArray<IObjectDraw> *objectsDraw;
     class IObjectDraw *circuit;
 
-    assert(childsOpt == NULL);
+    assert_no_null(childsOpt);
+    assert_no_null(*childsOpt);
 
     circuit = new CFigure(CDisplayEscalextric::SYMBOL_CIRCUIT);
 
-    objectsDraw = new CArray<IObjectDraw>(1);
-    objectsDraw->set(0, circuit);
+    (*childsOpt)->insert(0, circuit);
 
-    return objectsDraw;
+    return *childsOpt;
 }

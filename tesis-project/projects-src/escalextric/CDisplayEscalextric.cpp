@@ -26,8 +26,6 @@
 #include "CGeneratorSolid.hpp"
 #include "CStackTransformation.hpp"
 
-#include "CDisplayEscalextric__car.iig"
-
 const char *CDisplayEscalextric::SYMBOL_CIRCUIT = "Circuit";
 const char *CDisplayEscalextric::SYMBOL_CAR = "Car";
 
@@ -53,7 +51,7 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplaySprite(
     circuitImg->size(&sizeXCircuit, &sizeYCircuit);
     descriptionCircuit = new CDescriptionSpriteOneImage(&circuitImg);
 
-    imageCar = cimg_load_local_png(car);
+    imageCar = new CImg("./imagesCircuit/car.png");
     descriptionCar = CDescriptionSpriteOneImage::createSpriteOneImageInCenter(&imageCar);
 
     originCartesian = true;
