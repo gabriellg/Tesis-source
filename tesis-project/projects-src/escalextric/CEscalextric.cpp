@@ -7,7 +7,7 @@
 #include "CDataCircuit.inl"
 #include "CCar.inl"
 #include "CCircuit.inl"
-#include "CGeneratorPhysics.inl"
+#include "CGeneratorAccelerationKey.inl"
 
 #include "asrtbas.h"
 #include "memory.h"

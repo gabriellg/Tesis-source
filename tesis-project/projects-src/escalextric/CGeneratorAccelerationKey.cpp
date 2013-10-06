@@ -3,7 +3,7 @@
  *  License: GNU Public License
  * ----------------------------------------------------------------------------*/
 
-#include "CGeneratorPhysics.inl"
+#include "CGeneratorAccelerationKey.inl"
 
 #include "CCar.inl"
 #include "CEventAcceleration.inl"
