@@ -17,7 +17,6 @@
 
 #include "opcmenu.hpp"
 #include "CImg.hpp"
-#include "CAplication__salir.iig"
 
 //---------------------------------------------------------
 
@@ -124,7 +123,7 @@ static struct menu_t *i_createMenuArchive(class CWorkspace *workspace, bool with
 	
 	rcpAction = rcpaccion_crea_sin_destruye_class(i_salirAplicacion, CWorkspace, workspace);
 
-	image = cimg_load_local_png(salir);
+	image = new CImg("./imagesWorkspace/salir.png");
 	option = opcmenu_crea_opcion_con_icono("Salir", &image, &rcpAction);
 
 	menu_append_opcion(menu, &option);

@@ -12,14 +12,6 @@
 #include "memory.h"
 #include "CImg.hpp"
 
-#include "CWorkspaceWorldVirtual__planoxy.iig"
-#include "CWorkspaceWorldVirtual__planoxz.iig"
-#include "CWorkspaceWorldVirtual__planozy.iig"
-#include "CWorkspaceWorldVirtual__planoiso.iig"
-#include "CWorkspaceWorldVirtual__play.iig"
-#include "CWorkspaceWorldVirtual__stop.iig"
-#include "CWorkspaceWorldVirtual__pausa.iig"
-
 //-----------------------------------------------------------------------
 
 CWorkspaceWorldVirtual::CWorkspaceWorldVirtual(class CDefineWorld **defineWorld)
@@ -59,19 +51,19 @@ static void i_appendMenuView(class CWorkspaceWorldVirtual *workSpace)
     
     rcpOption = new CRcpActionViewPlaneXY();
     
-    imageIcon = cimg_load_local_png(planoxy);
+    imageIcon = new CImg("./imagesWorkspace/planoxy.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
     
     rcpOption = new CRcpActionViewPlaneXZ();
-    imageIcon = cimg_load_local_png(planoxz);
+    imageIcon = new CImg("./imagesWorkspace/planoxz.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
     
     rcpOption = new CRcpActionViewPlaneZY();
-    imageIcon = cimg_load_local_png(planozy);
+    imageIcon = new CImg("./imagesWorkspace/planozy.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
 
     rcpOption = new CRcpActionViewPlaneIso();
-    imageIcon = cimg_load_local_png(planoiso);
+    imageIcon = new CImg("./imagesWorkspace/planoiso.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
     
     workSpace->appendSeparatorIntoLastMenu();
@@ -90,15 +82,15 @@ static void i_appendMenuAnimation(class CWorkspaceWorldVirtual *workSpace)
     workSpace->appendMenu("Animación");
 
     rcpOption = new CRcpActionRun();
-    imageIcon = cimg_load_local_png(play);
+    imageIcon = new CImg("./imagesWorkspace/play.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
     
     rcpOption = new CRcpActionPause();
-    imageIcon = cimg_load_local_png(pausa);
+    imageIcon = new CImg("./imagesWorkspace/pausa.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
     
     rcpOption = new CRcpActionStop();
-    imageIcon = cimg_load_local_png(stop);
+    imageIcon = new CImg("./imagesWorkspace/stop.png");
     workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
 } 
 
