@@ -610,7 +610,7 @@ class CImg *CImg::laplace(unsigned long apertureSize)
 //
 void CImg::drawImageOnImage(long x, long y, const class CImg *image)
 {
-    IplImage *cvSource, *cvDest;
+    IplImage *cvSource, *cvDest, *cvMaskAlpha;
 
     assert_no_null(m_dataPrivate);
     assert_no_null(image);
@@ -621,11 +621,22 @@ void CImg::drawImageOnImage(long x, long y, const class CImg *image)
 
     assert(cvSource->nChannels == cvDest->nChannels);
 
+    if (cvSource->nChannels == 4)
+    {
+        cvMaskAlpha = cvCreateImage(cvSize(cvSource->width, cvSource->height), 8, 1);
+        cvSplit(cvSource, NULL, NULL, NULL, cvMaskAlpha);
+    }
+    else
+        cvMaskAlpha = NULL;
+
     cvSetImageROI(cvDest, cvRect(x, y, cvSource->width, cvSource->height));
 
-	cvCopy(cvSource, cvDest, NULL);
+	cvCopy(cvSource, cvDest, cvMaskAlpha);
 
     cvResetImageROI(cvDest);
+
+    if (cvMaskAlpha != NULL)
+        cvReleaseImage(&cvMaskAlpha);
 }
 
 //-----------------------------------------------------------------------
