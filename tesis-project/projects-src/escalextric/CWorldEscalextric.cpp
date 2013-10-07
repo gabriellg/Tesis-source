@@ -129,6 +129,15 @@ CWorldEscalextric::~CWorldEscalextric()
 
 //-----------------------------------------------------------------------
 
+void CWorldEscalextric::resetCars(void)
+{
+    assert_no_null(m_dataPrivate);
+    DELETE_OBJECT(&m_dataPrivate->cars, class CArray<SPrvCar>);
+    m_dataPrivate->cars = new CArray<SPrvCar>;
+}
+
+//-----------------------------------------------------------------------
+
 void CWorldEscalextric::setWorld2d(void)
 {
     prv_integrity(m_dataPrivate);

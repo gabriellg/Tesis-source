@@ -18,9 +18,6 @@
 #include "CTypeDescrPhysics.hpp"
 #include "CArray.hpp"
 
-const char *CCar::LEFT = "left";
-const char *CCar::RIGHT = "right";
-
 struct prv_dataPrivateCar_t
 {
     char *idCar;
@@ -78,6 +75,14 @@ CCar::CCar(const char *idCar)
 CCar::~CCar()
 {
 	prv_destroy(&m_dataPrivate);
+}
+
+//---------------------------------------------------------------
+
+const char *CCar::getId() const
+{
+    prv_integrity(m_dataPrivate);
+    return m_dataPrivate->idCar;
 }
 
 //---------------------------------------------------------------

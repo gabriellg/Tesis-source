@@ -9,12 +9,11 @@ class CCar: public CAgent
 {
     public:
 
-        static const char *LEFT;
-        static const char *RIGHT;
-
         CCar(const char *idCar);
         virtual ~CCar();
         
+        const char *getId() const;
+
     private:
 
         virtual void beginEvolution(class CCollectionEventsSystem *allEvents) {;}

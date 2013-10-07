@@ -12,6 +12,8 @@ class CWorldEscalextric: public IWorld
         CWorldEscalextric(const class CDataCircuit *dataCircuit);
         virtual ~CWorldEscalextric();
 
+        void resetCars(void);
+
         void setWorld2d(void);
         void setWorld3d(void);
 

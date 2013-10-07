@@ -6,9 +6,18 @@
 #include "CAgentGeneratorEvent.hpp"
 #include "CGeneratorKey.hpp"
 
-class CGeneratorAccelerationKey : public CGeneratorKey
+class CGeneratorAccelerationKey: public CGeneratorKey
 {
-    protected:
+public:
 
-        virtual void generateEventWithKey(const class CEventKey *evtKey, class CCollectionEventsSystem *events);
+    CGeneratorAccelerationKey();
+    virtual ~CGeneratorAccelerationKey();
+
+    void appendCarKey(const char *id, unsigned int keyAccelerator, unsigned int keyDesacelerator);
+
+private:
+
+    virtual void generateEventWithKey(const class CEventKey *evtKey, class CCollectionEventsSystem *events);
+
+    struct SPrvGeneratorAccelerationKey *m_dataPrivate;
 };

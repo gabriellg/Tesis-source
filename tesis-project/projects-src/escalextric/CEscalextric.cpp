@@ -27,33 +27,31 @@ struct SPrvDataPrivateEscalextric
 
 //-----------------------------------------------------------------------
 
-static struct SPrvDataPrivateEscalextric *prv_createDataPrivateEscalextric(
-                            bool is3d,
-                            class CDataCircuit **dataCircuit,
-                            class CWorldEscalextric **worldEscalextric)
+static struct SPrvDataPrivateEscalextric *prv_createDataPrivateEscalextric(bool is3d, class CDataCircuit **dataCircuit,
+        class CWorldEscalextric **worldEscalextric)
 {
-	struct SPrvDataPrivateEscalextric *dataPrivate;
+    struct SPrvDataPrivateEscalextric *dataPrivate;
 
-	dataPrivate = MALLOC(struct SPrvDataPrivateEscalextric);
+    dataPrivate = MALLOC(struct SPrvDataPrivateEscalextric);
 
-	dataPrivate->is3d = is3d;
-	dataPrivate->dataCircuit = ASSIGN_PP_NO_NULL(dataCircuit, class CDataCircuit);
-	dataPrivate->worldEscalextric = ASSIGN_PP_NO_NULL(worldEscalextric, class CWorldEscalextric);
+    dataPrivate->is3d = is3d;
+    dataPrivate->dataCircuit = ASSIGN_PP_NO_NULL(dataCircuit, class CDataCircuit);
+    dataPrivate->worldEscalextric = ASSIGN_PP_NO_NULL(worldEscalextric, class CWorldEscalextric);
 
-	return dataPrivate;
+    return dataPrivate;
 }
 
 //-----------------------------------------------------------------------
 
 CEscalextric::CEscalextric(bool is3d, const char *fileNameXML)
 {
-	class CWorldEscalextric *worldEscalextric;
+    class CWorldEscalextric *worldEscalextric;
     class CDataCircuit *dataCircuit;
 
     dataCircuit = new CDataCircuit(fileNameXML);
 
-	worldEscalextric = new CWorldEscalextric(dataCircuit);
-	m_dataPrivate = prv_createDataPrivateEscalextric(is3d, &dataCircuit, &worldEscalextric);
+    worldEscalextric = new CWorldEscalextric(dataCircuit);
+    m_dataPrivate = prv_createDataPrivateEscalextric(is3d, &dataCircuit, &worldEscalextric);
 }
 
 //-----------------------------------------------------------------------
@@ -70,28 +68,46 @@ CEscalextric::~CEscalextric()
 
 //-----------------------------------------------------------------------
 
+static void prv_appendCarWithKey(const char *id, char keyAccelerator, char keyDesaccelerator,
+        bool isLeft,
+        class CWorldEscalextric *worldEscalextric, class CGeneratorAccelerationKey *generatorKey)
+{
+    class CCar *carKey;
+    class CAgent *agentCar;
+
+    agentCar = carKey = new CCar(id);
+
+    if (isLeft == true)
+        worldEscalextric->appendCarLaneLeft(id);
+    else
+        worldEscalextric->appendCarLaneRight(id);
+
+    generatorKey->appendCarKey(id, keyAccelerator, keyDesaccelerator);
+    generatorKey->appendChild(&agentCar);
+}
+
+//-----------------------------------------------------------------------
+
 void CEscalextric::appendElementsToScene(class CScene *scene)
 {
-	class CAgent *circuit;
-	class CAgent *carLeft, *carRight;
-	class CAgent *generatorAccelerationKey;
-	
-	assert_no_null(scene);
-	assert_no_null(m_dataPrivate);
+    class CAgent *circuit, *generatorAgent;
+    class CGeneratorAccelerationKey *generatorAccelerationKey;
 
-    m_dataPrivate->worldEscalextric->appendCarLaneLeft(CCar::LEFT);
-    m_dataPrivate->worldEscalextric->appendCarLaneRight(CCar::RIGHT);
+    assert_no_null(scene);
+    assert_no_null(m_dataPrivate);
 
-	generatorAccelerationKey = new CGeneratorAccelerationKey();
+    m_dataPrivate->worldEscalextric->resetCars();
+
+    generatorAccelerationKey = new CGeneratorAccelerationKey();
     circuit = new CCircuit(m_dataPrivate->worldEscalextric);
-    carLeft = new CCar(CCar::LEFT);
-    carRight = new CCar(CCar::RIGHT);
 
-    generatorAccelerationKey->appendChild(&carLeft);
-    generatorAccelerationKey->appendChild(&carRight);
-    circuit->appendChild(&generatorAccelerationKey);
+    prv_appendCarWithKey("A-Z", 'a', 'z', true, m_dataPrivate->worldEscalextric, generatorAccelerationKey);
+    prv_appendCarWithKey("J-M", 'j', 'm', false, m_dataPrivate->worldEscalextric, generatorAccelerationKey);
 
-	scene->appendAgent(&circuit);
+    generatorAgent = generatorAccelerationKey;
+    circuit->appendChild(&generatorAgent);
+
+    scene->appendAgent(&circuit);
 }
 
 //-----------------------------------------------------------------------
@@ -114,5 +130,5 @@ void CEscalextric::appendDisplays(class CGestorDisplays *displays)
 
 void CEscalextric::defineLayers(class IGraphics *graphics)
 {
-	//TODO: Esta función debería estar en CDisplay3D
+    //TODO: Esta función debería estar en CDisplay3D
 }
