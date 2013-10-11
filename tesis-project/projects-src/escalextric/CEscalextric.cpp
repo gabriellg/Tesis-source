@@ -16,6 +16,7 @@
 #include "CString.hpp"
 #include "CScene.hpp"
 #include "CFigure.hpp"
+#include "CAgentPrimitive.hpp"
 #include "CGestorDisplays.hpp"
 
 struct SPrvDataPrivateEscalextric
@@ -90,7 +91,7 @@ static void prv_appendCarWithKey(const char *id, char keyAccelerator, char keyDe
 
 void CEscalextric::appendElementsToScene(class CScene *scene)
 {
-    class CAgent *circuit, *generatorAgent;
+    class CAgent *circuit, *generatorAgent, *agentSky;
     class CGeneratorAccelerationKey *generatorAccelerationKey;
 
     assert_no_null(scene);
@@ -107,6 +108,9 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
     generatorAgent = generatorAccelerationKey;
     circuit->appendChild(&generatorAgent);
 
+    agentSky = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_SKY);
+
+    scene->appendAgent(&agentSky);
     scene->appendAgent(&circuit);
 }
 

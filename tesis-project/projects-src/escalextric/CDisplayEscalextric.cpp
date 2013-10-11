@@ -24,10 +24,12 @@
 #include "CMaterial.hpp"
 #include "CMesh.hpp"
 #include "CGeneratorSolid.hpp"
+#include "CGeneratorModel.hpp"
 #include "CStackTransformation.hpp"
 
 const char *CDisplayEscalextric::SYMBOL_CIRCUIT = "Circuit";
 const char *CDisplayEscalextric::SYMBOL_CAR = "Car";
+const char *CDisplayEscalextric::SYMBOL_SKY = "Sky";
 
 //-----------------------------------------------------------------------
 //
@@ -122,6 +124,46 @@ static struct CModel3d *prv_createModelCar(void)
 }
 
 //-----------------------------------------------------------------------
+
+static class CModel3d *prv_createModel(const char *nameMaterial, class CMaterial **material, class CMesh **mesh)
+{
+    class CModel3d *model;
+
+    assert_no_null(mesh);
+
+    model = new CModel3d;
+
+    model->appendMaterial(material);
+    model->appendMesh(nameMaterial, *mesh);
+
+    delete *mesh;
+    *mesh = NULL;
+
+    return model;
+}
+
+//-----------------------------------------------------------------------
+//
+static struct CModel3d *prv_createModelSky(void)
+{
+    const char *PRV_MATERIAL_SKY = "Sky";
+    class CModel3d *model;
+    class CMaterial *material;
+    class CMesh *meshSky;
+    class CImg *imageSky;
+
+    meshSky = CGeneratorModel::createSky(300., 0.01, 10);
+    meshSky->calculateCoordsTexturesXY(CMesh::TEXTURE_DECAL);
+
+    imageSky = new CImg("./imagesCircuit/sky.png");
+    material = new CMaterial(PRV_MATERIAL_SKY, 0.3, 0.3, 0.3, 1., &imageSky);
+
+    model = prv_createModel(PRV_MATERIAL_SKY, &material, &meshSky);
+
+    return model;
+}
+
+//-----------------------------------------------------------------------
 //
 class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
                             const class CDataCircuit *dataCircuit,
@@ -130,8 +172,8 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
     class CDisplay3D *display3d;
     class CLight *light;
     class CPositionCamera *positionCamera;
-    class IDescription *descriptionCircuit, *descriptionCar;
-    class CModel3d *modelCircuit, *modelCar;
+    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky;
+    class CModel3d *modelCircuit, *modelCar, *modelSky;
 
     assert_no_null(dataCircuit);
     assert_no_null(worldEscalextric);
@@ -147,10 +189,14 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
     modelCar = prv_createModelCar();
     descriptionCar = new CDescriptionModel3d(&modelCar);
 
+    modelSky = prv_createModelSky();
+    descriptionSky = new CDescriptionModel3d(&modelSky);
+
     display3d = new CDisplay3D(worldEscalextric, &light, &positionCamera);
 
     display3d->appendDescription(SYMBOL_CIRCUIT, &descriptionCircuit);
     display3d->appendDescription(SYMBOL_CAR, &descriptionCar);
+    display3d->appendDescription(SYMBOL_SKY, &descriptionSky);
 
     return display3d;
 }
