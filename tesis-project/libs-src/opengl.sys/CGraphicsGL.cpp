@@ -318,7 +318,6 @@ void CGraphicsGL::initDevice(void)
     glEnable(GL_DEPTH);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glEnable(GL_CCW);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDepthFunc(GL_LESS);
@@ -332,10 +331,13 @@ void CGraphicsGL::initDevice(void)
 
 void CGraphicsGL::clear(void)
 {
+    GLfloat values[4] = {0.25f, 0.25f, 0.25f, 1.F};
+
     assert_no_null(m_dataPrivate);
 
     m_dataPrivate->isCameraPositioned = false;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMaterialfv(GL_FRONT, GL_AMBIENT, values);
 }
 
 //---------------------------------------------------------------
@@ -1184,8 +1186,8 @@ static void prv_drawElements(GLenum typePrimitive, const class CArray<CArrayULon
     for (unsigned long i = 0; i < num; i++)
     {
         const class CArrayULong *indexs;
-        unsigned long numIndexs;
-        unsigned long *arrayIndexs;
+        unsigned int numIndexs;
+        unsigned int *arrayIndexs;
 
         indexs = indexsPrimitives->get(i);
         assert_no_null(indexs);
@@ -1195,8 +1197,55 @@ static void prv_drawElements(GLenum typePrimitive, const class CArray<CArrayULon
 
         glDrawElements(typePrimitive, numIndexs, GL_UNSIGNED_INT, arrayIndexs);
 
-        FREE_T(&arrayIndexs, unsigned long);
+        FREE_T(&arrayIndexs, unsigned int);
     }
+}
+
+//---------------------------------------------------------------
+
+static void prv_drawNormalsDebug(
+                        const class CArrPoint3d *points,
+                        const class CArrPoint3d *normals)
+{
+    unsigned long numVertexs;
+    static double PRV_DISTANCE_NORMAL = 0.5;
+
+    numVertexs = points->size();
+    assert(numVertexs == normals->size());
+
+    glPushAttrib(GL_LINE_BIT | GL_ENABLE_BIT);
+    glDisable(GL_TEXTURE_2D);
+    glLineWidth(5.);
+
+    glBegin(GL_LINES);
+
+    for (unsigned long i = 0; i < numVertexs; i++)
+    {
+        double xorg, yorg, zorg, x1, y1, z1, x2, y2, z2;
+        double Nx, Ny, Nz;
+
+        points->get(i, &xorg, &yorg, &zorg);
+        normals->get(i, &Nx, &Ny, &Nz);
+
+        x1 = xorg - PRV_DISTANCE_NORMAL * Nx;
+        y1 = yorg - PRV_DISTANCE_NORMAL * Ny;
+        z1 = zorg - PRV_DISTANCE_NORMAL * Nz;
+
+        x2 = xorg + PRV_DISTANCE_NORMAL * Nx;
+        y2 = yorg + PRV_DISTANCE_NORMAL * Ny;
+        z2 = zorg + PRV_DISTANCE_NORMAL * Nz;
+
+        glColor4f(1.f, 0, 0, 1.);
+        glVertex3d(xorg, yorg, zorg);
+        glVertex3d(x1, y1, z1);
+        glColor4f(0, 1.f, 0, 1.);
+        glVertex3d(xorg, yorg, zorg);
+        glVertex3d(x2, y2, z2);
+    }
+
+    glEnd();
+
+    glPopAttrib();
 }
 
 //---------------------------------------------------------------
@@ -1211,6 +1260,7 @@ void CGraphicsGL::drawMesh(
 {
     unsigned long numVertexs, numIndexTriangles;
     float *arrayVertexs, *arrayNormals, *arrayTextCoord;
+    static bool debug = false;
 
     assert_no_null(m_dataPrivate);
 
@@ -1243,11 +1293,11 @@ void CGraphicsGL::drawMesh(
     numIndexTriangles = indexTriangles->size();
     if (numIndexTriangles > 0)
     {
-        unsigned long *arrayIndexTriangles;
+        unsigned int *arrayIndexTriangles;
 
         arrayIndexTriangles = indexTriangles->getArrayC();
         glDrawElements(GL_TRIANGLES, numIndexTriangles, GL_UNSIGNED_INT, arrayIndexTriangles);
-        FREE_T(&arrayIndexTriangles, unsigned long);
+        FREE_T(&arrayIndexTriangles, unsigned int);
     }
 
     prv_drawElements(GL_TRIANGLE_FAN, indexTriangleFan);
@@ -1264,6 +1314,10 @@ void CGraphicsGL::drawMesh(
 
     if (textCoord_opt != NULL)
         FREE_T(&arrayTextCoord, float);
+
+    if (debug == true)
+        prv_drawNormalsDebug(points, normals);
+
 }
 
 //-----------------------------------------------------------------------
