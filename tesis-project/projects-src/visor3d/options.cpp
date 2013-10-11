@@ -8,6 +8,7 @@
 #include "asrtbas.h"
 #include "memory.h"
 
+#include "CMath.hpp"
 #include "CMaterial.hpp"
 #include "CMesh.hpp"
 #include "CMatrix4x4.hpp"
@@ -136,10 +137,11 @@ class CModel3d *COptionCreateGrid3d::createModel(void)
     class CArrPoint3d *circle0, *circle1;
     class CArray<CArrPoint3d> *controlPoints;
 
-    circle = CPolylines::createCircle(2., 32);
+    circle = CPolylines::createCircle(2., 32, true);
 
     circle0 = CPolylines::createPolyline2dTo3d(circle, 0.);
     circle1 = CPolylines::createPolyline2dTo3d(circle, 5.);
+
     controlPoints = new CArray<CArrPoint3d>(2);
 
     controlPoints->set(0, circle0);
@@ -152,6 +154,27 @@ class CModel3d *COptionCreateGrid3d::createModel(void)
 
     delete controlPoints;
     delete circle;
+
+    return model;
+}
+
+//-----------------------------------------------------------------------
+
+class CModel3d *COptionCreateSky::createModel(void)
+{
+    const char *PRV_MATERIAL_SKY = "Sky";
+    class CModel3d *model;
+    class CMaterial *material;
+    class CMesh *meshSky;
+    class CImg *imageSky;
+
+    meshSky = CGeneratorModel::createSky(5., 0.01, 10);
+    meshSky->calculateCoordsTexturesXY(CMesh::TEXTURE_DECAL);
+
+    imageSky = new CImg("./imagesCircuit/sky.png");
+    material = new CMaterial(PRV_MATERIAL_SKY, 0.3, 0.3, 0.3, 1., &imageSky);
+
+    model = prv_createModel(PRV_MATERIAL_SKY, &material, &meshSky);
 
     return model;
 }

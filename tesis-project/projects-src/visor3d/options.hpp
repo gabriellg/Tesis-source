@@ -45,6 +45,17 @@ class COptionCreateGrid3d : public COptionCreateModel3d
         virtual class CModel3d *createModel(void);
 };
 
+class COptionCreateSky : public COptionCreateModel3d
+{
+    public:
+
+        COptionCreateSky(class CModel3d **modelApplication) : COptionCreateModel3d(modelApplication) {;}
+
+    protected:
+
+        virtual class CModel3d *createModel(void);
+};
+
 class COptionCreatePathOpen : public COptionCreateModel3d
 {
     public:

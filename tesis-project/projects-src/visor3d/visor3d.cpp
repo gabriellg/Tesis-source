@@ -70,6 +70,9 @@ CApplicationVisor::CApplicationVisor(const char *nameFile) : CApplicationScreen(
 
     option = new COptionCreateWithImage(&m_model);
     appendOption("Model With Image", 'I', &option);
+
+    option = new COptionCreateSky(&m_model);
+    appendOption("Sky", 'k', &option);
 }
 
 //---------------------------------------------------------------
