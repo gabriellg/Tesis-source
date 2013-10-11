@@ -44,5 +44,5 @@ class CArrayULong : private PrvBaseArray
         unsigned long get(unsigned long ind) const;
         unsigned long getLast(void) const;
 
-        unsigned long *getArrayC(void) const;
+        unsigned int *getArrayC(void) const;
 };

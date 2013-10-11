@@ -21,6 +21,7 @@ class PrvBaseArray
         ~PrvBaseArray();
 
         class PrvBaseArray *invert(CArray_FPtr_copyElement funcCopy) const;
+        void invertInSelf();
 
         void clear();
         unsigned long size() const;

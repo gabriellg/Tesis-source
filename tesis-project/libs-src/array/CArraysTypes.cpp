@@ -305,16 +305,16 @@ unsigned long CArrayULong::getLast(void) const
 
 //------------------------------------------------------------------------------
 
-unsigned long *CArrayULong::getArrayC(void) const
+unsigned int *CArrayULong::getArrayC(void) const
 {
-    unsigned long *array_c;
+    unsigned int *array_c;
     unsigned long numElems;
 
     numElems = PrvBaseArray::size();
 
     if (numElems > 0)
     {
-        array_c = CALLOC(numElems, unsigned long);
+        array_c = CALLOC(numElems, unsigned int);
 
         for (unsigned long i = 0; i < numElems; i++)
         {

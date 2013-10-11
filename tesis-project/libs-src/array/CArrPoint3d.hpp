@@ -11,6 +11,7 @@ class CArrPoint3d : private PrvBaseArray
         CArrPoint3d(unsigned long numPoints, double x, double y, double z);
         CArrPoint3d(const class CArrPoint3d *array);
 
+        void invertInSelf(void);
         class CArrPoint3d *invert(void) const;
 
         unsigned long size(void) const;

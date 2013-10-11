@@ -128,6 +128,13 @@ CArrPoint3d::CArrPoint3d(const class CArrPoint3d *array) : PrvBaseArray(array, (
 
 //-----------------------------------------------------------------------
 
+void CArrPoint3d::invertInSelf(void)
+{
+    PrvBaseArray::invertInSelf();
+}
+
+//-----------------------------------------------------------------------
+
 class CArrPoint3d *CArrPoint3d::invert(void) const
 {
     return (class CArrPoint3d *)PrvBaseArray::invert((CArray_FPtr_copyElement)prv_copyPoint3d);

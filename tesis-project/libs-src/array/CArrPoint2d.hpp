@@ -11,6 +11,7 @@ class CArrPoint2d: private PrvBaseArray
         CArrPoint2d(const class CArrPoint2d *points);
 
         class CArrPoint2d *invert(void) const;
+        void invertInSelf();
 
         unsigned long size(void) const;
 

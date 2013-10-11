@@ -118,6 +118,13 @@ class CArrPoint2d *CArrPoint2d::invert(void) const
 
 //-----------------------------------------------------------------------
 
+void CArrPoint2d::invertInSelf()
+{
+    PrvBaseArray::invertInSelf();
+}
+
+//-----------------------------------------------------------------------
+
 unsigned long CArrPoint2d::size(void) const
 {
     return PrvBaseArray::size();

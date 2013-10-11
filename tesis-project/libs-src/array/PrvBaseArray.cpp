@@ -141,12 +141,11 @@ PrvBaseArray::PrvBaseArray(struct prv_privateArray_t **data)
 
 //------------------------------------------------------------------------------
 //
-class PrvBaseArray *PrvBaseArray::invert(CArray_FPtr_copyElement funcCopy) const
+static void prv_invertArray(struct prv_privateArray_t *dataInverted)
 {
-    struct prv_privateArray_t *dataInverted;
     unsigned long halfNumArray;
 
-    dataInverted = prv_copy(m_data, funcCopy);
+    assert_no_null(dataInverted);
 
     halfNumArray = dataInverted->numElements / 2;
 
@@ -161,8 +160,26 @@ class PrvBaseArray *PrvBaseArray::invert(CArray_FPtr_copyElement funcCopy) const
         dataInverted->array[i] = dataInverted->array[indHalfLast];
         dataInverted->array[indHalfLast] = swapTemp;
     }
+}
+
+//------------------------------------------------------------------------------
+//
+class PrvBaseArray *PrvBaseArray::invert(CArray_FPtr_copyElement funcCopy) const
+{
+    struct prv_privateArray_t *dataInverted;
+
+    dataInverted = prv_copy(m_data, funcCopy);
+
+    prv_invertArray(dataInverted);
 
     return new PrvBaseArray(&dataInverted);
+}
+
+//------------------------------------------------------------------------------
+//
+void PrvBaseArray::invertInSelf()
+{
+    prv_invertArray(m_data);
 }
 
 //------------------------------------------------------------------------------
