@@ -9,7 +9,7 @@ class CPolylines
 
         //Creations.
         static class CArrPoint2d *createArcEllipse(double rx, double ry, double angleIni, double angleFin, unsigned long numPoints);
-        static class CArrPoint2d *createCircle(double radius, unsigned long numPoints);
+        static class CArrPoint2d *createCircle(double radius, unsigned long numPoints, bool counterclockwise);
         static class CArrPoint2d *createRectangleCentredInOrigin(double width, double height);
         static class CArrPoint2d *createPoligonRegular(double radius, unsigned long numEdges);
 

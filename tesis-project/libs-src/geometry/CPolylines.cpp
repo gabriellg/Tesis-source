@@ -36,12 +36,12 @@ static class CArrPoint2d *prv_createArcEllipse(
     double x, y;
 
     assert(numPoints > 1);
-    polyline = new CArrPoint2d(numPoints);
+    polyline = new CArrPoint2d(numPoints + 1);
 
     dangle = (angleEnd - angleIni) / numPoints;
     angle = angleIni;
 
-    for (unsigned long i = 0; i < numPoints - 1; i++)
+    for (unsigned long i = 0; i < numPoints; i++)
     {
         prv_pointElipse(rx, ry, angle, &x, &y);
         polyline->set(i, x, y);
@@ -50,20 +50,28 @@ static class CArrPoint2d *prv_createArcEllipse(
     }
 
     prv_pointElipse(rx, ry, angleEnd, &x, &y);
-    polyline->set(numPoints - 1, x, y);
+    polyline->set(numPoints, x, y);
 
     return polyline;
 }
 
 //------------------------------------------------------------------------------
 
-class CArrPoint2d *CPolylines::createCircle(double radius, unsigned long numPoints)
+class CArrPoint2d *CPolylines::createCircle(double radius, unsigned long numPoints, bool counterclockwise)
 {
     class CArrPoint2d *polyline;
     double angleIni, angleEnd;
 
-    angleIni = 0.;
-    angleEnd = 2. * CMath::PI;
+    if (counterclockwise == true)
+    {
+        angleIni = 0.;
+        angleEnd = 2. * CMath::PI;
+    }
+    else
+    {
+        angleIni = 2. * CMath::PI;
+        angleEnd = 0.;
+    }
 
     polyline = prv_createArcEllipse(radius, radius, angleIni, angleEnd, numPoints);
     assert(polyline->isClosed(PRV_PRECISION) == true);
