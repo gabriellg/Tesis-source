@@ -17,11 +17,11 @@ static GLenum prv_getFormatPixel(unsigned long nChannels)
     GLenum formatPixel;
 
     if (nChannels == 4)
-        formatPixel = GL_RGBA;
+        formatPixel = GL_BGRA;
     else
     {
         assert(nChannels == 3);
-        formatPixel = GL_RGB;
+        formatPixel = GL_BGR;
     }
 
     return formatPixel;
@@ -50,7 +50,7 @@ unsigned long CTextureGL::createTexture(const class CImg *image)
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 
     formatPixel = prv_getFormatPixel(nChannels);
-    glTexImage2D(GL_TEXTURE_2D, 0, formatPixel, width, height, 0, formatPixel, GL_UNSIGNED_BYTE, dataImage);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, formatPixel, GL_UNSIGNED_BYTE, dataImage);
 
     return idTexture;
 }
