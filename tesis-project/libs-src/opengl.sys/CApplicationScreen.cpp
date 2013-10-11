@@ -329,17 +329,12 @@ void CApplicationScreen::executeIdOption(unsigned long idOption)
 class CLight *CApplicationScreen::createLight0(void)
 {
     class CColor *colorAmbient, *colorDiffuse, *colorSpecular;
-    double xPosLight, yPosLight, zPosLight;
-
-    xPosLight = 7.;
-    yPosLight = 7.;
-    zPosLight = 15.;
 
     colorAmbient = new CColor(0.4, 0.4, 0.4);
     colorDiffuse = new CColor(0.7, 0.7, 0.7);
     colorSpecular = new CColor(0.8, 0.6, 0.6);
 
-    return new CLight(&colorAmbient, &colorDiffuse, &colorSpecular, xPosLight, yPosLight, zPosLight);
+    return new CLight(&colorAmbient, &colorDiffuse, &colorSpecular);
 }
 
 //---------------------------------------------------------------
