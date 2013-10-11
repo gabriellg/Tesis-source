@@ -6,6 +6,7 @@
 #include "CGeneratorModel.hpp"
 
 #include "asrtbas.h"
+#include "memory.h"
 
 #include "CMesh.hpp"
 #include "CGeometry.hpp"
@@ -14,6 +15,7 @@
 #include "CArrayRef.hpp"
 #include "CArraysTypes.hpp"
 #include "CArrPoint3d.hpp"
+#include "CArrPoint2d.hpp"
 #include "CTesselator.hpp"
 #include "CPolylines.hpp"
 #include "CImg.hpp"
@@ -288,6 +290,62 @@ class CMesh *CGeneratorModel::createWithGrid3d(const class CArrayRef<CArrPoint3d
     mesh->appendMultipleTriangleStripBands(&points, &normals, &indexsVertexsTrianglesStrips);
 
     return mesh;
+}
+
+//-----------------------------------------------------------------------
+
+static class CMesh *prv_createDomeOrSky(double height, double holeDome, unsigned long numIterations, bool isDome)
+{
+    class CMesh *mesh;
+    class CArray<CArrPoint3d> *controlPoints;
+    double radius;
+
+    radius = height * height + holeDome;
+    controlPoints = new CArray<CArrPoint3d>(numIterations);
+
+    for (unsigned long t = 0; t < numIterations; t++)
+    {
+        class CArrPoint2d *circle;
+        class CArrPoint3d *circle3d;
+        double dr, dh, dt;
+
+        dt = (double)t / (double)(numIterations - 1);
+
+        dh = dt * height;
+        dr = CMath::sqrt(radius - dh * dh);
+
+        circle = CPolylines::createCircle(dr, 8, isDome);
+        circle3d = CPolylines::createPolyline2dTo3d(circle, dh);
+        controlPoints->set(t, circle3d);
+
+        DELETE_OBJECT(&circle, class CArrPoint2d);
+    }
+
+    mesh = CGeneratorModel::createWithGrid3d((const class CArrayRef<CArrPoint3d> *)controlPoints);
+
+    DELETE_OBJECT(&controlPoints, class CArray<CArrPoint3d>);
+
+    return mesh;
+}
+
+// ----------------------------------------------------------------------------
+
+class CMesh *CGeneratorModel::createDome(double height, double holeDome, unsigned long numIterations)
+{
+    bool isDome;
+
+    isDome = true;
+    return prv_createDomeOrSky(height, holeDome, numIterations, isDome);
+}
+
+// ----------------------------------------------------------------------------
+
+class CMesh *CGeneratorModel::createSky(double height, double holeDome, unsigned long numIterations)
+{
+    bool isDome;
+
+    isDome = false;
+    return prv_createDomeOrSky(height, holeDome, numIterations, isDome);
 }
 
 // ----------------------------------------------------------------------------
