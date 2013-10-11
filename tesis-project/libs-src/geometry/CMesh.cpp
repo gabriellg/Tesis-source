@@ -835,6 +835,47 @@ void CMesh::calculateCoordsTexturesInPlane(enum CMesh::ETypeTexture typeTexture)
     m_dataPrivate->typeTexture = PRV_TEXTURE;
 }
 
+// ---------------------------------------------------------------------------
+
+void CMesh::calculateCoordsTexturesXY(enum CMesh::ETypeTexture typeTexture)
+{
+    unsigned long i, numPoints;
+
+    prv_integrity(m_dataPrivate);
+
+    numPoints = m_dataPrivate->vertexs->size();
+
+    for (i = 0; i < numPoints; i++)
+    {
+        struct SPrvVertex *vertex;
+        double xTexture, yTexture;
+        double Ux, Uy, Uz, Vx, Vy, Vz;
+
+        vertex = m_dataPrivate->vertexs->get(i);
+        assert_no_null(vertex);
+
+        vertex->texx = (float)vertex->x;
+        vertex->texy = (float)vertex->y;
+    }
+
+    switch(typeTexture)
+    {
+        case TEXTURE_REPEAT:
+
+            break;
+
+        case TEXTURE_DECAL:
+
+            prv_normalizeCoordTexture(m_dataPrivate->vertexs);
+            break;
+
+        default_error();
+    }
+
+    m_dataPrivate->typeTexture = PRV_TEXTURE;
+}
+
+
 //-----------------------------------------------------------------------
 
 static class CArrPoint2d *prv_createTexture(enum EPrvTypeTexture typeTexture, unsigned long numVertexs)

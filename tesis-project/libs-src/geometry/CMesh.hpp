@@ -85,6 +85,7 @@ class CMesh
         void applyMatrix(class CMatrix4x4 *matrixTransformation);
 
         void calculateCoordsTexturesInPlane(enum CMesh::ETypeTexture typeTexture);
+        void calculateCoordsTexturesXY(enum CMesh::ETypeTexture typeTexture);
 
         void draw(class IGraphics *graphics) const;
 
