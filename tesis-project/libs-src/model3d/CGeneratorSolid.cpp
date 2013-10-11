@@ -315,8 +315,8 @@ class CMesh *CGeneratorSolid::createCylinder(
     class CArrPoint3d *circleCapEnd, *normalsEndCap;
     class CArrayULong *indexsTriangleFanCircleEnd;
 
-    circle2dIni = CPolylines::createCircle(radiusInf, numPointsCilinder);
-    circle2dEnd = CPolylines::createCircle(radiusSup, numPointsCilinder);
+    circle2dIni = CPolylines::createCircle(radiusInf, numPointsCilinder, true);
+    circle2dEnd = CPolylines::createCircle(radiusSup, numPointsCilinder, true);
 
     stackTransformation = new CStackTransformation();
 
