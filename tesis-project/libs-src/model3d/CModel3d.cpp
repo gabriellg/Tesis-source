@@ -31,6 +31,8 @@ struct SPrvBody
 
 struct SDataPrivateModel3d
 {
+    bool isInLimits;
+
     class CArray<CMaterial> *materials;
     class CArray<SPrvBody> *bodies;
 };
@@ -102,12 +104,15 @@ static void prv_integrity(const struct SDataPrivateModel3d *dataPrivate)
 //-----------------------------------------------------------------------
 
 static struct SDataPrivateModel3d *prv_createModel3d(
+                        bool isInLimits,
                         class CArray<CMaterial> **materials,
                         class CArray<SPrvBody> **bodies)
 {
     struct SDataPrivateModel3d *dataPrivate;
 
     dataPrivate = MALLOC(struct SDataPrivateModel3d);
+
+    dataPrivate->isInLimits = isInLimits;
 
     dataPrivate->materials = ASSIGN_PP_NO_NULL(materials, class CArray<CMaterial>);
     dataPrivate->bodies = ASSIGN_PP_NO_NULL(bodies, class CArray<SPrvBody>);
@@ -136,10 +141,12 @@ CModel3d::CModel3d(void)
 {
     class CArray<CMaterial> *materials;
     class CArray<SPrvBody> *bodies;
+    bool isInLimits;
 
+    isInLimits = true;
     materials = new CArray<CMaterial>;
     bodies = new CArray<SPrvBody>;
-    m_dataPrivate = prv_createModel3d(&materials, &bodies);
+    m_dataPrivate = prv_createModel3d(isInLimits, &materials, &bodies);
 }
 
 //-----------------------------------------------------------------------
@@ -196,6 +203,14 @@ static struct SPrvBody *prv_appendBodyWithMaterialIfNotExist(class CArray<SPrvBo
     }
 
     return body;
+}
+
+//-----------------------------------------------------------------------
+
+void CModel3d::setIsInLimits(bool inLimits)
+{
+    prv_integrity(m_dataPrivate);
+    m_dataPrivate->isInLimits = inLimits;
 }
 
 //-----------------------------------------------------------------------
@@ -430,7 +445,7 @@ static void prv_applyTransformationToBodies(
 
 //-----------------------------------------------------------------------
 
-void CModel3d::InsideCube(double dimensionX, double dimensionY, double dimensionZ)
+void CModel3d::insideCube(double dimensionX, double dimensionY, double dimensionZ)
 {
     class CStackTransformation *stackTransformation;
     double factor;
@@ -546,5 +561,20 @@ void CModel3d::drawIdBlock(class IGraphics *graphics) const
     if (graphics->hasManagerBlocks() == true)
         prv_drawIdBlocksBodies(m_dataPrivate->bodies, graphics);
     else
-        prv_drawBodies(m_dataPrivate->bodies, graphics);
+    {
+        bool isDrawable;
+
+        if (m_dataPrivate->isInLimits == true)
+            isDrawable = true;
+        else
+        {
+            if (dynamic_cast<class CGraphicsRect *>(graphics) != NULL)
+                isDrawable = false;
+            else
+                isDrawable = true;
+        }
+
+        if (isDrawable == true)
+            prv_drawBodies(m_dataPrivate->bodies, graphics);
+    }
 }

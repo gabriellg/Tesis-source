@@ -168,7 +168,7 @@ class CModel3d *COptionCreateSky::createModel(void)
     class CMesh *meshSky;
     class CImg *imageSky;
 
-    meshSky = CGeneratorModel::createSky(5., 0.01, 10);
+    meshSky = CGeneratorModel::createSky(64, 5., 0.01, 10);
     meshSky->calculateCoordsTexturesXY(CMesh::TEXTURE_DECAL);
 
     imageSky = new CImg("./imagesCircuit/sky.png");

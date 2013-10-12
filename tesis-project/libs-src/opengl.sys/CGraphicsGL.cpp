@@ -376,6 +376,7 @@ void CGraphicsGL::defineMaterial(const class CMaterial *material)
 void CGraphicsGL::setMaterial(const char *nameLayer)
 {
     struct PrvLayer *layer;
+    enum CMaterial::EPriorityZFighting zFighting;
 
     assert_no_null(m_dataPrivate);
 
@@ -394,6 +395,28 @@ void CGraphicsGL::setMaterial(const char *nameLayer)
         layer->material->getColorRGBA(&r, &g, &b, &a);
         CTextureGL::textureOff();
         glColor4f(r, g, b, a);
+    }
+
+    zFighting = layer->material->getPriorityZFighting();
+
+    switch(zFighting)
+    {
+        case CMaterial::LOW:
+
+            glEnable(GL_POLYGON_OFFSET_FILL);
+            glPolygonOffset(1., 1.);
+            break;
+
+        case CMaterial::MEDIUM:
+
+            glDisable(GL_POLYGON_OFFSET_FILL);
+            glPolygonOffset(0., 0.);
+            break;
+
+        case CMaterial::HIGH:
+            glEnable(GL_POLYGON_OFFSET_FILL);
+            glPolygonOffset(-1., -1.);
+        default_error();
     }
 }
 

@@ -8,8 +8,8 @@ class CGeneratorModel
     public:
 
         static class CMesh *createWithGrid3d(const class CArrayRef<CArrPoint3d> *controlPoints);
-        static class CMesh *createSky(double height, double holeDome, unsigned long numIterations);
-        static class CMesh *createDome(double height, double holeDome, unsigned long numIterations);
+        static class CMesh *createSky(unsigned long numPointsCircle, double height, double holeDome, unsigned long numIterations);
+        static class CMesh *createDome(unsigned long numPointsCircle, double height, double holeDome, unsigned long numIterations);
 
         static class CMesh *createWithPathOpenWithoutCaps(const class CArrayRef<CArrPoint3d> *polylinesInPathWithSamePoints);
         static class CMesh *createWithPathOpen(const class CArrayRef<CArrPoint3d> *polylinesInPathWithSamePoints);

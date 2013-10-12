@@ -10,6 +10,8 @@ class CModel3d
         CModel3d(void);
         virtual ~CModel3d();
 
+        void setIsInLimits(bool inLimits);
+
         void appendMaterial(class CMaterial **material);
 
         void appendMesh(const char *nameMaterial, const class CMesh *mesh);
@@ -37,7 +39,7 @@ class CModel3d
                         double Nx3, double Ny3, double Nz3,
                         double texx3, double texy3);
 
-        void InsideCube(double dimensionX, double dimensionY, double dimensionZ);
+        void insideCube(double dimensionX, double dimensionY, double dimensionZ);
 
         void applyTransformation(const class CStackTransformation *transformation);
 

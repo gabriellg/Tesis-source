@@ -848,8 +848,6 @@ void CMesh::calculateCoordsTexturesXY(enum CMesh::ETypeTexture typeTexture)
     for (i = 0; i < numPoints; i++)
     {
         struct SPrvVertex *vertex;
-        double xTexture, yTexture;
-        double Ux, Uy, Uz, Vx, Vy, Vz;
 
         vertex = m_dataPrivate->vertexs->get(i);
         assert_no_null(vertex);

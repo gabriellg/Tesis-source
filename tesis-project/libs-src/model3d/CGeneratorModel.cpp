@@ -294,7 +294,7 @@ class CMesh *CGeneratorModel::createWithGrid3d(const class CArrayRef<CArrPoint3d
 
 //-----------------------------------------------------------------------
 
-static class CMesh *prv_createDomeOrSky(double height, double holeDome, unsigned long numIterations, bool isDome)
+static class CMesh *prv_createDomeOrSky(unsigned long numPointsCircle, double height, double holeDome, unsigned long numIterations, bool isDome)
 {
     class CMesh *mesh;
     class CArray<CArrPoint3d> *controlPoints;
@@ -314,7 +314,7 @@ static class CMesh *prv_createDomeOrSky(double height, double holeDome, unsigned
         dh = dt * height;
         dr = CMath::sqrt(radius - dh * dh);
 
-        circle = CPolylines::createCircle(dr, 8, isDome);
+        circle = CPolylines::createCircle(dr, numPointsCircle, isDome);
         circle3d = CPolylines::createPolyline2dTo3d(circle, dh);
         controlPoints->set(t, circle3d);
 
@@ -330,22 +330,22 @@ static class CMesh *prv_createDomeOrSky(double height, double holeDome, unsigned
 
 // ----------------------------------------------------------------------------
 
-class CMesh *CGeneratorModel::createDome(double height, double holeDome, unsigned long numIterations)
+class CMesh *CGeneratorModel::createDome(unsigned long numPointsCircle, double height, double holeDome, unsigned long numIterations)
 {
     bool isDome;
 
     isDome = true;
-    return prv_createDomeOrSky(height, holeDome, numIterations, isDome);
+    return prv_createDomeOrSky(numPointsCircle, height, holeDome, numIterations, isDome);
 }
 
 // ----------------------------------------------------------------------------
 
-class CMesh *CGeneratorModel::createSky(double height, double holeDome, unsigned long numIterations)
+class CMesh *CGeneratorModel::createSky(unsigned long numPointsCircle, double height, double holeDome, unsigned long numIterations)
 {
     bool isDome;
 
     isDome = false;
-    return prv_createDomeOrSky(height, holeDome, numIterations, isDome);
+    return prv_createDomeOrSky(numPointsCircle, height, holeDome, numIterations, isDome);
 }
 
 // ----------------------------------------------------------------------------

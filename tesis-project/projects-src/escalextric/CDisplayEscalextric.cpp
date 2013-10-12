@@ -12,8 +12,10 @@
 
 #include "CDisplaySprite.hpp"
 #include "CImg.hpp"
+#include "CPolylines.hpp"
 #include "CDescriptionSpriteOneImage.hpp"
 #include "CReaderModel3d.hpp"
+#include "CArrPoint2d.hpp"
 
 #include "CDisplay3D.hpp"
 #include "CPositionCamera.hpp"
@@ -30,6 +32,7 @@
 const char *CDisplayEscalextric::SYMBOL_CIRCUIT = "Circuit";
 const char *CDisplayEscalextric::SYMBOL_CAR = "Car";
 const char *CDisplayEscalextric::SYMBOL_SKY = "Sky";
+const char *CDisplayEscalextric::SYMBOL_FLOOR = "Floor";
 
 //-----------------------------------------------------------------------
 //
@@ -118,7 +121,7 @@ static struct CModel3d *prv_createModelCar(void)
 
     modelCar = CReaderModel3d::readModel3d("./objetos3d/car.3ds");
 
-    modelCar->InsideCube(PRV_SIZE_CAR, PRV_SIZE_CAR, PRV_SIZE_CAR);
+    modelCar->insideCube(PRV_SIZE_CAR, PRV_SIZE_CAR, PRV_SIZE_CAR);
 
     return modelCar;
 }
@@ -152,13 +155,54 @@ static struct CModel3d *prv_createModelSky(void)
     class CMesh *meshSky;
     class CImg *imageSky;
 
-    meshSky = CGeneratorModel::createSky(300., 0.01, 10);
+    meshSky = CGeneratorModel::createSky(64, 300., 0.01, 10);
     meshSky->calculateCoordsTexturesXY(CMesh::TEXTURE_DECAL);
 
     imageSky = new CImg("./imagesCircuit/sky.png");
     material = new CMaterial(PRV_MATERIAL_SKY, 0.3, 0.3, 0.3, 1., &imageSky);
 
     model = prv_createModel(PRV_MATERIAL_SKY, &material, &meshSky);
+
+    model->setIsInLimits(false);
+
+    return model;
+}
+
+//-----------------------------------------------------------------------
+//
+static struct CModel3d *prv_createModelFloor(void)
+{
+    const char *PRV_MATERIAL_FLOOR = "Floor";
+    class CModel3d *model;
+    class CMaterial *material;
+    class CMesh *meshFloor;
+    class CImg *imageFloor;
+    class CArrPoint2d *rectangle;
+    double x1, y1, x2, y2, x3, y3, x4, y4;
+    double Nx, Ny, Nz;
+
+    rectangle = CPolylines::createRectangleCentredInOrigin(150., 150.);
+    rectangle->get(0, &x1, &y1);
+    rectangle->get(1, &x2, &y2);
+    rectangle->get(2, &x3, &y3);
+    rectangle->get(3, &x4, &y4);
+
+    Nx = 0.; Ny = 0.; Nz = 1.;
+
+    meshFloor = new CMesh();
+    meshFloor->appendQuad(
+                    x1, y1, 0., Nx, Ny, Nz,
+                    x2, y2, 0., Nx, Ny, Nz,
+                    x3, y3, 0., Nx, Ny, Nz,
+                    x4, y4, 0., Nx, Ny, Nz);
+
+    meshFloor->calculateCoordsTexturesXY(CMesh::TEXTURE_REPEAT);
+
+    imageFloor = new CImg("./imagesCircuit/grass.jpg");
+    material = new CMaterial(PRV_MATERIAL_FLOOR, 0.3, 0.3, 0.3, 1., &imageFloor);
+    material->setPriorityZFighting(CMaterial::LOW);
+    model = prv_createModel(PRV_MATERIAL_FLOOR, &material, &meshFloor);
+    model->setIsInLimits(false);
 
     return model;
 }
@@ -172,8 +216,8 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
     class CDisplay3D *display3d;
     class CLight *light;
     class CPositionCamera *positionCamera;
-    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky;
-    class CModel3d *modelCircuit, *modelCar, *modelSky;
+    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky, *descriptionFloor;
+    class CModel3d *modelCircuit, *modelCar, *modelSky, *modelFloor;
 
     assert_no_null(dataCircuit);
     assert_no_null(worldEscalextric);
@@ -192,11 +236,15 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
     modelSky = prv_createModelSky();
     descriptionSky = new CDescriptionModel3d(&modelSky);
 
+    modelFloor = prv_createModelFloor();
+    descriptionFloor = new CDescriptionModel3d(&modelFloor);
+
     display3d = new CDisplay3D(worldEscalextric, &light, &positionCamera);
 
     display3d->appendDescription(SYMBOL_CIRCUIT, &descriptionCircuit);
     display3d->appendDescription(SYMBOL_CAR, &descriptionCar);
     display3d->appendDescription(SYMBOL_SKY, &descriptionSky);
+    display3d->appendDescription(SYMBOL_FLOOR, &descriptionFloor);
 
     return display3d;
 }

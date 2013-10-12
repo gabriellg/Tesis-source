@@ -15,6 +15,8 @@ struct SDataPrivateMaterial_t
 {
     char *nameMaterial;
 
+    enum CMaterial::EPriorityZFighting zFighting;
+
     float r, b, g, a;
 
     bool withTexture;
@@ -25,6 +27,7 @@ struct SDataPrivateMaterial_t
 
 static struct SDataPrivateMaterial_t *prv_createMaterial(
                 const char *nombreMaterial,
+                enum CMaterial::EPriorityZFighting zFighting,
                 float r, float g, float b, float a,
                 bool withTexture,
                 class CImg **textureImage)
@@ -34,6 +37,9 @@ static struct SDataPrivateMaterial_t *prv_createMaterial(
     dataPrivate = MALLOC(struct SDataPrivateMaterial_t);
 
     dataPrivate->nameMaterial = CString::copy(nombreMaterial);
+
+    dataPrivate->zFighting = zFighting;
+
     dataPrivate->r = r;
     dataPrivate->g = g;
     dataPrivate->b = b;
@@ -72,7 +78,7 @@ CMaterial::CMaterial(const char *nameMaterial, float r, float g, float b, float 
 
     withTexture = false;
     textureImage = NULL;
-    m_dataPrivate = prv_createMaterial(nameMaterial, r, g, b, a, withTexture, &textureImage);
+    m_dataPrivate = prv_createMaterial(nameMaterial, CMaterial::MEDIUM, r, g, b, a, withTexture, &textureImage);
 }
 
 //-----------------------------------------------------------------------
@@ -82,7 +88,7 @@ CMaterial::CMaterial(const char *nameMaterial, float r, float g, float b, float 
     bool withTexture;
 
     withTexture = true;
-    m_dataPrivate = prv_createMaterial(nameMaterial, r, g, b, a, withTexture, textureImage);
+    m_dataPrivate = prv_createMaterial(nameMaterial, CMaterial::MEDIUM, r, g, b, a, withTexture, textureImage);
 }
 
 //-----------------------------------------------------------------------
@@ -100,6 +106,7 @@ CMaterial::CMaterial(const CMaterial *material)
 
     m_dataPrivate = prv_createMaterial(
                             material->m_dataPrivate->nameMaterial,
+                            material->m_dataPrivate->zFighting,
                             material->m_dataPrivate->r,
                             material->m_dataPrivate->g,
                             material->m_dataPrivate->b,
@@ -113,6 +120,22 @@ CMaterial::CMaterial(const CMaterial *material)
 CMaterial::~CMaterial()
 {
     prv_destroyMaterial(&m_dataPrivate);
+}
+
+//-----------------------------------------------------------------------
+
+void CMaterial::setPriorityZFighting(enum CMaterial::EPriorityZFighting zFighting)
+{
+    assert_no_null(m_dataPrivate);
+    m_dataPrivate->zFighting = zFighting;
+}
+
+//-----------------------------------------------------------------------
+
+enum CMaterial::EPriorityZFighting CMaterial::getPriorityZFighting() const
+{
+    assert_no_null(m_dataPrivate);
+    return m_dataPrivate->zFighting;
 }
 
 //-----------------------------------------------------------------------
