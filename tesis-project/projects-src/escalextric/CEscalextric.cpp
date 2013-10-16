@@ -91,7 +91,7 @@ static void prv_appendCarWithKey(const char *id, char keyAccelerator, char keyDe
 
 void CEscalextric::appendElementsToScene(class CScene *scene)
 {
-    class CAgent *circuit, *generatorAgent, *agentSky, *agentFloor;
+    class CAgent *circuit, *generatorAgent, *agentWorld;
     class CGeneratorAccelerationKey *generatorAccelerationKey;
 
     assert_no_null(scene);
@@ -108,11 +108,9 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
     generatorAgent = generatorAccelerationKey;
     circuit->appendChild(&generatorAgent);
 
-    agentSky = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_SKY);
-    agentFloor = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_FLOOR);
+    agentWorld = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_WORLD);
 
-    scene->appendAgent(&agentSky);
-    scene->appendAgent(&agentFloor);
+    scene->appendAgent(&agentWorld);
     scene->appendAgent(&circuit);
 }
 

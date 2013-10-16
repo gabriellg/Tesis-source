@@ -9,6 +9,7 @@
 #include "CDataCircuit.inl"
 
 #include "asrtbas.h"
+#include "memory.h"
 
 #include "CDisplaySprite.hpp"
 #include "CImg.hpp"
@@ -16,6 +17,8 @@
 #include "CDescriptionSpriteOneImage.hpp"
 #include "CReaderModel3d.hpp"
 #include "CArrPoint2d.hpp"
+#include "CArrPoint3d.hpp"
+#include "CVector.hpp"
 
 #include "CDisplay3D.hpp"
 #include "CPositionCamera.hpp"
@@ -31,14 +34,12 @@
 
 const char *CDisplayEscalextric::SYMBOL_CIRCUIT = "Circuit";
 const char *CDisplayEscalextric::SYMBOL_CAR = "Car";
-const char *CDisplayEscalextric::SYMBOL_SKY = "Sky";
-const char *CDisplayEscalextric::SYMBOL_FLOOR = "Floor";
+const char *CDisplayEscalextric::SYMBOL_WORLD = "World";
 
 //-----------------------------------------------------------------------
 //
-class ITraslatorDisplay *CDisplayEscalextric::createDisplaySprite(
-                            const class CDataCircuit *dataCircuit,
-                            class CWorldEscalextric *worldEscalextric)
+class ITraslatorDisplay *CDisplayEscalextric::createDisplaySprite(const class CDataCircuit *dataCircuit,
+        class CWorldEscalextric *worldEscalextric)
 {
     class CDisplaySprite *displaySprite;
     class IDescription *descriptionCircuit, *descriptionCar;
@@ -60,7 +61,8 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplaySprite(
     descriptionCar = CDescriptionSpriteOneImage::createSpriteOneImageInCenter(&imageCar);
 
     originCartesian = true;
-    displaySprite = new CDisplaySprite(originCartesian, sizeXTrack, sizeYTrack, sizeXCircuit, sizeYCircuit, worldEscalextric);
+    displaySprite = new CDisplaySprite(originCartesian, sizeXTrack, sizeYTrack, sizeXCircuit, sizeYCircuit,
+            worldEscalextric);
 
     displaySprite->appendDescription(SYMBOL_CIRCUIT, &descriptionCircuit);
     displaySprite->appendDescription(SYMBOL_CAR, &descriptionCar);
@@ -88,10 +90,7 @@ static class CPositionCamera *prv_createPositionCameraDefault(void)
     upY = 1.;
     upZ = 0.;
 
-    return new CPositionCamera(
-                    eyeX, eyeY, eyeZ,
-                    pointReferenceX, pointReferenceY, pointReferenceZ,
-                    upX, upY, upZ);
+    return new CPositionCamera(eyeX, eyeY, eyeZ, pointReferenceX, pointReferenceY, pointReferenceZ, upX, upY, upZ);
 }
 
 //-----------------------------------------------------------------------
@@ -127,97 +126,134 @@ static struct CModel3d *prv_createModelCar(void)
 }
 
 //-----------------------------------------------------------------------
-
-static class CModel3d *prv_createModel(const char *nameMaterial, class CMaterial **material, class CMesh **mesh)
+//
+static class CMesh *prv_SizeWorld(double sizeFloor,
+        double dx, double dy, double dz,
+        double angleDegrees, double Ux, double Uy, double Uz,
+        enum CMesh::ETypeTexture typeTexture)
 {
-    class CModel3d *model;
+    class CMesh *mesh;
+    class CArrPoint2d *edge;
+    class CArrPoint3d *edge3d;
+    class CStackTransformation *stack;
+    double Nx, Ny, Nz;
+    double x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
+
+    edge = CPolylines::createRectangleCentredInOrigin(sizeFloor, sizeFloor);
+
+    stack = new CStackTransformation();
+    stack->appendTranslation(dx, dy, dz);
+    stack->appendRotation(angleDegrees, Ux, Uy, Uz);
+    stack->getNormal(&Nx, &Ny, &Nz);
+
+    edge3d = stack->transformationPoints2d(edge);
+    edge3d->get(0, &x1, &y1, &z1);
+    edge3d->get(1, &x2, &y2, &z2);
+    edge3d->get(2, &x3, &y3, &z3);
+    edge3d->get(3, &x4, &y4, &z4);
+
+    mesh = new CMesh();
+    mesh->appendQuad(x1, y1, z1, Nx, Ny, Nz, x2, y2, z2, Nx, Ny, Nz, x3, y3, z3, Nx, Ny, Nz, x4, y4, z4, Nx, Ny, Nz);
+    mesh->calculateCoordsTexturesInPlane(typeTexture);
+
+    DELETE_OBJECT(&edge, class CArrPoint2d);
+    DELETE_OBJECT(&edge3d, class CArrPoint3d);
+
+    return mesh;
+}
+
+//-----------------------------------------------------------------------
+//
+static void prv_appendMeshToModel(const char *nameMaterial, const char *fileImage, class CMesh **mesh,
+        class CModel3d *model)
+{
+    class CImg *image;
+    class CMaterial *material;
 
     assert_no_null(mesh);
 
-    model = new CModel3d;
-
-    model->appendMaterial(material);
+    image = new CImg(fileImage);
+    material = new CMaterial(nameMaterial, 1., 1., 1., 1., &image);
+    material->setPriorityZFighting(CMaterial::LOW);
+    model->appendMaterial(&material);
     model->appendMesh(nameMaterial, *mesh);
 
-    delete *mesh;
-    *mesh = NULL;
-
-    return model;
+    DELETE_OBJECT(mesh, class CMesh);
 }
 
 //-----------------------------------------------------------------------
 //
-static struct CModel3d *prv_createModelSky(void)
-{
-    const char *PRV_MATERIAL_SKY = "Sky";
-    class CModel3d *model;
-    class CMaterial *material;
-    class CMesh *meshSky;
-    class CImg *imageSky;
-
-    meshSky = CGeneratorModel::createSky(64, 300., 0.01, 10);
-    meshSky->calculateCoordsTexturesXY(CMesh::TEXTURE_DECAL);
-
-    imageSky = new CImg("./imagesCircuit/sky.png");
-    material = new CMaterial(PRV_MATERIAL_SKY, 0.3, 0.3, 0.3, 1., &imageSky);
-
-    model = prv_createModel(PRV_MATERIAL_SKY, &material, &meshSky);
-
-    model->setIsInLimits(false);
-
-    return model;
-}
-
-//-----------------------------------------------------------------------
-//
-static struct CModel3d *prv_createModelFloor(void)
+static struct CModel3d *prv_createModelWorld(void)
 {
     const char *PRV_MATERIAL_FLOOR = "Floor";
+    const char *PRV_MATERIAL_CEIL = "Ceil";
+    const char *PRV_MATERIAL_CEIL_XNEG = "Ceil_X-";
+    const char *PRV_MATERIAL_CEIL_XPOS = "Ceil_X+";
+    const char *PRV_MATERIAL_CEIL_YNEG = "Ceil_Y-";
+    const char *PRV_MATERIAL_CEIL_YPOS = "Ceil_Y+";
     class CModel3d *model;
-    class CMaterial *material;
-    class CMesh *meshFloor;
-    class CImg *imageFloor;
-    class CArrPoint2d *rectangle;
-    double x1, y1, x2, y2, x3, y3, x4, y4;
-    double Nx, Ny, Nz;
+    class CMesh *meshFloor, *meshCeil, *meshXNeg, *meshXPos, *meshYNeg, *meshYPos;
+    const double PRV_SIZE_WORLD = 150.;
 
-    rectangle = CPolylines::createRectangleCentredInOrigin(150., 150.);
-    rectangle->get(0, &x1, &y1);
-    rectangle->get(1, &x2, &y2);
-    rectangle->get(2, &x3, &y3);
-    rectangle->get(3, &x4, &y4);
+    meshFloor = prv_SizeWorld(
+            PRV_SIZE_WORLD,
+            0., 0., 0., //dx,dy,dz
+            0., 0., 1., 0.,//angleDegrees, Ux, Uy, Uz,
+            CMesh::TEXTURE_REPEAT);
 
-    Nx = 0.; Ny = 0.; Nz = 1.;
+    meshCeil = prv_SizeWorld(
+            PRV_SIZE_WORLD,
+            0., 0., 0.5 * PRV_SIZE_WORLD, //dx,dy,dz
+            180., 0., 1., 0.,//angleDegrees, Ux, Uy, Uz,
+            CMesh::TEXTURE_DECAL);
 
-    meshFloor = new CMesh();
-    meshFloor->appendQuad(
-                    x1, y1, 0., Nx, Ny, Nz,
-                    x2, y2, 0., Nx, Ny, Nz,
-                    x3, y3, 0., Nx, Ny, Nz,
-                    x4, y4, 0., Nx, Ny, Nz);
+    meshXNeg = prv_SizeWorld(
+            PRV_SIZE_WORLD,
+            -0.5 * PRV_SIZE_WORLD, 0., 0., //dx,dy,dz
+            90., 0., 1., 0.,//angleDegrees, Ux, Uy, Uz,
+            CMesh::TEXTURE_DECAL);
 
-    meshFloor->calculateCoordsTexturesXY(CMesh::TEXTURE_REPEAT);
+    meshXPos = prv_SizeWorld(
+            PRV_SIZE_WORLD,
+            0.5 * PRV_SIZE_WORLD, 0., 0., //dx,dy,dz
+            -90., 0., 1., 0.,//angleDegrees, Ux, Uy, Uz,
+            CMesh::TEXTURE_DECAL);
 
-    imageFloor = new CImg("./imagesCircuit/grass.jpg");
-    material = new CMaterial(PRV_MATERIAL_FLOOR, 0.3, 0.3, 0.3, 1., &imageFloor);
-    material->setPriorityZFighting(CMaterial::LOW);
-    model = prv_createModel(PRV_MATERIAL_FLOOR, &material, &meshFloor);
+    meshYNeg = prv_SizeWorld(
+            PRV_SIZE_WORLD,
+            0., 0.5 * PRV_SIZE_WORLD, 0., //dx,dy,dz
+            90., 1., 0., 0.,//angleDegrees, Ux, Uy, Uz,
+            CMesh::TEXTURE_DECAL);
+
+    meshYPos = prv_SizeWorld(
+            PRV_SIZE_WORLD,
+            0., -0.5 * PRV_SIZE_WORLD, 0., //dx,dy,dz
+            -90., 1., 0., 0.,//angleDegrees, Ux, Uy, Uz,
+            CMesh::TEXTURE_DECAL);
+
+    model = new CModel3d;
     model->setIsInLimits(false);
+
+    prv_appendMeshToModel(PRV_MATERIAL_FLOOR, "./imagesCircuit/grass.jpg", &meshFloor, model);
+    prv_appendMeshToModel(PRV_MATERIAL_CEIL, "./imagesCircuit/ceil.jpg", &meshCeil, model);
+    prv_appendMeshToModel(PRV_MATERIAL_CEIL_XNEG, "./imagesCircuit/sky-xneg.jpg", &meshXNeg, model);
+    prv_appendMeshToModel(PRV_MATERIAL_CEIL_XPOS, "./imagesCircuit/sky-xpos.jpg", &meshXPos, model);
+    prv_appendMeshToModel(PRV_MATERIAL_CEIL_YNEG, "./imagesCircuit/sky-yneg.jpg", &meshYNeg, model);
+    prv_appendMeshToModel(PRV_MATERIAL_CEIL_YPOS, "./imagesCircuit/sky-ypos.jpg", &meshYPos, model);
 
     return model;
 }
 
 //-----------------------------------------------------------------------
 //
-class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
-                            const class CDataCircuit *dataCircuit,
-                            class CWorldEscalextric *worldEscalextric)
+class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(const class CDataCircuit *dataCircuit,
+        class CWorldEscalextric *worldEscalextric)
 {
     class CDisplay3D *display3d;
     class CLight *light;
     class CPositionCamera *positionCamera;
-    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky, *descriptionFloor;
-    class CModel3d *modelCircuit, *modelCar, *modelSky, *modelFloor;
+    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky;
+    class CModel3d *modelCircuit, *modelCar, *modelWorld;
 
     assert_no_null(dataCircuit);
     assert_no_null(worldEscalextric);
@@ -233,18 +269,14 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(
     modelCar = prv_createModelCar();
     descriptionCar = new CDescriptionModel3d(&modelCar);
 
-    modelSky = prv_createModelSky();
-    descriptionSky = new CDescriptionModel3d(&modelSky);
-
-    modelFloor = prv_createModelFloor();
-    descriptionFloor = new CDescriptionModel3d(&modelFloor);
+    modelWorld = prv_createModelWorld();
+    descriptionSky = new CDescriptionModel3d(&modelWorld);
 
     display3d = new CDisplay3D(worldEscalextric, &light, &positionCamera);
 
     display3d->appendDescription(SYMBOL_CIRCUIT, &descriptionCircuit);
     display3d->appendDescription(SYMBOL_CAR, &descriptionCar);
-    display3d->appendDescription(SYMBOL_SKY, &descriptionSky);
-    display3d->appendDescription(SYMBOL_FLOOR, &descriptionFloor);
+    display3d->appendDescription(SYMBOL_WORLD, &descriptionSky);
 
     return display3d;
 }
