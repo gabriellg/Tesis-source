@@ -61,7 +61,6 @@ void CTextureGL::textureOn(unsigned long idTexture)
 {
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, idTexture);
-    glColor3d(.5f, .5f, .5f);
 }
 
 //-----------------------------------------------------------------------

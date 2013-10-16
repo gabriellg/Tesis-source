@@ -377,6 +377,7 @@ void CGraphicsGL::setMaterial(const char *nameLayer)
 {
     struct PrvLayer *layer;
     enum CMaterial::EPriorityZFighting zFighting;
+    float r, g, b, a;
 
     assert_no_null(m_dataPrivate);
 
@@ -384,19 +385,14 @@ void CGraphicsGL::setMaterial(const char *nameLayer)
     assert_no_null(layer);
     assert_no_null(layer->material);
 
+    layer->material->getColorRGBA(&r, &g, &b, &a);
+
     if (layer->material->hasTexture() == true)
-    {
         CTextureGL::textureOn(layer->idTexture);
-    }
     else
-    {
-        float r, g, b, a;
-
-        layer->material->getColorRGBA(&r, &g, &b, &a);
         CTextureGL::textureOff();
-        glColor4f(r, g, b, a);
-    }
 
+    glColor4f(r, g, b, a);
     zFighting = layer->material->getPriorityZFighting();
 
     switch(zFighting)
