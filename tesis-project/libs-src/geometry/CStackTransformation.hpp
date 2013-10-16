@@ -26,6 +26,8 @@ class CStackTransformation
 
         void appendMatrix(const class CMatrix4x4 *matrix);
 
+        void getNormal(double *Nx, double *Ny, double *Nz) const;
+
         class CArrPoint3d *transformationPoints2d(const class CArrPoint2d *points) const;
 
         void transformationPoints3d(class CArrPoint3d *points) const;

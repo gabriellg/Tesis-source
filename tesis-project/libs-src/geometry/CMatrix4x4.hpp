@@ -52,6 +52,8 @@ class CMatrix4x4
 
         void getMatrix(double valuesMatrix[4][4]) const;
 
+        void getNormal(double *Nx, double *Ny, double *Nz) const;
+
     private:
 
         CMatrix4x4(struct SDataPrivateMatrix4x4 **dataPrivate);

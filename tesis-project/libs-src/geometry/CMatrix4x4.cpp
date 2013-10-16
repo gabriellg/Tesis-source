@@ -582,3 +582,17 @@ void CMatrix4x4::getMatrix(double valuesMatrix[4][4]) const
     valuesMatrix[3][2] = 0.;
     valuesMatrix[3][3] = 1.;
 }
+
+//---------------------------------------------------------------
+
+void CMatrix4x4::getNormal(double *Nx, double *Ny, double *Nz) const
+{
+    assert_no_null(m_dataPrivate);
+    assert_no_null(Nx);
+    assert_no_null(Ny);
+    assert_no_null(Nz);
+
+    *Nx = m_dataPrivate->Nx;
+    *Ny = m_dataPrivate->Ny;
+    *Nz = m_dataPrivate->Nz;
+}

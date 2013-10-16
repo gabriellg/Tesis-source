@@ -242,6 +242,14 @@ void CStackTransformation::appendMatrix(const class CMatrix4x4 *matrix)
 
 //-----------------------------------------------------------------------
 //
+void CStackTransformation::getNormal(double *Nx, double *Ny, double *Nz) const
+{
+    prv_integrity(m_dataPrivate);
+    m_dataPrivate->matrixCurrent->getNormal(Nx, Ny, Nz);
+}
+
+//-----------------------------------------------------------------------
+//
 class CArrPoint3d *CStackTransformation::transformationPoints2d(const class CArrPoint2d *points) const
 {
     prv_integrity(m_dataPrivate);
