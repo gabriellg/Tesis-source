@@ -383,11 +383,11 @@ void CApplicationScreen::mouseClick(int button, int state, int x, int y)
     }
     else if (button == GLUT_WHEEL_UP)
     {
-        m_dataPrivate->positionCamera->frontCamera(PRV_STEP_CAMERA);
+        m_dataPrivate->positionCamera->traslate(-PRV_STEP_CAMERA);
     }
     else if (button == GLUT_WHEEL_DOWN)
     {
-        m_dataPrivate->positionCamera->backCamera(PRV_STEP_CAMERA);
+        m_dataPrivate->positionCamera->traslate(PRV_STEP_CAMERA);
     }
 }
 
