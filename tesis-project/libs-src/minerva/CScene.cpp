@@ -14,13 +14,13 @@ struct SPrvDataPrivateScene
     class CArrayRef<CAgent> *initialGeneration;
     class CArrayRef<CAgent> *currentGeneration;
 
-    class CEventKey *evtKeyCurrent;
+    class CCollectionEventsSystem *allEvents;
 };
 
 //---------------------------------------------------------------
 
 static struct SPrvDataPrivateScene *prv_createScene(class CArrayRef<CAgent> **initialGeneration,
-        class CArrayRef<CAgent> **currentGeneration, class CEventKey **evtKeyCurrent)
+        class CArrayRef<CAgent> **currentGeneration, class CCollectionEventsSystem **allEvents)
 {
     struct SPrvDataPrivateScene *dataPrivate;
     
@@ -28,7 +28,7 @@ static struct SPrvDataPrivateScene *prv_createScene(class CArrayRef<CAgent> **in
 
     dataPrivate->initialGeneration = ASSIGN_PP_NO_NULL(initialGeneration, class CArrayRef<CAgent>);
     dataPrivate->currentGeneration = ASSIGN_PP(currentGeneration, class CArrayRef<CAgent>);
-    dataPrivate->evtKeyCurrent = ASSIGN_PP(evtKeyCurrent, class CEventKey);
+    dataPrivate->allEvents = ASSIGN_PP(allEvents, class CCollectionEventsSystem);
     
     return dataPrivate;
 }
@@ -55,8 +55,8 @@ static void prv_destroyScene(struct SPrvDataPrivateScene **dataPrivate)
 
     CAgent::destroyAllAgentsNotRepeated(&agentScene);
 
-    if ((*dataPrivate)->evtKeyCurrent != NULL)
-        DELETE_OBJECT(&(*dataPrivate)->evtKeyCurrent, class CEventKey);
+
+    DELETE_OBJECT(&(*dataPrivate)->allEvents, class CCollectionEventsSystem);
 
     DELETE_OBJECT(dataPrivate, SPrvDataPrivateScene);
 }
@@ -67,13 +67,13 @@ CScene::CScene()
 {
     class CArrayRef<CAgent> *initialGeneration;
     class CArrayRef<CAgent> *currentGeneration;
-    class CEventKey *evtKey;
+    class CCollectionEventsSystem *allEvents;
 
     initialGeneration = new CArrayRef<CAgent>;
     currentGeneration = NULL;
-    evtKey = NULL;
+    allEvents = new CCollectionEventsSystem(this);
 
-    m_dataPrivate = prv_createScene(&initialGeneration, &currentGeneration, &evtKey);
+    m_dataPrivate = prv_createScene(&initialGeneration, &currentGeneration, &allEvents);
 }
 
 //---------------------------------------------------------------
@@ -98,38 +98,11 @@ void CScene::appendAgent(class CAgent **agent)
 
 //---------------------------------------------------------------
 
-void CScene::appendKey(const struct EvtKey_t *evtKey)
+void CScene::appendEvent(class CEventSystem **evtSystem)
 {
     assert_no_null(m_dataPrivate);
-
-    if (m_dataPrivate->evtKeyCurrent != NULL)
-        delete m_dataPrivate->evtKeyCurrent;
-
-    m_dataPrivate->evtKeyCurrent = new CEventKey(evtKey);
-}
-
-//---------------------------------------------------------------
-
-static void prv_nextGeneration(class CScene *scene, class CEventKey **evtKeyCurrent,
-        class CArrayRef<CAgent> **currentGeneration)
-{
-    class CCollectionEventsSystem *allEvents;
-
-    assert_no_null(evtKeyCurrent);
-
-    allEvents = new CCollectionEventsSystem(scene);
-
-    if (*evtKeyCurrent != NULL)
-    {
-        class CEventSystem *evtSystemKey;
-
-        evtSystemKey = ASSIGN_PP_NO_NULL(evtKeyCurrent, class CEventKey);
-        allEvents->appendEventSystem(&evtSystemKey);
-    }
-
-    CAgent::nextGeneration(allEvents, currentGeneration);
-
-    DELETE_OBJECT(&allEvents, class CCollectionEventsSystem);
+    assert_no_null(m_dataPrivate->allEvents);
+    m_dataPrivate->allEvents->appendEventSystem(evtSystem);
 }
 
 //---------------------------------------------------------------
@@ -153,7 +126,10 @@ void CScene::nextFrame()
         m_dataPrivate->initialGeneration = NULL;
     }
 
-    prv_nextGeneration(this, &m_dataPrivate->evtKeyCurrent, &currentGeneration);
+    CAgent::nextGeneration(m_dataPrivate->allEvents, &currentGeneration);
+
+    DELETE_OBJECT(&m_dataPrivate->allEvents, class CCollectionEventsSystem);
+    m_dataPrivate->allEvents = new CCollectionEventsSystem(this);
 
     m_dataPrivate->currentGeneration = currentGeneration;
 }

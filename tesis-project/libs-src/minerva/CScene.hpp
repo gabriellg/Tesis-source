@@ -9,7 +9,7 @@ class CScene
 		
 		void appendAgent(class CAgent **agent);
         
-        void appendKey(const struct EvtKey_t *evtKey);
+        void appendEvent(class CEventSystem **evtSystem);
         void nextFrame();
         void processDraw(class CTypeDescription *evtDraw) const;
 		
