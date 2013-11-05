@@ -18,6 +18,8 @@
 #include "CFigure.hpp"
 #include "CAgentPrimitive.hpp"
 #include "CGestorDisplays.hpp"
+#include "CAgentCamera.hpp"
+#include "CPositionCamera.hpp"
 
 struct SPrvDataPrivateEscalextric
 {
@@ -89,10 +91,34 @@ static void prv_appendCarWithKey(const char *id, char keyAccelerator, char keyDe
 
 //-----------------------------------------------------------------------
 
+static class CPositionCamera *prv_createPositionCameraDefault(void)
+{
+    double eyeX, eyeY, eyeZ;
+    double pointReferenceX, pointReferenceY, pointReferenceZ;
+    double upX, upY, upZ;
+
+    eyeX = 0.;
+    eyeY = 0.;
+    eyeZ = 15.;
+
+    pointReferenceX = 0.;
+    pointReferenceY = 0.;
+    pointReferenceZ = 0.;
+
+    upX = 0.;
+    upY = 1.;
+    upZ = 0.;
+
+    return new CPositionCamera(eyeX, eyeY, eyeZ, pointReferenceX, pointReferenceY, pointReferenceZ, upX, upY, upZ);
+}
+
+//-----------------------------------------------------------------------
+
 void CEscalextric::appendElementsToScene(class CScene *scene)
 {
-    class CAgent *circuit, *generatorAgent, *agentWorld;
+    class CAgent *circuit, *generatorAgent, *agentWorld, *agentCamera;
     class CGeneratorAccelerationKey *generatorAccelerationKey;
+    class CPositionCamera *positionCamera;
 
     assert_no_null(scene);
     assert_no_null(m_dataPrivate);
@@ -110,8 +136,13 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
 
     agentWorld = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_WORLD);
 
-    scene->appendAgent(&agentWorld);
-    scene->appendAgent(&circuit);
+    positionCamera = prv_createPositionCameraDefault();
+
+    agentCamera = new CAgentCamera(&positionCamera);
+    agentCamera->appendChild(&agentWorld);
+    agentCamera->appendChild(&circuit);
+
+    scene->appendAgent(&agentCamera);
 }
 
 //-----------------------------------------------------------------------
