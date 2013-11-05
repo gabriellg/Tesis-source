@@ -9,11 +9,13 @@
 #include "asrtbas.h"
 #include "memory.h"
 #include "CArray.hpp"
+#include "CPositionCamera.hpp"
 
 const char *CTransform3D::ID_SYMBOL_SCALE3D = "Scale3d";
 const char *CTransform3D::ID_SYMBOL_TRASLATE3D = "Traslate3d";
 const char *CTransform3D::ID_SYMBOL_ROTATE3D = "Rotate3d";
 const char *CTransform3D::ID_SYMBOL_EXTRUSION3D = "Extrusion3d";
+const char *CTransform3D::ID_SYMBOL_CAMERA3D = "Camera3d";
 
 class CDataScale3D: public IDataTransformation3D
 {
@@ -66,6 +68,21 @@ private:
 
     double m_Nx, m_Ny, m_Nz;
 };
+
+class CDataCamera3D: public IDataTransformation3D
+{
+public:
+
+    CDataCamera3D(class CPositionCamera **positionCamera);
+    virtual ~CDataCamera3D();
+
+    virtual void applyTransformacion(class IGraphics *graphics) const;
+
+private:
+
+    class CPositionCamera *m_positionCamera;
+};
+
 
 //---------------------------------------------------------------
 
@@ -144,6 +161,36 @@ void CDataExtrusion3D::applyTransformacion(class IGraphics *graphics) const
 
 //---------------------------------------------------------------
 
+CDataCamera3D::CDataCamera3D(class CPositionCamera **positionCamera)
+{
+    m_positionCamera = ASSIGN_PP_NO_NULL(positionCamera, class CPositionCamera);
+}
+
+//---------------------------------------------------------------
+
+CDataCamera3D::~CDataCamera3D()
+{
+    assert_no_null(m_positionCamera);
+    DELETE_OBJECT(&m_positionCamera, class CPositionCamera);
+}
+
+//---------------------------------------------------------------
+
+void CDataCamera3D::applyTransformacion(class IGraphics *graphics) const
+{
+    assert_no_null(graphics);
+    assert_no_null(m_positionCamera);
+
+    graphics->pushTransformation();
+    graphics->resetTransformation();
+
+    m_positionCamera->positionCamera(graphics);
+
+    graphics->popTransformation();
+}
+
+//---------------------------------------------------------------
+
 static class CArray<IObjectDraw> *prv_createSons(class IObjectDraw **figure)
 {
     class CArray<IObjectDraw> *sons;
@@ -206,4 +253,14 @@ class CTransform *CTransform3D::createExtrusion3D(class IObjectDraw **figure, do
 
     dataTransformation = new CDataExtrusion3D(Nx, Ny, Nz);
     return new CTransform(ID_SYMBOL_EXTRUSION3D, &dataTransformation, &sons);
+}
+
+//---------------------------------------------------------------
+
+class CTransform *CTransform3D::createCamera3d(class CArray<IObjectDraw> **sons, class CPositionCamera **posCamera)
+{
+    class IDataSymbol *dataTransformation;
+
+    dataTransformation = new CDataCamera3D(posCamera);
+    return new CTransform(ID_SYMBOL_CAMERA3D, &dataTransformation, sons);
 }
