@@ -6,4 +6,5 @@ sudo apt-get install libxi-dev
 sudo apt-get install libxmu-headers
 sudo apt-get install libxmu-dev
 sudo apt-get install libglib2.0-dev
+sudo apt-get install libopencv-deb
 
