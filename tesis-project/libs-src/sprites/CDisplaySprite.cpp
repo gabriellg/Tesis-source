@@ -227,16 +227,3 @@ void CDisplaySprite::drawScene(class IGraphics *graphics, const class CScene *sc
     delete imageResult;
     delete graphicsSprite;
 }
-
-//-----------------------------------------------------------------------
-
-bool CDisplaySprite::withSize(unsigned long *width, unsigned long *height) const
-{
-    assert_no_null(width);
-    assert_no_null(height);
-
-    *width = m_dataPrivate->width;
-    *height = m_dataPrivate->height;
-
-    return true;
-}

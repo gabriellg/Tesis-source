@@ -11,8 +11,10 @@
 #include "CScene.hpp"
 #include "CTypeDescription.hpp"
 #include "CGestorDisplays.hpp"
+#include "CEventCamera.hpp"
+#include "CEventKey.hpp"
 
-struct prv_dataPrivate_t
+struct SPrvDataWorkspaceWorldVirtual
 {
     class CDefineWorld *defineWorld;
     class CGestorDisplays *gestorDisplays;
@@ -21,35 +23,33 @@ struct prv_dataPrivate_t
 
 //---------------------------------------------------------------
 
-static struct prv_dataPrivate_t *prv_createDataPrivate(
-						class CDefineWorld **defineWorld,
-                        class CGestorDisplays **gestorDisplays,
-                        class CScene **scene)
-{   
-    struct prv_dataPrivate_t *data_private;
-    
-    data_private = MALLOC(struct prv_dataPrivate_t);
-         
-    data_private->defineWorld = ASSIGN_PP_NO_NULL(defineWorld, class CDefineWorld);
-    data_private->gestorDisplays = ASSIGN_PP_NO_NULL(gestorDisplays, class CGestorDisplays);
-    data_private->scene = ASSIGN_PP_NO_NULL(scene, class CScene);
-    
-    return data_private;
+static void prv_integrityDataWorkspaceWorlVirtual(const struct SPrvDataWorkspaceWorldVirtual *dataPrivate)
+{
+    assert_no_null(dataPrivate);
+    assert_no_null(dataPrivate->defineWorld);
+    assert_no_null(dataPrivate->gestorDisplays);
+    assert_no_null(dataPrivate->scene);
 }
 
 //---------------------------------------------------------------
 
-static void prv_destroyDataPrivate(struct prv_dataPrivate_t **dataPrivate)
-{
-    assert_no_null(dataPrivate);
-    assert_no_null(*dataPrivate);
-
-    delete (*dataPrivate)->defineWorld;
-    delete (*dataPrivate)->scene;
-    delete (*dataPrivate)->gestorDisplays;
+static struct SPrvDataWorkspaceWorldVirtual *prv_createDataPrivate(
+						class CDefineWorld **defineWorld,
+                        class CGestorDisplays **gestorDisplays,
+                        class CScene **scene)
+{   
+    struct SPrvDataWorkspaceWorldVirtual *dataPrivate;
     
-    FREE_T(dataPrivate, struct prv_dataPrivate_t);
-} 
+    dataPrivate = MALLOC(struct SPrvDataWorkspaceWorldVirtual);
+         
+    dataPrivate->defineWorld = ASSIGN_PP_NO_NULL(defineWorld, class CDefineWorld);
+    dataPrivate->gestorDisplays = ASSIGN_PP_NO_NULL(gestorDisplays, class CGestorDisplays);
+    dataPrivate->scene = ASSIGN_PP_NO_NULL(scene, class CScene);
+    
+    prv_integrityDataWorkspaceWorlVirtual(dataPrivate);
+
+    return dataPrivate;
+}
 
 //-----------------------------------------------------------------------
 
@@ -71,16 +71,21 @@ CDataWorkspaceWorldVirtual::CDataWorkspaceWorldVirtual(class CDefineWorld **defi
 
 CDataWorkspaceWorldVirtual::~CDataWorkspaceWorldVirtual()
 {
-    assert_no_null(m_dataPrivate);
-    prv_destroyDataPrivate(&m_dataPrivate);
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
+    DELETE_OBJECT(&m_dataPrivate->defineWorld, class CDefineWorld);
+    DELETE_OBJECT(&m_dataPrivate->gestorDisplays, class CGestorDisplays);
+    DELETE_OBJECT(&m_dataPrivate->scene, class CScene);
+
+    FREE_T(&m_dataPrivate, struct SPrvDataWorkspaceWorldVirtual);
 }
 
 //-----------------------------------------------------------------------
 
 void CDataWorkspaceWorldVirtual::defineLayers(class IGraphics *graphics) const
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->defineWorld);
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
     m_dataPrivate->defineWorld->defineLayers(graphics);
 }
 
@@ -88,18 +93,19 @@ void CDataWorkspaceWorldVirtual::defineLayers(class IGraphics *graphics) const
 
 void CDataWorkspaceWorldVirtual::appendKeyToScene(const struct EvtKey_t *evtKey)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->scene);
-    
-    m_dataPrivate->scene->appendKey(evtKey);
+    class CEventSystem *eventKey;
+
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
+    eventKey = new CEventKey(evtKey);
+    m_dataPrivate->scene->appendEvent(&eventKey);
 }
 
 //-----------------------------------------------------------------------
 
 void CDataWorkspaceWorldVirtual::nextFrame(void)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->scene);
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
     
     m_dataPrivate->scene->nextFrame();
 }
@@ -108,8 +114,7 @@ void CDataWorkspaceWorldVirtual::nextFrame(void)
 
 void CDataWorkspaceWorldVirtual::stop(void)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->scene);
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
     
     delete m_dataPrivate->scene;
     
@@ -121,83 +126,67 @@ void CDataWorkspaceWorldVirtual::stop(void)
 
 void CDataWorkspaceWorldVirtual::setInitialPositionCamera(void)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
+    class CEventSystem *evtCamera;
 
-    m_dataPrivate->gestorDisplays->setInitialPositionCamera();
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
+    evtCamera = CEventCamera::createInitialPositionCamera();
+    m_dataPrivate->scene->appendEvent(&evtCamera);
 }
 
 //-----------------------------------------------------------------------
 
-void CDataWorkspaceWorldVirtual::positionCamera(class IGraphics *graphics) const
+void CDataWorkspaceWorldVirtual::setRotationCamera(double rotXDegrees, double rotYDegrees, double rotZDegrees)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
-    
-    m_dataPrivate->gestorDisplays->positionCameraCurrentDisplay(graphics);
+    class CEventSystem *evtCamera;
+
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
+    evtCamera = CEventCamera::createAnimationRotation(rotXDegrees, rotYDegrees, rotZDegrees);
+    m_dataPrivate->scene->appendEvent(&evtCamera);
 }
 
 //-----------------------------------------------------------------------
 
-void CDataWorkspaceWorldVirtual::makeRotationCamera(class IGraphics *graphics) const
+void CDataWorkspaceWorldVirtual::incrRotateCamera(double incrRotateX, double incrRotateY, double incrRotateZ)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
-    
-    m_dataPrivate->gestorDisplays->makeRotationCurrentDisplay(graphics);
+    class CEventSystem *evtCamera;
+
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
+    evtCamera = CEventCamera::createIncrRotateCamera(incrRotateX, incrRotateY, incrRotateZ);
+    m_dataPrivate->scene->appendEvent(&evtCamera);
 }
 
 //-----------------------------------------------------------------------
 
-void CDataWorkspaceWorldVirtual::setRotationCamera(struct areaDibujo_t *areaDibujo, double rotXDegrees, double rotYDegrees, double rotZDegrees)
+void CDataWorkspaceWorldVirtual::frontCamera(double step)
 {
-	assert_no_null(m_dataPrivate);
-	assert_no_null(m_dataPrivate->gestorDisplays);
-	m_dataPrivate->gestorDisplays->setRotationCameraCurrentDisplay(areaDibujo, rotXDegrees, rotYDegrees, rotZDegrees);
+    class CEventSystem *evtCamera;
+
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
+
+    evtCamera = CEventCamera::createTraslateCamera(step);
+    m_dataPrivate->scene->appendEvent(&evtCamera);
 }
 
 //-----------------------------------------------------------------------
 
-void CDataWorkspaceWorldVirtual::incrRotateCamera(struct areaDibujo_t *areaDibujo, double incrRotateX, double incrRotateY, double incrRotateZ)
+void CDataWorkspaceWorldVirtual::backCamera(double step)
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
-    m_dataPrivate->gestorDisplays->incrRotateCameraCurrentDisplay(areaDibujo, incrRotateX, incrRotateY, incrRotateZ);
-}
+    class CEventSystem *evtCamera;
 
-//-----------------------------------------------------------------------
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
 
-void CDataWorkspaceWorldVirtual::frontCamera(struct areaDibujo_t *areaDibujo, double step)
-{
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
-    m_dataPrivate->gestorDisplays->frontCameraCurrentDisplay(areaDibujo, step);
-}
-
-//-----------------------------------------------------------------------
-
-void CDataWorkspaceWorldVirtual::backCamera(struct areaDibujo_t *areaDibujo, double step)
-{
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
-    m_dataPrivate->gestorDisplays->backCameraCurrentDisplay(areaDibujo, step);
-}
-
-//-----------------------------------------------------------------------
-
-bool CDataWorkspaceWorldVirtual::isArea3D(void) const
-{
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
-    return m_dataPrivate->gestorDisplays->isArea3DCurrentDisplay();
+    evtCamera = CEventCamera::createTraslateCamera(-step);
+    m_dataPrivate->scene->appendEvent(&evtCamera);
 }
 
 //-----------------------------------------------------------------------
 
 void CDataWorkspaceWorldVirtual::draw(class IGraphics *graphics) const
 {
-    assert_no_null(m_dataPrivate);
-    assert_no_null(m_dataPrivate->gestorDisplays);
+    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
     
     m_dataPrivate->gestorDisplays->drawScene(graphics, m_dataPrivate->scene);
 }

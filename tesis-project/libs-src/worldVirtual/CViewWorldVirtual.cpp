@@ -107,7 +107,6 @@ static void i_positionCamera(
                     class IGraphics *graphics)
 {
     assert_no_null(dataPrivate);
-    dataPrivate->dataWorkspaceWorldVirtual->positionCamera(graphics);
 }
 
 //-----------------------------------------------------------------------
@@ -164,7 +163,7 @@ static void i_rotarEscena(
     incrRotateZ = incrX * (360. / width);
     incrRotateX = incrY * (360. / heigth);
      
-    dataWorkspaceWorldVirtual->incrRotateCamera(areaDibujo, incrRotateX, 0., incrRotateZ);
+    dataWorkspaceWorldVirtual->incrRotateCamera(incrRotateX, 0., incrRotateZ);
 }
 
 //-----------------------------------------------------------------------
@@ -199,12 +198,12 @@ static void i_procesar_wheel(struct SDataPrivateViewWorldVirtual *dataPrivate, c
 
         case EVTMOUSE_WHEEL_UP:
 
-            dataPrivate->dataWorkspaceWorldVirtual->backCamera(dataPrivate->areaDibujo, i_STEP);
+            dataPrivate->dataWorkspaceWorldVirtual->backCamera(i_STEP);
             break;
 
         case EVTMOUSE_WHEEL_DOWN:
 
-            dataPrivate->dataWorkspaceWorldVirtual->frontCamera(dataPrivate->areaDibujo, i_STEP);
+            dataPrivate->dataWorkspaceWorldVirtual->frontCamera(i_STEP);
             break;
 
         default_error();
@@ -279,13 +278,13 @@ static void i_onKey(struct EvtKey_t *evtKey, struct SDataPrivateViewWorldVirtual
     {
         case 'w':
             
-            dataPrivate->dataWorkspaceWorldVirtual->frontCamera(dataPrivate->areaDibujo, i_STEP);
+            dataPrivate->dataWorkspaceWorldVirtual->frontCamera(i_STEP);
             evtkey_endEvent(evtKey);
             break;    
         
         case 'x':
         
-            dataPrivate->dataWorkspaceWorldVirtual->backCamera(dataPrivate->areaDibujo, i_STEP);
+            dataPrivate->dataWorkspaceWorldVirtual->backCamera(i_STEP);
             evtkey_endEvent(evtKey);
             break;    
         
@@ -321,90 +320,6 @@ static void i_defineLayersAxis(const struct SDataPrivateViewWorldVirtual *dataPr
 
 //-----------------------------------------------------------------------
 
-static void i_drawAxis(class IGraphics *graphics, const char *nameLayer)
-{
-    assert_no_null(graphics);
-
-    graphics->setMaterial(nameLayer);
-    graphics->scale(0.2, 0.2, 2.);
-    graphics->drawUnitCylinder(IGraphics::LEVELDETAIL_NORMAL, IGraphics::TYPEDRAW_SOLID);
-    graphics->traslation(0.,0.,1.);
-    graphics->scale(2., 2., 0.4);
-
-    graphics->drawUnitCone(IGraphics::LEVELDETAIL_NORMAL, IGraphics::TYPEDRAW_SOLID);
-    graphics->scale(-1., 1., 1.);
-	graphics->drawUnitDisk(IGraphics::LEVELDETAIL_NORMAL, IGraphics::TYPEDRAW_SOLID);
-}
-
-//-----------------------------------------------------------------------
-
-static void i_drawAxisX(class IGraphics *graphics)
-{
-    assert_no_null(graphics);
-
-    graphics->pushTransformation();
-	
-    graphics->rotation(90., 0., 1., 0.);
-	i_drawAxis(graphics, i_LAYER_AXIS_X);
-	
-	graphics->popTransformation();
-}
-
-//-----------------------------------------------------------------------
-
-static void i_drawAxisY(class IGraphics *graphics)
-{
-    assert_no_null(graphics);
-
-    graphics->pushTransformation();
-	
-    graphics->rotation(-90., 1., 0., 0.);
-	i_drawAxis(graphics, i_LAYER_AXIS_Y);
-	
-	graphics->popTransformation();
-}
-
-//-----------------------------------------------------------------------
-
-static void i_drawAxisZ(class IGraphics *graphics)
-{
-    assert_no_null(graphics);
-
-    graphics->pushTransformation();
-	
-	i_drawAxis(graphics, i_LAYER_AXIS_Z);
-	
-	graphics->popTransformation();
-}
-
-//-----------------------------------------------------------------------
-
-static void i_drawAllAxis(const struct SDataPrivateViewWorldVirtual *dataPrivate, class IGraphics *graphics)
-{
-	assert_no_null(dataPrivate);
-	assert_no_null(dataPrivate->dataWorkspaceWorldVirtual);
-    assert_no_null(graphics);
-	
-	graphics->pushTransformation();
-	graphics->resetTransformation();
-	
-	dataPrivate->dataWorkspaceWorldVirtual->makeRotationCamera(graphics);
-	
-	i_drawAxisX(graphics);
-	i_drawAxisY(graphics);
-	i_drawAxisZ(graphics);
-	
-	graphics->popTransformation();
-	
-	graphics->pushTransformation();
-	graphics->scale(0.5, 0.5, 0.5);
-	graphics->setMaterial(i_LAYER_ORIGIN);
-	graphics->drawUnitSphere(IGraphics::LEVELDETAIL_NORMAL, IGraphics::TYPEDRAW_SOLID);
-	graphics->popTransformation();
-	
-}
-//-----------------------------------------------------------------------
-
 static bool i_bounds(
                 const struct SDataPrivateViewWorldVirtual *dataPrivate,
                 double *ox, double *oy, double *oz,
@@ -422,6 +337,7 @@ static bool i_bounds(
 	
 	return true;
 }
+
 //-----------------------------------------------------------------------
 
 static struct panel_t *i_viewWorldVirtual(
@@ -441,29 +357,20 @@ static struct panel_t *i_viewWorldVirtual(
 
     funcion_dibujo = rcpdibujo_crea(i_defineLayers, i_dibuja_vista, SDataPrivateViewWorldVirtual, dataPrivate);
 
-    if (dataPrivate->dataWorkspaceWorldVirtual->isArea3D() == true)
-    {
-    	panel = areadibujo_crea_modelo3d(
-                        ancho, alto,
-                        struct SDataPrivateViewWorldVirtual, dataPrivate,
-                        i_positionCamera,
-                        &funcion_dibujo, areaDibujo);
-    
-		rcpmouse = rcpmouse_create(SDataPrivateViewWorldVirtual, dataPrivate, i_onMouse);
-		areadibujo_appendReceptorMouse(*areaDibujo, &rcpmouse);
-		
-		rcpkey = rcpkey_create(SDataPrivateViewWorldVirtual, dataPrivate, i_onKey);
-		panel_appendReceptorKeys(panel, &rcpkey);
+    panel = areadibujo_crea_modelo3d(
+                    ancho, alto,
+                    struct SDataPrivateViewWorldVirtual, dataPrivate,
+                    i_positionCamera,
+                    &funcion_dibujo, areaDibujo);
 
-		funcion_dibujo_ejes = rcpdibujo_crea_con_limites(i_defineLayersAxis, i_drawAllAxis, i_bounds, SDataPrivateViewWorldVirtual, dataPrivate);
-		areadibujo_appendZonaDibujoIzqInferior(*areaDibujo, 92, 92, &funcion_dibujo_ejes);
-    }        
-    else
-    {
-    	panel = areadibujo_crea_modelo2d(
-						ancho, alto,
-                        &funcion_dibujo, areaDibujo);
-    }
+    rcpmouse = rcpmouse_create(SDataPrivateViewWorldVirtual, dataPrivate, i_onMouse);
+    areadibujo_appendReceptorMouse(*areaDibujo, &rcpmouse);
+    
+    rcpkey = rcpkey_create(SDataPrivateViewWorldVirtual, dataPrivate, i_onKey);
+    panel_appendReceptorKeys(panel, &rcpkey);
+
+    funcion_dibujo_ejes = rcpdibujo_crea_con_limites(i_defineLayersAxis, NULL, i_bounds, SDataPrivateViewWorldVirtual, dataPrivate);
+    areadibujo_appendZonaDibujoIzqInferior(*areaDibujo, 92, 92, &funcion_dibujo_ejes);
 
     return panel;             
 }
@@ -492,7 +399,7 @@ struct panel_t *CViewWorldVirtual::panel(class CDataWorkspace *dataWorkspace)
 void CViewWorldVirtual::setRotationCamera(double rotXDegrees, double rotYDegrees, double rotZDegrees)
 {
 	assert_no_null(m_dataPrivate);
-	m_dataPrivate->dataWorkspaceWorldVirtual->setRotationCamera(m_dataPrivate->areaDibujo, rotXDegrees, rotYDegrees, rotZDegrees);
+	m_dataPrivate->dataWorkspaceWorldVirtual->setRotationCamera(rotXDegrees, rotYDegrees, rotZDegrees);
 }
 
 //-----------------------------------------------------------------------

@@ -86,97 +86,6 @@ void CGestorDisplays::appendDisplay(class ITraslatorDisplay **display)
 
 //-----------------------------------------------------------------------
 
-void CGestorDisplays::setInitialPositionCamera(void)
-{
-	unsigned long i, num;
-
-	prv_integrity(m_dataPrivate);
-		
-	num = m_dataPrivate->displays->size();
-		
-	for (i = 0; i < num; i++)
-	{
-		class ITraslatorDisplay *display;
-			
-		display = m_dataPrivate->displays->get(i);
-		display->setInitialPositionCamera();
-	}
-}
-
-//-----------------------------------------------------------------------
-
-void CGestorDisplays::makeRotationCurrentDisplay(class IGraphics *graphics)
-{
-	class ITraslatorDisplay *display;
-	
-	prv_integrity(m_dataPrivate);
-	
-	display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	display->makeRotationCamera(graphics);
-}
-
-//-----------------------------------------------------------------------
-
-void CGestorDisplays::setRotationCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double rotXDegrees, double rotYDegrees, double rotZDegrees)
-{
-	class ITraslatorDisplay *display;
-	
-	prv_integrity(m_dataPrivate);
-	
-	display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	display->setRotationCamera(areaDibujo, rotXDegrees, rotYDegrees, rotZDegrees);
-}
-
-//-----------------------------------------------------------------------
-
-void CGestorDisplays::incrRotateCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double incrRotateX, double incrRotateY, double incrRotateZ)
-{
-	class ITraslatorDisplay *display;
-	
-    prv_integrity(m_dataPrivate);
-
-    display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	display->incrRotateCamera(areaDibujo, incrRotateX, incrRotateY, incrRotateZ);
-}
-
-//-----------------------------------------------------------------------
-
-void CGestorDisplays::frontCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double step)
-{
-	class ITraslatorDisplay *display;
-	
-    prv_integrity(m_dataPrivate);
-
-    display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	display->frontCamera(areaDibujo, step);
-}
-
-//-----------------------------------------------------------------------
-
-void CGestorDisplays::backCameraCurrentDisplay(struct areaDibujo_t *areaDibujo, double step)
-{
-	class ITraslatorDisplay *display;
-	
-    prv_integrity(m_dataPrivate);
-
-    display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	display->backCamera(areaDibujo, step);
-}
-
-//-----------------------------------------------------------------------
-
-void CGestorDisplays::positionCameraCurrentDisplay(class IGraphics *graphics) const
-{
-	class ITraslatorDisplay *display;
-	
-    prv_integrity(m_dataPrivate);
-
-    display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	display->positionCamera(graphics);
-}
-
-//-----------------------------------------------------------------------
-
 void CGestorDisplays::drawScene(class IGraphics *graphics, const class CScene *scene)
 {
 	class ITraslatorDisplay *display;
@@ -185,16 +94,4 @@ void CGestorDisplays::drawScene(class IGraphics *graphics, const class CScene *s
 
     display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
     display->drawScene(graphics, scene);
-}
-
-//-----------------------------------------------------------------------
-
-bool CGestorDisplays::isArea3DCurrentDisplay(void) const
-{
-	class ITraslatorDisplay *display;
-	
-    prv_integrity(m_dataPrivate);
-
-    display = m_dataPrivate->displays->get(m_dataPrivate->indCurrentDisplay);
-	return display->isArea3D();
 }

@@ -72,29 +72,6 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplaySprite(const class CD
 
 //-----------------------------------------------------------------------
 
-static class CPositionCamera *prv_createPositionCameraDefault(void)
-{
-    double eyeX, eyeY, eyeZ;
-    double pointReferenceX, pointReferenceY, pointReferenceZ;
-    double upX, upY, upZ;
-
-    eyeX = 0.;
-    eyeY = 0.;
-    eyeZ = 15.;
-
-    pointReferenceX = 0.;
-    pointReferenceY = 0.;
-    pointReferenceZ = 0.;
-
-    upX = 0.;
-    upY = 1.;
-    upZ = 0.;
-
-    return new CPositionCamera(eyeX, eyeY, eyeZ, pointReferenceX, pointReferenceY, pointReferenceZ, upX, upY, upZ);
-}
-
-//-----------------------------------------------------------------------
-
 static class CLight *prv_createLight(void)
 {
     class CColor *colorAmbient, *colorDiffuse, *colorSpecular;
@@ -251,7 +228,6 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(const class CDataC
 {
     class CDisplay3D *display3d;
     class CLight *light;
-    class CPositionCamera *positionCamera;
     class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky;
     class CModel3d *modelCircuit, *modelCar, *modelWorld;
 
@@ -261,7 +237,6 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(const class CDataC
     worldEscalextric->setWorld3d();
 
     light = prv_createLight();
-    positionCamera = prv_createPositionCameraDefault();
 
     modelCircuit = dataCircuit->model3d();
     descriptionCircuit = new CDescriptionModel3d(&modelCircuit);
@@ -272,7 +247,7 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(const class CDataC
     modelWorld = prv_createModelWorld();
     descriptionSky = new CDescriptionModel3d(&modelWorld);
 
-    display3d = new CDisplay3D(worldEscalextric, &light, &positionCamera);
+    display3d = new CDisplay3D(worldEscalextric, &light);
 
     display3d->appendDescription(SYMBOL_CIRCUIT, &descriptionCircuit);
     display3d->appendDescription(SYMBOL_CAR, &descriptionCar);
