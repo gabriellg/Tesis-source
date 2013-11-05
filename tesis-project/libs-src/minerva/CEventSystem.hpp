@@ -1,7 +1,6 @@
 // Define evento de un sistema.
 
-#ifndef CEVENTSYSTEM_HPP_
-#define CEVENTSYSTEM_HPP_
+#pragma once
 
 class CEventSystem
 {
@@ -16,5 +15,3 @@ class CEventSystem
     
         char *m_nameTypeEvent;
 };
-
-#endif /*CEVENTSYSTEM_HPP_*/
