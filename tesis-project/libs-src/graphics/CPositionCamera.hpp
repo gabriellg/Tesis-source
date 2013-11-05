@@ -19,8 +19,7 @@ class CPositionCamera
         void makeRotationCamera(class IGraphics *graphics) const;
         
         void incrRotationCamera(double incrRotXDegrees, double incrRotYDegrees, double incrRotZDegrees);
-        void frontCamera(double step);
-        void backCamera(double step);
+        void traslate(double step);
         void setParametricRotation(
                                 double t,
                                 double rotXIniDegrees, double rotYIniDegrees, double rotZIniDegrees,
