@@ -5,6 +5,7 @@
 
 #include "asrtbas.h"
 #include "array.h"
+#include "limits.h"
 
 #define i_MARGEN_ENTRE_ITEMS 3
 
