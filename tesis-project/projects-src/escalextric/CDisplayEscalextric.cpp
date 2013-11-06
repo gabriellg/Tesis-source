@@ -223,7 +223,7 @@ static struct CModel3d *prv_createModelWorld(void)
 
 //-----------------------------------------------------------------------
 //
-class ITraslatorDisplay *CDisplayEscalextric::createDisplayGL(const class CDataCircuit *dataCircuit,
+class ITraslatorDisplay *CDisplayEscalextric::createDisplay3D(const class CDataCircuit *dataCircuit,
         class CWorldEscalextric *worldEscalextric)
 {
     class CDisplay3D *display3d;

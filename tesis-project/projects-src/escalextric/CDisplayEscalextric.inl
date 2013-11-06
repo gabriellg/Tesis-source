@@ -12,5 +12,5 @@ class CDisplayEscalextric
         static const char *SYMBOL_WORLD;
 
         static class ITraslatorDisplay *createDisplaySprite(const class CDataCircuit *dataCircuit, class CWorldEscalextric *worldEscalextric);
-        static class ITraslatorDisplay *createDisplayGL(const class CDataCircuit *dataCircuit, class CWorldEscalextric *worldEscalextric);
+        static class ITraslatorDisplay *createDisplay3D(const class CDataCircuit *dataCircuit, class CWorldEscalextric *worldEscalextric);
 };

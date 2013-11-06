@@ -154,7 +154,7 @@ void CEscalextric::appendDisplays(class CGestorDisplays *displays)
     assert_no_null(m_dataPrivate);
 
     if (m_dataPrivate->is3d == true)
-        display = CDisplayEscalextric::createDisplayGL(m_dataPrivate->dataCircuit, m_dataPrivate->worldEscalextric);
+        display = CDisplayEscalextric::createDisplay3D(m_dataPrivate->dataCircuit, m_dataPrivate->worldEscalextric);
     else
         display = CDisplayEscalextric::createDisplaySprite(m_dataPrivate->dataCircuit, m_dataPrivate->worldEscalextric);
 
