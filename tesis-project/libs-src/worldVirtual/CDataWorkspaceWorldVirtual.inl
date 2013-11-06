@@ -18,7 +18,6 @@ class CDataWorkspaceWorldVirtual : public CDataWorkspace
         
 		void setInitialPositionCamera(void);
         
-        void setRotationCamera(double rotXDegrees, double rotYDegrees, double rotZDegrees);
         void incrRotateCamera(double incrRotateX, double incrRotateY, double incrRotateZ);
         void frontCamera(double step);
         void backCamera(double step);

@@ -45,29 +45,9 @@ class CView *CWorkspaceWorldVirtual::createView(class CDataWorkspace *dataWorksp
 static void i_appendMenuView(class CWorkspaceWorldVirtual *workSpace)
 {
     class CRcpOpcAreaDib *rcpOption;
-    class CImg *imageIcon;
     
     workSpace->appendMenu("Vistas");
     
-    rcpOption = new CRcpActionViewPlaneXY();
-    
-    imageIcon = new CImg("./imagesWorkspace/planoxy.png");
-    workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
-    
-    rcpOption = new CRcpActionViewPlaneXZ();
-    imageIcon = new CImg("./imagesWorkspace/planoxz.png");
-    workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
-    
-    rcpOption = new CRcpActionViewPlaneZY();
-    imageIcon = new CImg("./imagesWorkspace/planozy.png");
-    workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
-
-    rcpOption = new CRcpActionViewPlaneIso();
-    imageIcon = new CImg("./imagesWorkspace/planoiso.png");
-    workSpace->appendOptionWithIconIntoLastMenu(&imageIcon, rcpOption);
-    
-    workSpace->appendSeparatorIntoLastMenu();
-
     rcpOption = new CRcpActionInitialPosition();
     workSpace->appendOptionIntoLastMenu(rcpOption);
 } 

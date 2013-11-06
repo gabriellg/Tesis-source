@@ -33,10 +33,6 @@ struct SDataPrivateViewWorldVirtual
     struct areaDibujo_t *areaDibujo;
 };
 
-static const char *i_LAYER_AXIS_X = "AXIS_X";
-static const char *i_LAYER_AXIS_Y = "AXIS_Y";
-static const char *i_LAYER_AXIS_Z = "AXIS_Z";
-static const char *i_LAYER_ORIGIN = "ORIGIN";
 static const double i_STEP = .3;
 
 //-----------------------------------------------------------------------
@@ -296,50 +292,6 @@ static void i_onKey(struct EvtKey_t *evtKey, struct SDataPrivateViewWorldVirtual
 
 //-----------------------------------------------------------------------
 
-static void i_defineLayersAxis(const struct SDataPrivateViewWorldVirtual *dataPrivate, class IGraphics *graphics)
-{
-    class CMaterial *layerAxisX, *layerAxisY, *layerAxisZ, *layerAxisOrigin;
-
-    assert_no_null(graphics);
-
-    layerAxisX = new CMaterial(i_LAYER_AXIS_X, 0., 1., 0., 1.);
-    layerAxisY = new CMaterial(i_LAYER_AXIS_Y, 1., 0., 0., 1.);
-    layerAxisZ = new CMaterial(i_LAYER_AXIS_Z, 0., 0., 1., 1.);
-    layerAxisOrigin = new CMaterial(i_LAYER_ORIGIN, 0.5, 0.5, 0.5, 1.);
-
-    graphics->defineMaterial(layerAxisX);
-    graphics->defineMaterial(layerAxisY);
-    graphics->defineMaterial(layerAxisZ);
-    graphics->defineMaterial(layerAxisOrigin);
-
-    delete layerAxisX;
-    delete layerAxisY;
-    delete layerAxisZ;
-    delete layerAxisOrigin;
-}
-
-//-----------------------------------------------------------------------
-
-static bool i_bounds(
-                const struct SDataPrivateViewWorldVirtual *dataPrivate,
-                double *ox, double *oy, double *oz,
-                double *ex, double *ey, double *ez)
-{
-	assert_no_null(dataPrivate);
-	
-	*ox = -2.5; 
-	*oy = -2.5; 
-	*oz = -2.5;
-	
-	*ex = 2.5; 
-	*ey = 2.5; 
-	*ez = 2.5;
-	
-	return true;
-}
-
-//-----------------------------------------------------------------------
-
 static struct panel_t *i_viewWorldVirtual(
                         const class CViewWorldVirtual *view,
                         struct SDataPrivateViewWorldVirtual *dataPrivate,
@@ -369,9 +321,6 @@ static struct panel_t *i_viewWorldVirtual(
     rcpkey = rcpkey_create(SDataPrivateViewWorldVirtual, dataPrivate, i_onKey);
     panel_appendReceptorKeys(panel, &rcpkey);
 
-    funcion_dibujo_ejes = rcpdibujo_crea_con_limites(i_defineLayersAxis, NULL, i_bounds, SDataPrivateViewWorldVirtual, dataPrivate);
-    areadibujo_appendZonaDibujoIzqInferior(*areaDibujo, 92, 92, &funcion_dibujo_ejes);
-
     return panel;             
 }
 
@@ -392,14 +341,6 @@ struct panel_t *CViewWorldVirtual::panel(class CDataWorkspace *dataWorkspace)
 	panel = i_viewWorldVirtual(this, m_dataPrivate, &m_dataPrivate->areaDibujo);
 
     return panel;
-}
-
-//-----------------------------------------------------------------------
-
-void CViewWorldVirtual::setRotationCamera(double rotXDegrees, double rotYDegrees, double rotZDegrees)
-{
-	assert_no_null(m_dataPrivate);
-	m_dataPrivate->dataWorkspaceWorldVirtual->setRotationCamera(rotXDegrees, rotYDegrees, rotZDegrees);
 }
 
 //-----------------------------------------------------------------------

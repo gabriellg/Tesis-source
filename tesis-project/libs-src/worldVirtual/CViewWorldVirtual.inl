@@ -12,7 +12,6 @@ class CViewWorldVirtual : public CView
 	
 		struct panel_t *panel(class CDataWorkspace *dataWorkspace);
         
-        void setRotationCamera(double rotXDegrees, double rotYDegrees, double rotZDegrees);
         void setInitialPositionCamera(class CDataWorkspaceWorldVirtual *dataWorkspaceWorldVirtual);
 
     private:

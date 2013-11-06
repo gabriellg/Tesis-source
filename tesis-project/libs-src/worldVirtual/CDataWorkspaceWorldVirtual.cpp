@@ -136,18 +136,6 @@ void CDataWorkspaceWorldVirtual::setInitialPositionCamera(void)
 
 //-----------------------------------------------------------------------
 
-void CDataWorkspaceWorldVirtual::setRotationCamera(double rotXDegrees, double rotYDegrees, double rotZDegrees)
-{
-    class CEventSystem *evtCamera;
-
-    prv_integrityDataWorkspaceWorlVirtual(m_dataPrivate);
-
-    evtCamera = CEventCamera::createAnimationRotation(rotXDegrees, rotYDegrees, rotZDegrees);
-    m_dataPrivate->scene->appendEvent(&evtCamera);
-}
-
-//-----------------------------------------------------------------------
-
 void CDataWorkspaceWorldVirtual::incrRotateCamera(double incrRotateX, double incrRotateY, double incrRotateZ)
 {
     class CEventSystem *evtCamera;
@@ -156,6 +144,7 @@ void CDataWorkspaceWorldVirtual::incrRotateCamera(double incrRotateX, double inc
 
     evtCamera = CEventCamera::createIncrRotateCamera(incrRotateX, incrRotateY, incrRotateZ);
     m_dataPrivate->scene->appendEvent(&evtCamera);
+    m_dataPrivate->scene->nextFrame();
 }
 
 //-----------------------------------------------------------------------
@@ -168,6 +157,7 @@ void CDataWorkspaceWorldVirtual::frontCamera(double step)
 
     evtCamera = CEventCamera::createTraslateCamera(step);
     m_dataPrivate->scene->appendEvent(&evtCamera);
+    m_dataPrivate->scene->nextFrame();
 }
 
 //-----------------------------------------------------------------------
@@ -180,6 +170,7 @@ void CDataWorkspaceWorldVirtual::backCamera(double step)
 
     evtCamera = CEventCamera::createTraslateCamera(-step);
     m_dataPrivate->scene->appendEvent(&evtCamera);
+    m_dataPrivate->scene->nextFrame();
 }
 
 //-----------------------------------------------------------------------
