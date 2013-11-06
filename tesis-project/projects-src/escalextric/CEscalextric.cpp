@@ -20,6 +20,8 @@
 #include "CGestorDisplays.hpp"
 #include "CAgentCamera.hpp"
 #include "CPositionCamera.hpp"
+#include "CModel3d.hpp"
+#include "CGraphicsRect.hpp"
 
 struct SPrvDataPrivateEscalextric
 {
@@ -114,19 +116,50 @@ static class CPositionCamera *prv_createPositionCameraDefault(void)
 
 //-----------------------------------------------------------------------
 
+static void prv_calculateCenterCircuit(class CDataCircuit *dataCircuit, double *xCenterCircuit, double *yCenterCircuit, double *zCenterCircuit)
+{
+    class CModel3d *model;
+    class CGraphicsRect *graphicsLimits;
+    double xmin, ymin, zmin, xmax, ymax, zmax;
+    bool existLimits;
+
+    assert_no_null(dataCircuit);
+
+    model = dataCircuit->model3d();
+
+    graphicsLimits = new CGraphicsRect();
+
+    model->draw(graphicsLimits);
+
+    existLimits = graphicsLimits->getLimits(&xmin, &ymin, &zmin, &xmax, &ymax, &zmax);
+    assert(existLimits == true);
+
+    *xCenterCircuit = (xmin + xmax) * 0.5;
+    *yCenterCircuit = (ymin + ymax) * 0.5;
+    *zCenterCircuit = (zmin + zmax) * 0.5;
+
+    DELETE_OBJECT(&model, class CModel3d);
+    DELETE_OBJECT(&graphicsLimits, class CGraphicsRect);
+}
+
+//-----------------------------------------------------------------------
+
 void CEscalextric::appendElementsToScene(class CScene *scene)
 {
-    class CAgent *circuit, *generatorAgent, *agentWorld, *agentCamera;
+    class CAgent *circuit, *generatorAgent, *agentWorld, *agentCamera, *light;
     class CGeneratorAccelerationKey *generatorAccelerationKey;
     class CPositionCamera *positionCamera;
+    double xCenterCircuit, yCenterCircuit, zCenterCircuit;
 
     assert_no_null(scene);
     assert_no_null(m_dataPrivate);
 
     m_dataPrivate->worldEscalextric->resetCars();
 
+    prv_calculateCenterCircuit(m_dataPrivate->dataCircuit, &xCenterCircuit, &yCenterCircuit, &zCenterCircuit);
+
     generatorAccelerationKey = new CGeneratorAccelerationKey();
-    circuit = new CCircuit(m_dataPrivate->worldEscalextric);
+    circuit = new CCircuit(m_dataPrivate->worldEscalextric, xCenterCircuit, yCenterCircuit, zCenterCircuit);
 
     prv_appendCarWithKey("A-Z", 'a', 'z', true, m_dataPrivate->worldEscalextric, generatorAccelerationKey);
     prv_appendCarWithKey("J-M", 'j', 'm', false, m_dataPrivate->worldEscalextric, generatorAccelerationKey);
@@ -135,6 +168,7 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
     circuit->appendChild(&generatorAgent);
 
     agentWorld = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_WORLD);
+    light = new CAgentPrimitive(CDisplayEscalextric::SYMBOL_LIGHT_AMBIENT);
 
     positionCamera = prv_createPositionCameraDefault();
 
@@ -142,6 +176,7 @@ void CEscalextric::appendElementsToScene(class CScene *scene)
     agentCamera->appendChild(&agentWorld);
     agentCamera->appendChild(&circuit);
 
+    scene->appendAgent(&light);
     scene->appendAgent(&agentCamera);
 }
 

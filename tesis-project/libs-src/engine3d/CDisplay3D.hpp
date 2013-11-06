@@ -6,7 +6,7 @@ class CDisplay3D: public ITraslatorDisplay
 {
 	public:
 		
-		CDisplay3D(class IWorld *world, class CLight **light);
+		CDisplay3D(class IWorld *world);
 		virtual ~CDisplay3D();
 		
         virtual void appendDescription(const char *symbol, class IDescription **description);

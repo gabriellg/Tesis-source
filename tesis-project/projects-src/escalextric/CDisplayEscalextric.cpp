@@ -31,10 +31,12 @@
 #include "CGeneratorSolid.hpp"
 #include "CGeneratorModel.hpp"
 #include "CStackTransformation.hpp"
+#include "CLight3d.hpp"
 
 const char *CDisplayEscalextric::SYMBOL_CIRCUIT = "Circuit";
 const char *CDisplayEscalextric::SYMBOL_CAR = "Car";
 const char *CDisplayEscalextric::SYMBOL_WORLD = "World";
+const char *CDisplayEscalextric::SYMBOL_LIGHT_AMBIENT = "LightAmbient";
 
 //-----------------------------------------------------------------------
 //
@@ -228,7 +230,7 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplay3D(const class CDataC
 {
     class CDisplay3D *display3d;
     class CLight *light;
-    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky;
+    class IDescription *descriptionCircuit, *descriptionCar, *descriptionSky, *descriptionLight;
     class CModel3d *modelCircuit, *modelCar, *modelWorld;
 
     assert_no_null(dataCircuit);
@@ -247,11 +249,14 @@ class ITraslatorDisplay *CDisplayEscalextric::createDisplay3D(const class CDataC
     modelWorld = prv_createModelWorld();
     descriptionSky = new CDescriptionModel3d(&modelWorld);
 
-    display3d = new CDisplay3D(worldEscalextric, &light);
+    display3d = new CDisplay3D(worldEscalextric);
+
+    descriptionLight = new CLight3d(&light);
 
     display3d->appendDescription(SYMBOL_CIRCUIT, &descriptionCircuit);
     display3d->appendDescription(SYMBOL_CAR, &descriptionCar);
     display3d->appendDescription(SYMBOL_WORLD, &descriptionSky);
+    display3d->appendDescription(SYMBOL_LIGHT_AMBIENT, &descriptionLight);
 
     return display3d;
 }

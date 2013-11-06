@@ -23,7 +23,6 @@
 struct SPrvDataPrivateDisplay3D
 {
     class IWorld *world;
-	class CLight *light;
 	class CDictionaryDescription *dictionarySymbols;
 };
 
@@ -32,7 +31,6 @@ struct SPrvDataPrivateDisplay3D
 static void prv_integrity(const struct SPrvDataPrivateDisplay3D *dataPrivate)
 {
     assert_no_null(dataPrivate);
-    assert_no_null(dataPrivate->light);
     assert_no_null(dataPrivate->dictionarySymbols);
 }
 
@@ -40,7 +38,6 @@ static void prv_integrity(const struct SPrvDataPrivateDisplay3D *dataPrivate)
 
 static struct SPrvDataPrivateDisplay3D *prv_createDataPrivateDisplay3D(
                                 class IWorld *world,
-								class CLight **light, 
 								class CDictionaryDescription **dictionarySymbols)
 {
 	struct SPrvDataPrivateDisplay3D *dataPrivate;
@@ -48,7 +45,6 @@ static struct SPrvDataPrivateDisplay3D *prv_createDataPrivateDisplay3D(
 	dataPrivate = MALLOC(struct SPrvDataPrivateDisplay3D);
 	
 	dataPrivate->world = world;
-	dataPrivate->light = ASSIGN_PP_NO_NULL(light, class CLight);
 	dataPrivate->dictionarySymbols = ASSIGN_PP_NO_NULL(dictionarySymbols, class CDictionaryDescription);
 	
 	prv_integrity(dataPrivate);
@@ -70,7 +66,7 @@ static void prv_appendTransformation(const char *symbolTransformation, class CDi
 
 //-----------------------------------------------------------------------
 
-CDisplay3D::CDisplay3D(class IWorld *world, class CLight **light)
+CDisplay3D::CDisplay3D(class IWorld *world)
 {
 	class CDictionaryDescription *dictionarySymbols;
 	
@@ -82,7 +78,7 @@ CDisplay3D::CDisplay3D(class IWorld *world, class CLight **light)
     prv_appendTransformation(CTransform3D::ID_SYMBOL_EXTRUSION3D, dictionarySymbols);
     prv_appendTransformation(CTransform3D::ID_SYMBOL_CAMERA3D, dictionarySymbols);
 		
-	m_dataPrivate = prv_createDataPrivateDisplay3D(world, light, &dictionarySymbols);
+	m_dataPrivate = prv_createDataPrivateDisplay3D(world, &dictionarySymbols);
 }
 
 //-----------------------------------------------------------------------
@@ -91,7 +87,6 @@ CDisplay3D::~CDisplay3D()
 {
     prv_integrity(m_dataPrivate);
 
-    delete m_dataPrivate->light;
     delete m_dataPrivate->dictionarySymbols;
 
     FREE_T(&m_dataPrivate, struct SPrvDataPrivateDisplay3D);
@@ -119,10 +114,7 @@ void CDisplay3D::drawScene(class IGraphics *graphics, const class CScene *scene)
     graphicsGL = dynamic_cast<class CGraphicsGL *>(graphics);
 
     if (graphicsGL != NULL)
-    {
-        m_dataPrivate->light->putLight(graphicsGL, IGraphics::LIGHT0);
         scene->processDraw(evtDraw);
-    }
     else
         scene->processDraw(evtDraw);
 
