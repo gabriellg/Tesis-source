@@ -225,6 +225,16 @@ class CTransform *CTransform3D::createTraslate3D(class IObjectDraw **figure, dou
 
 //---------------------------------------------------------------
 
+class CTransform *CTransform3D::createTraslateArray3d(class CArray<IObjectDraw> **sons, double tx, double ty, double tz)
+{
+    class IDataSymbol *dataTransformation;
+
+    dataTransformation = new CDataTraslate3D(tx, ty, tz);
+    return new CTransform(ID_SYMBOL_TRASLATE3D, &dataTransformation, sons);
+}
+
+//---------------------------------------------------------------
+
 class CTransform *CTransform3D::createRotate3D(class IObjectDraw **figure, double angle, double Ux, double Uy,
         double Uz)
 {

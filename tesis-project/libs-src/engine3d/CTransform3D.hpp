@@ -21,6 +21,7 @@ class CTransform3D
 
 		static class CTransform *createScale3D(class IObjectDraw **figure, double sx, double sy, double sz);
 		static class CTransform *createTraslate3D(class IObjectDraw **figure, double tx, double ty, double tz);
+		static class CTransform *createTraslateArray3d(class CArray<IObjectDraw> **sons, double tx, double ty, double tz);
 		static class CTransform *createRotate3D(class IObjectDraw **figure, double angle, double Ux, double Uy, double Uz);
 		static class CTransform *createExtrusion3D(class IObjectDraw **figure, double Nx, double Ny, double Nz);
 		static class CTransform *createCamera3d(class CArray<IObjectDraw> **sons, class CPositionCamera **posCamera);
