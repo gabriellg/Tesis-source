@@ -6,7 +6,8 @@ class CCircuit: public CAgent
 {
 public:
 
-    CCircuit(class CWorldEscalextric *worldEscalextric);
+    CCircuit(class CWorldEscalextric *worldEscalextric, double xCenterCircuit, double yCenterCircuit, double zCenterCircuit);
+    virtual ~CCircuit();
 
 private:
 
