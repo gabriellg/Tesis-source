@@ -80,6 +80,7 @@ CDisplay3D::CDisplay3D(class IWorld *world, class CLight **light)
     prv_appendTransformation(CTransform3D::ID_SYMBOL_TRASLATE3D, dictionarySymbols);
     prv_appendTransformation(CTransform3D::ID_SYMBOL_ROTATE3D, dictionarySymbols);
     prv_appendTransformation(CTransform3D::ID_SYMBOL_EXTRUSION3D, dictionarySymbols);
+    prv_appendTransformation(CTransform3D::ID_SYMBOL_CAMERA3D, dictionarySymbols);
 		
 	m_dataPrivate = prv_createDataPrivateDisplay3D(world, light, &dictionarySymbols);
 }
