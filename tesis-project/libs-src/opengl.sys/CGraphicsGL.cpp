@@ -580,8 +580,6 @@ void CGraphicsGL::positionCamera(
     assert(m_dataPrivate->isCameraPositioned == false);
 
     m_dataPrivate->isCameraPositioned = true;
-
-    glLoadIdentity();
     gluLookAt(eyeX, eyeY, eyeZ,  pointReferenceX, pointReferenceY, pointReferenceZ, upX, upY, upZ);
 }
 
