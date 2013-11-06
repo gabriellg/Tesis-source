@@ -181,12 +181,7 @@ void CDataCamera3D::applyTransformacion(class IGraphics *graphics) const
     assert_no_null(graphics);
     assert_no_null(m_positionCamera);
 
-    graphics->pushTransformation();
-    graphics->resetTransformation();
-
     m_positionCamera->positionCamera(graphics);
-
-    graphics->popTransformation();
 }
 
 //---------------------------------------------------------------
