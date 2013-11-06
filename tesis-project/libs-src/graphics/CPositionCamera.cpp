@@ -163,8 +163,8 @@ void CPositionCamera::incrRotationCamera(double incrRotXDegrees, double incrRotY
 
 void CPositionCamera::traslate(double step)
 {
-    m_dataPrivate->eyeZ = step;
-    m_dataPrivate->pointReferenceZ = step;
+    m_dataPrivate->eyeZ += step;
+    m_dataPrivate->pointReferenceZ += step;
 }
 
 //-----------------------------------------------------------------------
