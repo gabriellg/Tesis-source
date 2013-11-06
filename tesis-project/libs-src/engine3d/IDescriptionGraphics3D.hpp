@@ -1,7 +1,6 @@
-//CFigure3DProcessDraw.hpp
+//IDescriptionGraphics3D.hpp
 
-#ifndef IDESCRIPTIONGRAPHICS3D_HPP_
-#define IDESCRIPTIONGRAPHICS3D_HPP_
+#pragma once
 
 #include "IDescription.hpp"
 
@@ -13,5 +12,3 @@ class IDescriptionGraphics3D : public IDescription
         virtual void drawSymbol(class IGraphics *graphics, const class IDataSymbol *dataFigure) = 0;
         virtual void endSymbol(class IGraphics *graphics, const class IDataSymbol *dataFigure) = 0;
 };
-
-#endif /* IDESCRIPTIONGRAPHICS3D_HPP_ */
