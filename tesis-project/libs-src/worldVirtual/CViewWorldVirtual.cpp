@@ -257,6 +257,8 @@ static void i_onMouse(const struct EvtMouse_t *evtMouse, struct SDataPrivateView
 
         default_error();
     }
+
+    areadibujo_redraw(dataPrivate->areaDibujo);
 }
 
 //-----------------------------------------------------------------------
@@ -300,7 +302,6 @@ static struct panel_t *i_viewWorldVirtual(
     struct panel_t *panel;
     unsigned long ancho, alto;
     struct rcpdibujo_t *funcion_dibujo;
-    struct rcpdibujo_t *funcion_dibujo_ejes;
     struct RcpMouse_t *rcpmouse;
     struct RcpKey_t *rcpkey;
     
