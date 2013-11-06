@@ -255,6 +255,9 @@ static void i_redibujarDibujos(
 
             se_dibuja = true;
             assert_no_null(func_positionCamera);
+
+            graphics->resetTransformation();
+
             func_positionCamera(dataCamera, graphics);
             
             if (limites->hayLimites == true)
