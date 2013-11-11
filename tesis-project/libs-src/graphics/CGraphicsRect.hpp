@@ -23,6 +23,7 @@ class CGraphicsRect: public IGraphics
         virtual void defineMaterial(const class CMaterial *material) {;}
 
         virtual void setMaterial(const char *nameMaterial) {;}
+        virtual void setColor(float r, float g, float b) {;}
 
         virtual void resetTransformation(void);
         virtual void pushTransformation(void);

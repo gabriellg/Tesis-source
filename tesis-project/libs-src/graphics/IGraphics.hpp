@@ -47,6 +47,8 @@ class IGraphics
 
         virtual void setMaterial(const char *nameLayer) = 0;
 
+        virtual void setColor(float r, float g, float b) = 0;
+
         virtual void resetTransformation(void) = 0;
 
         virtual void pushTransformation(void) = 0;

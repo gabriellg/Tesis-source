@@ -26,6 +26,8 @@ class CGraphicsGL: public IGraphics
 
         virtual void setMaterial(const char *nameLayer);
 
+        virtual void setColor(float r, float g, float b);
+
         virtual void resetTransformation(void);
 
         virtual void pushTransformation(void);

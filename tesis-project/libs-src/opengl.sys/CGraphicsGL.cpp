@@ -418,6 +418,13 @@ void CGraphicsGL::setMaterial(const char *nameLayer)
 
 //---------------------------------------------------------------
 
+void CGraphicsGL::setColor(float r, float g, float b)
+{
+    glColor3f(r, g, b);
+}
+
+//---------------------------------------------------------------
+
 void CGraphicsGL::resetTransformation(void)
 {
     assert_no_null(m_dataPrivate);
