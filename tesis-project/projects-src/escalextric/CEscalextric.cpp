@@ -95,13 +95,14 @@ static void prv_appendCarWithKey(const char *id, char keyAccelerator, char keyDe
 
 static class CPositionCamera *prv_createPositionCameraDefault(void)
 {
+    class CPositionCamera *positionCamera;
     double eyeX, eyeY, eyeZ;
     double pointReferenceX, pointReferenceY, pointReferenceZ;
     double upX, upY, upZ;
 
     eyeX = 0.;
-    eyeY = 0.;
-    eyeZ = 15.;
+    eyeY = 2.5;
+    eyeZ = 5.;
 
     pointReferenceX = 0.;
     pointReferenceY = 0.;
@@ -111,7 +112,11 @@ static class CPositionCamera *prv_createPositionCameraDefault(void)
     upY = 1.;
     upZ = 0.;
 
-    return new CPositionCamera(eyeX, eyeY, eyeZ, pointReferenceX, pointReferenceY, pointReferenceZ, upX, upY, upZ);
+    positionCamera = new CPositionCamera(eyeX, eyeY, eyeZ, pointReferenceX, pointReferenceY, pointReferenceZ, upX, upY, upZ);
+
+    positionCamera->incrRotationCamera(-90., 0., 0.);
+
+    return positionCamera;
 }
 
 //-----------------------------------------------------------------------

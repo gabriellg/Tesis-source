@@ -5,6 +5,7 @@
 #include "asrtbas.h"
 #include "memory.h"
 
+#include "CVector.hpp"
 #include "CGeometry.hpp"
 #include "IGraphics.hpp"
 
@@ -137,7 +138,7 @@ void CPositionCamera::positionCamera(class IGraphics *graphics) const
                         m_dataPrivate->pointReferenceX, m_dataPrivate->pointReferenceY, m_dataPrivate->pointReferenceZ,
                         m_dataPrivate->upX, m_dataPrivate->upY, m_dataPrivate->upZ);
 
-    i_makeRotationAxis(m_dataPrivate->rotXDegrees, m_dataPrivate->rotYDegrees, m_dataPrivate->rotZDegrees, graphics); 
+    i_makeRotationAxis(m_dataPrivate->rotXDegrees, m_dataPrivate->rotYDegrees, m_dataPrivate->rotZDegrees, graphics);
 }
 
 //-----------------------------------------------------------------------
@@ -163,8 +164,24 @@ void CPositionCamera::incrRotationCamera(double incrRotXDegrees, double incrRotY
 
 void CPositionCamera::traslate(double step)
 {
-    m_dataPrivate->eyeZ += step;
-    m_dataPrivate->pointReferenceZ += step;
+    double Ux, Uy, Uz;
+
+    CVector::twoPointstoVector(
+            m_dataPrivate->eyeX, m_dataPrivate->eyeY, m_dataPrivate->eyeZ,
+            m_dataPrivate->pointReferenceX, m_dataPrivate->pointReferenceY, m_dataPrivate->pointReferenceZ,
+            &Ux, &Uy, &Uz);
+
+    CGeometry::traslatePoint3D(
+            m_dataPrivate->eyeX, m_dataPrivate->eyeY, m_dataPrivate->eyeZ,
+            step,
+            Ux, Uy, Uz,
+            &m_dataPrivate->eyeX, &m_dataPrivate->eyeY, &m_dataPrivate->eyeZ);
+
+    CGeometry::traslatePoint3D(
+            m_dataPrivate->pointReferenceX, m_dataPrivate->pointReferenceY, m_dataPrivate->pointReferenceZ,
+            step,
+            Ux, Uy, Uz,
+            &m_dataPrivate->pointReferenceX, &m_dataPrivate->pointReferenceY, &m_dataPrivate->pointReferenceZ);
 }
 
 //-----------------------------------------------------------------------

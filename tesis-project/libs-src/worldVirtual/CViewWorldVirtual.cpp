@@ -91,6 +91,7 @@ static void i_dibuja_vista(
 	
     assert_no_null(dataPrivate);
     assert_no_null(dataPrivate->dataWorkspaceWorldVirtual);
+
     dataPrivate->dataWorkspaceWorldVirtual->draw(graphics);
     
     graphics->popTransformation();
@@ -266,10 +267,13 @@ static void i_onMouse(const struct EvtMouse_t *evtMouse, struct SDataPrivateView
 static void i_onKey(struct EvtKey_t *evtKey, struct SDataPrivateViewWorldVirtual *dataPrivate)
 {
     unsigned int key;
+    bool hasUpdated;
     
     assert_no_null(dataPrivate);
     assert_no_null(dataPrivate->dataWorkspaceWorldVirtual);
     
+    hasUpdated = false;
+
     key = evtkey_key(evtKey);
     
     switch(key)
@@ -277,12 +281,14 @@ static void i_onKey(struct EvtKey_t *evtKey, struct SDataPrivateViewWorldVirtual
         case 'w':
             
             dataPrivate->dataWorkspaceWorldVirtual->frontCamera(i_STEP);
+            hasUpdated = true;
             evtkey_endEvent(evtKey);
             break;    
         
         case 'x':
         
             dataPrivate->dataWorkspaceWorldVirtual->backCamera(i_STEP);
+            hasUpdated = true;
             evtkey_endEvent(evtKey);
             break;    
         
@@ -290,6 +296,9 @@ static void i_onKey(struct EvtKey_t *evtKey, struct SDataPrivateViewWorldVirtual
             break;
         
     }
+
+    if (hasUpdated == true)
+        areadibujo_redraw(dataPrivate->areaDibujo);
 }
 
 //-----------------------------------------------------------------------
