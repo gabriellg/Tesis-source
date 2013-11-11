@@ -87,6 +87,19 @@ double CGeometry::angleVectorZeroTo2PiRadians(double x, double y)
 
 //---------------------------------------------------------------
 //
+void CGeometry::traslatePoint3D(double x, double y, double z, double distance, double Ux, double Uy, double Uz, double *xtraslate, double *ytraslate, double *ztraslate)
+{
+    assert_no_null(xtraslate);
+    assert_no_null(ytraslate);
+    assert_no_null(ztraslate);
+
+    *xtraslate = x + distance * Ux;
+    *ytraslate = y + distance * Uy;
+    *ztraslate = z + distance * Uz;
+}
+
+//---------------------------------------------------------------
+//
 double CGeometry::module3D(
                     double x1, double y1, double z1,
                     double x2, double y2, double z2)

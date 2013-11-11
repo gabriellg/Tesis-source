@@ -14,6 +14,8 @@ class CGeometry
 
         static double angleVectorZeroTo2PiRadians(double x, double y);
 
+        static void traslatePoint3D(double x, double y, double z, double distance, double Ux, double Uy, double Uz, double *xtraslate, double *ytraslate, double *ztraslate);
+
         static double module3D(double x1, double y1, double z1, double x2, double y2, double z2);
 
         static bool isSamePoint3D(double x1, double y1, double z1, double x2, double y2, double z2, double precision);
